@@ -26,7 +26,7 @@ export function Preloader() {
 
     const globe = new Promise<void>((resolve) => {
       window.addEventListener(GLOBE_READY, () => resolve(), { once: true });
-      setTimeout(resolve, 4000);
+      setTimeout(resolve, 2500);
     });
     Promise.all([document.fonts?.ready, globe]).then(() => (ready = true));
 

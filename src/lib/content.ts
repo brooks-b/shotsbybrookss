@@ -6,7 +6,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { cache } from "react";
 import { thumbHashToRGBA } from "thumbhash";
-import type { ChapterSummary, Frame, TravelStop } from "./frames";
+import type { ChapterSummary, Frame, PlaceInfo, TravelStop } from "./frames";
 import type { Collection, Manifest, Photo } from "./types";
 
 const CONTENT = path.join(process.cwd(), "content");
@@ -248,4 +248,49 @@ export function getMosaicFrames(count = 32): Frame[] {
     }
   }
   return out;
+}
+
+/**
+ * Photos chosen as the arrival backdrop for a place, where a different shot
+ * suits its atmosphere better than the cover (dusk for Wyoming's stars,
+ * sunset for Bangkok's lanterns).
+ */
+const BACKDROPS: Record<string, string> = {
+  wyoming: "dscf0495",
+  bangkok: "dscf2366",
+  japan: "dscf2035",
+  rwanda: "dscf2697",
+};
+
+/** Every place on the globe, in travel order, ready for the destination board. */
+export function getPlaces(): PlaceInfo[] {
+  const covers = getPhotoCovers();
+  return getChapters()
+    .filter((c) => c.kind === "place" && !c.locationPending)
+    .map((c) => {
+      const frames = getFrames(c.slug);
+      const photos = frames.filter((f) => f.kind === "photo");
+      const stops = getTravelStops().filter((s) => s.slug === c.slug);
+      const cover = c.cover.kind === "photo" ? c.cover : undefined;
+      const backdrop = photos.find((f) => BACKDROPS[c.slug] && f.key.endsWith(BACKDROPS[c.slug])) ?? cover;
+      return {
+        slug: c.slug,
+        title: c.title,
+        subtitle: c.subtitle,
+        year: Number(c.dates.start.slice(0, 4)),
+        dates: c.dates,
+        region: c.region,
+        cover,
+        backdrop,
+        frames: photos.length,
+        cities: stops.map((s) => ({
+          name: s.name,
+          lat: s.lat,
+          lng: s.lng,
+          tz: s.tz,
+          frames: s.frames,
+          photo: covers[`${c.slug}|${s.name}`],
+        })),
+      };
+    });
 }

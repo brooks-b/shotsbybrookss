@@ -1,120 +1,157 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { ATMOSPHERES, type ParticleKind } from "./atmospheres";
+import { ATMOSPHERES, type Atmosphere, type ParticleKind } from "./atmospheres";
 
 type Particle = {
   kind: ParticleKind;
+  layer: number;
   color: string;
   x: number;
   y: number;
   vx: number;
   vy: number;
+  /** Extra velocity from an entrance burst; decays to nothing. */
+  ex: number;
+  ey: number;
   size: number;
   rot: number;
   vr: number;
   phase: number;
-  /** 0 → 1 fade-in, back to 0 when the place changes. */
+  /** 0 = far (small, slow, faint), 1 = near (large, fast, soft-focused). */
+  depth: number;
+  /** Seconds left in the current state (droplets bead, shooting stars wait). */
+  timer: number;
   fade: number;
   dying: boolean;
 };
 
 const rand = (a: number, b: number) => a + Math.random() * (b - a);
 const pick = <T,>(xs: T[]) => xs[Math.floor(Math.random() * xs.length)];
+const DEPTH_KINDS = new Set<ParticleKind>(["petal", "leaf", "flake", "mote", "lantern", "bubble"]);
 
-/** Where a particle starts and how it moves, by kind. */
-function spawn(kind: ParticleKind, colors: string[], w: number, h: number, scatter: boolean): Particle {
-  const base = {
+function spawn(kind: ParticleKind, layer: number, colors: string[], w: number, h: number, scatter: boolean): Particle {
+  const depth = DEPTH_KINDS.has(kind) ? Math.random() ** 1.7 : 0.5;
+  const k = 0.55 + depth * 1.1; // size and speed with depth
+  const p: Particle = {
     kind,
+    layer,
     color: pick(colors),
+    x: rand(0, w),
+    y: scatter ? rand(0, h) : -20,
+    vx: 0,
+    vy: 0,
+    ex: 0,
+    ey: 0,
+    size: 1,
     rot: rand(0, Math.PI * 2),
     vr: rand(-1.2, 1.2),
     phase: rand(0, Math.PI * 2),
+    depth,
+    timer: 0,
     fade: 0,
     dying: false,
   };
-  const anywhereY = rand(0, h);
   switch (kind) {
     case "petal":
-      return {
-        ...base,
+      Object.assign(p, {
         x: rand(-0.1 * w, w),
-        y: scatter ? anywhereY : rand(-80, -10),
-        vx: rand(8, 34),
-        vy: rand(30, 62),
-        size: rand(4, 7),
-      };
+        y: scatter ? p.y : rand(-80, -10),
+        vx: rand(8, 34) * k,
+        vy: rand(30, 60) * k,
+        size: rand(4, 6.5) * k,
+      });
+      break;
     case "leaf":
-      return {
-        ...base,
+      Object.assign(p, {
         x: rand(-0.05 * w, w),
-        y: scatter ? anywhereY : rand(-80, -10),
-        vx: rand(-14, 14),
-        vy: rand(22, 44),
-        size: rand(5, 9),
+        y: scatter ? p.y : rand(-80, -10),
+        vx: rand(-14, 14) * k,
+        vy: rand(22, 42) * k,
+        size: rand(5, 8) * k,
         vr: rand(-0.8, 0.8),
-      };
+      });
+      break;
     case "streak":
-      return {
-        ...base,
+      Object.assign(p, {
         x: rand(0, w * 1.15),
-        y: scatter ? anywhereY : rand(-120, -10),
+        y: scatter ? p.y : rand(-120, -10),
         vx: -70,
-        vy: rand(640, 900),
-        size: rand(12, 22),
-      };
+        vy: rand(680, 940),
+        size: rand(12, 24),
+      });
+      break;
+    case "droplet":
+      Object.assign(p, {
+        x: rand(0.03 * w, 0.97 * w),
+        y: rand(0.05 * h, 0.8 * h),
+        size: rand(3, 8),
+        timer: rand(1.5, 5),
+      });
+      break;
     case "flake":
-      return {
-        ...base,
-        x: rand(0, w),
-        y: scatter ? anywhereY : rand(-60, -5),
-        vx: rand(-8, 8),
-        vy: rand(18, 42),
-        size: rand(0.8, 2.4),
-      };
+      Object.assign(p, {
+        y: scatter ? p.y : rand(-60, -5),
+        vx: rand(-8, 8) * k,
+        vy: rand(16, 36) * k,
+        size: rand(0.8, 2) * k,
+      });
+      break;
     case "lantern":
-      return {
-        ...base,
-        x: rand(0.05 * w, 0.95 * w),
-        y: scatter ? anywhereY : h + rand(10, 80),
+      Object.assign(p, {
+        x: rand(0.04 * w, 0.96 * w),
+        y: scatter ? p.y : h + rand(10, 80),
         vx: rand(-4, 4),
-        vy: -rand(14, 30),
-        size: rand(3, 5.5),
+        vy: -rand(14, 26) * k,
+        size: rand(2.6, 4.6) * k,
         rot: 0,
         vr: 0,
-      };
+      });
+      break;
     case "bubble":
-      return {
-        ...base,
-        x: rand(0, w),
-        y: scatter ? anywhereY : h + rand(10, 60),
+      Object.assign(p, {
+        y: scatter ? p.y : h + rand(10, 60),
         vx: rand(-4, 4),
-        vy: -rand(18, 42),
-        size: rand(2, 6),
+        vy: -rand(18, 40) * k,
+        size: rand(2, 5) * k,
         rot: 0,
         vr: 0,
-      };
+      });
+      break;
     case "mote":
-      return { ...base, x: rand(0, w), y: anywhereY, vx: rand(-6, 6), vy: rand(-5, 3), size: rand(0.8, 1.8) };
+      Object.assign(p, { y: rand(0, h), vx: rand(-6, 6), vy: rand(-5, 3), size: rand(0.7, 1.6) * k });
+      break;
     case "firefly":
-      return { ...base, x: rand(0, w), y: rand(h * 0.25, h), vx: rand(-10, 10), vy: rand(-8, 8), size: rand(1.3, 2) };
+      Object.assign(p, { y: rand(h * 0.3, h), vx: rand(-10, 10), vy: rand(-8, 8), size: rand(1.3, 2) });
+      break;
     case "star":
-      return { ...base, x: rand(0, w), y: rand(0, h * 0.75), vx: 0, vy: 0, size: rand(0.5, 1.4) };
+      Object.assign(p, { y: rand(0, h * 0.6), size: rand(0.5, 1.3) });
+      break;
+    case "shooting":
+      Object.assign(p, {
+        x: rand(0.1 * w, 0.7 * w),
+        y: rand(0.02 * h, 0.3 * h),
+        vx: rand(520, 760),
+        vy: rand(160, 260),
+        size: 1,
+        timer: rand(1.5, 4),
+      });
+      break;
   }
+  return p;
 }
 
-function draw(ctx: CanvasRenderingContext2D, p: Particle, t: number) {
+function drawShape(ctx: CanvasRenderingContext2D, p: Particle, t: number) {
+  const a = p.fade * (0.55 + 0.45 * (1 - Math.abs(p.depth - 0.6)));
   ctx.fillStyle = p.color;
   ctx.strokeStyle = p.color;
-  const a = p.fade;
   switch (p.kind) {
     case "petal": {
-      // A soft teardrop that flips as it tumbles.
       ctx.save();
       ctx.translate(p.x, p.y);
       ctx.rotate(p.rot);
       ctx.scale(1, 0.35 + 0.65 * Math.abs(Math.cos(t * 1.6 + p.phase)));
-      ctx.globalAlpha = 0.8 * a;
+      ctx.globalAlpha = 0.85 * a;
       const s = p.size;
       ctx.beginPath();
       ctx.moveTo(0, -s);
@@ -129,14 +166,14 @@ function draw(ctx: CanvasRenderingContext2D, p: Particle, t: number) {
       ctx.translate(p.x, p.y);
       ctx.rotate(p.rot);
       ctx.scale(0.4 + 0.6 * Math.abs(Math.cos(t * 0.9 + p.phase)), 1);
-      ctx.globalAlpha = 0.75 * a;
+      ctx.globalAlpha = 0.85 * a;
       const s = p.size;
       ctx.beginPath();
       ctx.moveTo(0, -s * 1.5);
       ctx.quadraticCurveTo(s * 0.85, 0, 0, s * 1.5);
       ctx.quadraticCurveTo(-s * 0.85, 0, 0, -s * 1.5);
       ctx.fill();
-      ctx.globalAlpha = 0.35 * a;
+      ctx.globalAlpha = 0.3 * a;
       ctx.strokeStyle = "#0e0d0b";
       ctx.lineWidth = 0.7;
       ctx.beginPath();
@@ -147,7 +184,7 @@ function draw(ctx: CanvasRenderingContext2D, p: Particle, t: number) {
       return;
     }
     case "streak": {
-      ctx.globalAlpha = 0.3 * a;
+      ctx.globalAlpha = 0.32 * p.fade;
       ctx.lineWidth = 1;
       const k = p.size / Math.hypot(p.vx, p.vy);
       ctx.beginPath();
@@ -156,60 +193,116 @@ function draw(ctx: CanvasRenderingContext2D, p: Particle, t: number) {
       ctx.stroke();
       return;
     }
+    case "droplet": {
+      // A bead of water on the lens: a thin rim and a highlight.
+      ctx.globalAlpha = 0.4 * p.fade;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.ellipse(p.x, p.y, p.size * 0.85, p.size, 0, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.globalAlpha = 0.75 * p.fade;
+      ctx.beginPath();
+      ctx.arc(p.x - p.size * 0.3, p.y - p.size * 0.4, Math.max(p.size * 0.18, 0.8), 0, Math.PI * 2);
+      ctx.fill();
+      return;
+    }
     case "flake":
-      ctx.globalAlpha = 0.75 * a;
+    case "mote": {
+      const tw = p.kind === "mote" ? 0.45 + 0.55 * (0.5 + 0.5 * Math.sin(t * 1.4 + p.phase)) : 0.85;
+      ctx.globalAlpha = tw * a;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
       ctx.fill();
       return;
+    }
     case "lantern": {
-      const flicker = 0.75 + 0.25 * Math.sin(t * 7 + p.phase * 3);
-      ctx.globalAlpha = 0.9 * a * flicker;
+      const flicker = 0.78 + 0.22 * Math.sin(t * 7 + p.phase * 3);
+      ctx.globalAlpha = 0.95 * a * flicker;
       const w = p.size * 1.3;
       const h = p.size * 1.8;
       ctx.beginPath();
       ctx.roundRect(p.x - w / 2, p.y - h / 2, w, h, w * 0.35);
       ctx.fill();
+      ctx.globalAlpha = 0.14 * a * flicker;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * 3.2, 0, Math.PI * 2);
+      ctx.fill();
       return;
     }
     case "bubble":
-      ctx.globalAlpha = 0.5 * a;
+      ctx.globalAlpha = 0.55 * a;
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
       ctx.stroke();
       return;
-    case "mote":
-      ctx.globalAlpha = (0.35 + 0.45 * (0.5 + 0.5 * Math.sin(t * 1.4 + p.phase))) * a;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fill();
-      return;
     case "firefly": {
       const blink = Math.max(0, Math.sin(t * 1.8 + p.phase * 2)) ** 3;
-      ctx.globalAlpha = 0.12 * blink * a;
+      ctx.globalAlpha = 0.14 * blink * p.fade;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size * 4, 0, Math.PI * 2);
       ctx.fill();
-      ctx.globalAlpha = 0.95 * blink * a;
+      ctx.globalAlpha = 0.95 * blink * p.fade;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
       ctx.fill();
       return;
     }
     case "star":
-      ctx.globalAlpha = (0.25 + 0.75 * (0.5 + 0.5 * Math.sin(t * 2.2 + p.phase * 5))) * a;
+      ctx.globalAlpha = (0.25 + 0.75 * (0.5 + 0.5 * Math.sin(t * 2.2 + p.phase * 5))) * p.fade;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
       ctx.fill();
       return;
+    case "shooting": {
+      if (p.timer > 0) return;
+      ctx.globalAlpha = 0.85 * p.fade;
+      ctx.lineWidth = 1.2;
+      const k = 120 / Math.hypot(p.vx, p.vy);
+      ctx.beginPath();
+      ctx.moveTo(p.x, p.y);
+      ctx.lineTo(p.x - p.vx * k, p.y - p.vy * k);
+      ctx.stroke();
+      return;
+    }
   }
 }
 
+/** How a place's weather arrives on the first frame. */
+function enter(a: Atmosphere, w: number, h: number, scale: number): Particle[] {
+  const out: Particle[] = [];
+  a.layers.forEach((layer, li) => {
+    const n = Math.round(layer.count * scale);
+    const first = layer.kind === "star" ? n : Math.round(n * 0.75);
+    for (let i = 0; i < first; i++) {
+      const p = spawn(layer.kind, li, layer.colors, w, h, true);
+      if (a.entrance === "burst" && layer.kind === "petal") {
+        // Petals burst outward from the centre, then settle into falling.
+        p.x = w / 2 + rand(-30, 30);
+        p.y = h * 0.45 + rand(-30, 30);
+        const ang = rand(0, Math.PI * 2);
+        const sp = rand(160, 520) * (0.6 + p.depth);
+        p.ex = Math.cos(ang) * sp;
+        p.ey = Math.sin(ang) * sp - 60;
+      } else if (a.entrance === "rise" && (layer.kind === "lantern" || layer.kind === "bubble")) {
+        // Half are already aloft; the rest lift off from below, quickly at first.
+        if (i % 2) {
+          p.y = h + rand(0, h * 0.4);
+          p.ey = -rand(120, 220);
+        }
+      } else if (!a.entrance && layer.kind !== "star") {
+        continue;
+      }
+      out.push(p);
+    }
+  });
+  return out;
+}
+
 /**
- * The weather for the place you're visiting. One canvas over the globe;
- * switching places lets the old particles fade out while the new ones drift
- * in. Pauses off screen and stays off under reduced motion.
+ * The weather for a place. One canvas; switching places lets the old particles
+ * fade out while the new ones arrive. Pauses off screen and stays off under
+ * reduced motion.
  */
 export function PlaceAtmosphere({ slug, running }: { slug: string | null; running: boolean }) {
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -240,67 +333,85 @@ export function PlaceAtmosphere({ slug, running }: { slug: string | null; runnin
 
     let particles: Particle[] = [];
     let current: string | null = null;
-    let spawnBudget = 0;
+    const budget: number[] = [];
     let raf = 0;
     let last = performance.now();
+    const scale = () => Math.min(Math.max(w / 1440, 0.45), 1);
 
     const frame = (now: number) => {
       const dt = Math.min((now - last) / 1000, 1 / 20);
       last = now;
       const t = now / 1000;
 
-      // Place changed: let the old weather fade out and start the new one.
       if (slugRef.current !== current) {
         current = slugRef.current;
         particles.forEach((p) => (p.dying = true));
-        // A first handful are scattered across the screen so it doesn't start empty.
         const a = current ? ATMOSPHERES[current] : undefined;
-        if (a && a.kind !== "star") {
-          const n = Math.round(a.count * Math.min(Math.max(w / 1440, 0.45), 1) * 0.35);
-          for (let i = 0; i < n; i++) particles.push(spawn(a.kind, a.colors, w, h, true));
-        }
+        if (a) particles.push(...enter(a, w, h, scale()));
+        budget.length = 0;
       }
 
       const atmo = current ? ATMOSPHERES[current] : undefined;
-      if (atmo) {
-        const target = Math.round(atmo.count * Math.min(Math.max(w / 1440, 0.45), 1));
-        const alive = particles.reduce((n, p) => n + (p.dying ? 0 : 1), 0);
-        spawnBudget += dt * (target / 1.4);
-        while (spawnBudget >= 1 && alive + 1 <= target) {
-          particles.push(spawn(atmo.kind, atmo.colors, w, h, atmo.kind === "star"));
-          spawnBudget -= 1;
-          if (particles.length > target * 2) break;
+      atmo?.layers.forEach((layer, li) => {
+        const target = Math.max(1, Math.round(layer.count * scale()));
+        const alive = particles.reduce((n, p) => n + (!p.dying && p.layer === li ? 1 : 0), 0);
+        budget[li] = Math.min((budget[li] ?? 0) + dt * (target / 1.6), 2);
+        while ((budget[li] ?? 0) >= 1 && alive < target) {
+          particles.push(spawn(layer.kind, li, layer.colors, w, h, layer.kind === "star" || layer.kind === "mote"));
+          budget[li] -= 1;
+          break;
         }
-        spawnBudget = Math.min(spawnBudget, 2);
-      }
+      });
 
       ctx.clearRect(0, 0, w, h);
+      const near: Particle[] = [];
       const keep: Particle[] = [];
       for (const p of particles) {
         p.fade = p.dying ? p.fade - dt / 0.8 : Math.min(1, p.fade + dt / 0.9);
-        if (p.fade <= 0 && p.dying) continue;
+        if (p.dying && p.fade <= 0) continue;
 
-        // Gentle sway for anything that drifts.
-        const sway = p.kind === "petal" || p.kind === "leaf" ? Math.sin(t * 1.3 + p.phase) * 18 : 0;
+        const decay = Math.exp(-dt * 1.8);
+        p.ex *= decay;
+        p.ey *= decay;
+        const sway = p.kind === "petal" || p.kind === "leaf" ? Math.sin(t * 1.3 + p.phase) * 18 * (0.6 + p.depth) : 0;
         if (p.kind === "mote" || p.kind === "firefly") {
-          p.vx += rand(-12, 12) * dt;
-          p.vy += rand(-12, 12) * dt;
-          p.vx *= 0.99;
-          p.vy *= 0.99;
+          p.vx = (p.vx + rand(-12, 12) * dt) * 0.99;
+          p.vy = (p.vy + rand(-12, 12) * dt) * 0.99;
         }
-        p.x += (p.vx + sway) * dt;
-        p.y += p.vy * dt;
+        if (p.kind === "droplet") {
+          // Bead for a while, then slide down the lens, speeding up.
+          p.timer -= dt;
+          if (p.timer < 0) p.vy = Math.min(p.vy + 140 * dt, 220);
+        }
+        if (p.kind === "shooting") {
+          p.timer -= dt;
+          if (p.timer > 0) {
+            keep.push(p);
+            continue;
+          }
+        }
+        p.x += (p.vx + p.ex + sway) * dt;
+        p.y += (p.vy + p.ey) * dt;
         p.rot += p.vr * dt;
 
-        // Recycle anything that has left the screen.
-        const out = p.y > h + 40 || p.y < -100 || p.x < -60 || p.x > w + 60;
+        const out = p.y > h + 60 || p.y < -140 || p.x < -80 || p.x > w + 80;
         if (out) {
           if (p.dying) continue;
-          Object.assign(p, spawn(p.kind, atmo?.colors ?? [p.color], w, h, false), { fade: 1 });
-          if (p.kind === "mote" || p.kind === "firefly") p.fade = 0;
+          const layer = atmo?.layers[p.layer];
+          if (!layer) continue;
+          Object.assign(p, spawn(layer.kind, p.layer, layer.colors, w, h, false), {
+            fade: p.kind === "mote" || p.kind === "firefly" || p.kind === "droplet" ? 0 : 1,
+          });
         }
-        draw(ctx, p, t);
+        if (p.depth > 0.82 && DEPTH_KINDS.has(p.kind)) near.push(p);
+        else drawShape(ctx, p, t);
         keep.push(p);
+      }
+      // The nearest particles are drawn out of focus, like they're right at the lens.
+      if (near.length) {
+        ctx.filter = "blur(2.5px)";
+        for (const p of near) drawShape(ctx, p, t);
+        ctx.filter = "none";
       }
       particles = keep;
       ctx.globalAlpha = 1;

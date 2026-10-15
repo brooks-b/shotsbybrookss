@@ -196,6 +196,27 @@ html.lenis body {
     transform 0.7s var(--ease-out);
 }
 
+/* Foliage framing an arrival, moving in a light breeze. */
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-1.2deg);
+  }
+  50% {
+    transform: rotate(1.2deg);
+  }
+}
+
+/* Slow push-in on an arrival photo. */
+@keyframes push-in {
+  from {
+    transform: scale(1.12);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
 /* Readout swaps in when you pick a place. */
 @keyframes fade-up {
   from {

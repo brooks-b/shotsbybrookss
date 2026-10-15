@@ -2,10 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import { pad } from "@/lib/format";
-import { GLOBE_READY, PRELOADER_KEY as KEY } from "@/lib/preloader";
+import { PRELOADER_KEY as KEY } from "@/lib/preloader";
 
 /**
- * 000 → 100 while fonts and the globe load, then the cover lifts away.
+ * 000 → 100 while the fonts load, then the cover lifts away.
  * Once per session.
  */
 export function Preloader() {
@@ -24,11 +24,8 @@ export function Preloader() {
     const start = performance.now();
     let ready = false;
 
-    const globe = new Promise<void>((resolve) => {
-      window.addEventListener(GLOBE_READY, () => resolve(), { once: true });
-      setTimeout(resolve, 2500);
-    });
-    Promise.all([document.fonts?.ready, globe]).then(() => (ready = true));
+    // The opening is photos and type now, so fonts are all it needs to wait for.
+    Promise.resolve(document.fonts?.ready).then(() => (ready = true));
 
     document.documentElement.style.overflow = "hidden";
     const tick = (now: number) => {

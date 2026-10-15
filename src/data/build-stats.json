@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-15T19:43:01.938Z",
+  "generatedAt": "2026-10-15T21:23:49.833Z",
   "buildSeconds": 5.1,
   "routes": 18,
   "firstLoadJsKb": null,
   "lighthouse": {
     "mobile": {
-      "performance": 90,
+      "performance": 92,
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,
@@ -13,7 +13,7 @@
       "url": "/"
     },
     "desktop": {
-      "performance": 96,
+      "performance": 97,
       "accessibility": 100,
       "bestPractices": 100,
       "seo": 100,

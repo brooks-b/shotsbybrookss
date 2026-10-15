@@ -62,3 +62,22 @@ export type TravelStop = Stop & {
   /** Position in overall travel order. */
   seq: number;
 };
+
+/** One city within a place, with the photo that represents it. */
+export type PlaceCity = Stop & { frames: number; photo?: Frame };
+
+/** A destination on the home page: a place chapter and its cities, in travel order. */
+export type PlaceInfo = {
+  slug: string;
+  title: string;
+  subtitle?: string;
+  year: number;
+  dates: { start: string; end: string };
+  region?: Region;
+  /** The photo on its board panel. */
+  cover?: Frame;
+  /** The full-bleed photo you arrive to (defaults to the cover). */
+  backdrop?: Frame;
+  cities: PlaceCity[];
+  frames: number;
+};

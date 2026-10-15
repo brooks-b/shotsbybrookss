@@ -176,24 +176,18 @@ html.lenis body {
   }
 }
 
-/* ── Shutter reveal ────────────────────────────────────────────────────── */
-/* Two blades part from the centre line, like a focal-plane shutter.
-   The clip sits on the child: a fully clipped element never registers
-   as intersecting, so the observed wrapper has to stay unclipped. */
+/* ── Photo reveal ──────────────────────────────────────────────────────── */
+/* A quick fade, started just before the photo scrolls into view. The fade
+   sits on the child so the observed wrapper always has a real box. */
 
-.shutter > * {
-  clip-path: inset(50% 0 50% 0);
-  transition: clip-path 1s var(--ease-shutter);
+.fade-in > * {
+  opacity: 0;
+  transition:
+    opacity 0.25s ease-out,
+    transform 0.7s var(--ease-out);
 }
-.shutter > * > * {
-  transform: scale(1.06);
-  transition: transform 1.4s var(--ease-out);
-}
-.shutter[data-open="true"] > * {
-  clip-path: inset(0 0 0 0);
-}
-.shutter[data-open="true"] > * > * {
-  transform: scale(1);
+.fade-in[data-open="true"] > * {
+  opacity: 1;
 }
 
 /* Line-by-line text reveal */
@@ -276,8 +270,7 @@ html.lenis body {
   .grain {
     animation: none;
   }
-  .shutter > *,
-  .shutter > * > *,
+  .fade-in > *,
   .line-mask > span {
     clip-path: none;
     transform: none;

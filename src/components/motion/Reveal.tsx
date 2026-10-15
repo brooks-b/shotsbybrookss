@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 
 type Props = {
   as?: "div" | "figure" | "section" | "p" | "h2" | "span";
-  /** "shutter" opens like a focal-plane shutter; "lines" slides text lines up. */
-  variant?: "shutter" | "lines";
+  /** "fade" fades photos in quickly; "lines" slides text lines up. */
+  variant?: "fade" | "lines";
   className?: string;
   style?: React.CSSProperties;
   children: React.ReactNode;
@@ -14,7 +14,7 @@ type Props = {
 };
 
 /** Sets data-open="true" the first time the element scrolls into view. CSS does the rest. */
-export function Reveal({ as = "div", variant = "shutter", className = "", style, children, threshold = 0.15 }: Props) {
+export function Reveal({ as = "div", variant = "fade", className = "", style, children, threshold }: Props) {
   const ref = useRef<HTMLElement>(null);
   const [open, setOpen] = useState(false);
 
@@ -28,18 +28,21 @@ export function Reveal({ as = "div", variant = "shutter", className = "", style,
           io.disconnect();
         }
       },
-      { threshold, rootMargin: "0px 0px -6% 0px" },
+      // Photos start fading a little before they arrive; text waits until it's in view.
+      variant === "fade"
+        ? { threshold: threshold ?? 0, rootMargin: "0px 0px 15% 0px" }
+        : { threshold: threshold ?? 0.15, rootMargin: "0px 0px -6% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [threshold]);
+  }, [threshold, variant]);
 
   const Tag = as as "div";
   return (
     <Tag
       ref={ref as React.Ref<HTMLDivElement>}
       data-open={open}
-      className={`${variant === "shutter" ? "shutter" : ""} ${className}`}
+      className={`${variant === "fade" ? "fade-in" : ""} ${className}`}
       style={style}
     >
       {children}

@@ -155,6 +155,29 @@ describe("ingest", () => {
     expect(third.manifest.photos[0].alt).toBe("Torii gates in late light");
   });
 
+  it("applies per-photo details from collection.json", async () => {
+    await addCollection({
+      slug: "japan",
+      stops: [
+        { name: "Tokyo", lat: 35.6762, lng: 139.6503, tz: "Asia/Tokyo" },
+        { name: "Kyoto", lat: 35.0116, lng: 135.7681, tz: "Asia/Tokyo" },
+      ],
+      photos: {
+        "A.jpg": { alt: "A pagoda at sunset", stop: "Kyoto" },
+        "B.jpg": { alt: "Two people at teamLab", people: true },
+      },
+    });
+    await writeFile(photoPath("japan", "A.jpg"), await makeFixtureJpeg());
+    await writeFile(photoPath("japan", "B.jpg"), await makeFixtureJpeg({ colors: ["#246", "#111"] }));
+
+    const { manifest, summary } = await run();
+    const [a, b] = manifest.photos;
+    expect(a).toMatchObject({ alt: "A pagoda at sunset", stop: "Kyoto", coords: { lat: 35, lng: 135.8 } });
+    expect(b.withheld).toBe(true);
+    expect(b.sources.webp).toHaveLength(0);
+    expect(summary.withheld).toEqual(["japan-b"]);
+  });
+
   it("reports photos it can't place and drops deleted ones", async () => {
     await addCollection({
       slug: "italy",

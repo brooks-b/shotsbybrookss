@@ -2,6 +2,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Inter_Tight } from "next/font/google";
+import { AmbientTone } from "@/components/motion/AmbientTone";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           Skip to content
         </a>
+        <AmbientTone />
         <SmoothScroll>
           <SiteHeader chapters={getChapters().length} frames={getAllFrames().length} />
           <main id="main">{children}</main>

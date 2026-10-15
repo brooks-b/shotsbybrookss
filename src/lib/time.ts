@@ -13,6 +13,8 @@ const ABBR: Record<string, [standard: string, daylight: string]> = {
   "Europe/Budapest": ["CET", "CEST"],
   "Europe/Bratislava": ["CET", "CEST"],
   "Asia/Tokyo": ["JST", "JST"],
+  "Asia/Bangkok": ["ICT", "ICT"],
+  "Africa/Kigali": ["CAT", "CAT"],
 };
 
 /** Minutes east of UTC for `tz` at `date`. */

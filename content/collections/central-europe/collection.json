@@ -19,10 +19,47 @@
     }
   ],
   "dates": {
-    "start": "2025-07",
-    "end": "2025-07"
+    "start": "2025-12",
+    "end": "2025-12"
   },
-  "datesApprox": true,
-  "order": 5,
-  "placeholders": 2
+  "order": 7,
+  "cover": "DSCF1376.jpg",
+  "photos": {
+    "DSCF1341.jpg": {
+      "alt": "The gilded dome and altar of St. Stephen's Basilica, visitors in silhouette",
+      "stop": "Budapest"
+    },
+    "DSCF1376.jpg": {
+      "alt": "A spire of Fisherman's Bastion in Budapest on a grey day",
+      "stop": "Budapest"
+    },
+    "DSCF1383.JPG": {
+      "alt": "Visitors at a balustrade of Fisherman's Bastion, Parliament across the Danube",
+      "stop": "Budapest"
+    },
+    "DSCF1386.JPG": {
+      "alt": "A conical tower of Fisherman's Bastion with people on its balcony",
+      "stop": "Budapest"
+    },
+    "DSCF1390.JPG": {
+      "alt": "Arched windows and columns at Fisherman's Bastion in low light",
+      "stop": "Budapest"
+    },
+    "DSCF1441.JPG": {
+      "alt": "A cobbled corner of Bratislava's old town",
+      "stop": "Bratislava"
+    },
+    "DSCF1453.JPG": {
+      "alt": "Clipped hedge gardens below Bratislava Castle in fog",
+      "stop": "Bratislava"
+    },
+    "DSCF1462.JPG": {
+      "alt": "A red-roofed tower seen through an arched window in Bratislava",
+      "stop": "Bratislava"
+    },
+    "DSCF1465.jpg": {
+      "alt": "A red-roofed tower above Bratislava's rooftops in fog",
+      "stop": "Bratislava"
+    }
+  }
 }

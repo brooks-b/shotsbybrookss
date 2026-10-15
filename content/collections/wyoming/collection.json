@@ -1,28 +1,57 @@
 {
   "slug": "wyoming",
   "title": "Wyoming",
-  "subtitle": "Wind River Range → Grand Teton",
+  "subtitle": "Grand Teton → Wind River Range",
   "kind": "place",
   "region": "North America",
   "stops": [
-    {
-      "name": "Wind River Range",
-      "lat": 42.8666,
-      "lng": -109.8607,
-      "tz": "America/Denver"
-    },
     {
       "name": "Grand Teton",
       "lat": 43.7904,
       "lng": -110.6818,
       "tz": "America/Denver"
+    },
+    {
+      "name": "Wind River Range",
+      "lat": 42.8666,
+      "lng": -109.8607,
+      "tz": "America/Denver"
     }
   ],
   "dates": {
-    "start": "2025-08",
-    "end": "2025-08"
+    "start": "2025-07",
+    "end": "2025-07"
   },
-  "datesApprox": true,
-  "order": 6,
-  "placeholders": 2
+  "order": 3,
+  "cover": "DSCF0393.JPG",
+  "photos": {
+    "DSCF0333.JPG": {
+      "alt": "The neon cowboy sign of the Million Dollar Cowboy Bar in Jackson at dusk",
+      "stop": "Grand Teton"
+    },
+    "DSCF0393.JPG": {
+      "alt": "Granite peaks rising above a lake in Grand Teton National Park",
+      "stop": "Grand Teton"
+    },
+    "DSCF0406.jpg": {
+      "alt": "A log cabin in the sagebrush below the Teton Range",
+      "stop": "Grand Teton"
+    },
+    "DSCF0487.JPG": {
+      "alt": "A barn and fence line silhouetted against a pink sunset, the Tetons behind",
+      "stop": "Grand Teton"
+    },
+    "DSCF0495.JPG": {
+      "alt": "A wooden barn at dusk under a soft pink sky",
+      "stop": "Grand Teton"
+    },
+    "DSCF0520.jpg": {
+      "alt": "The Teton Range at sunset from the road, a speed limit sign in the foreground",
+      "stop": "Grand Teton"
+    },
+    "DSCF0529.JPG": {
+      "alt": "Jenny Lake and the Tetons framed by pine branches",
+      "stop": "Grand Teton"
+    }
+  }
 }

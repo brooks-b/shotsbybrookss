@@ -39,18 +39,20 @@ function Tile({
   sizes,
   onOpen,
   className = "",
+  style,
 }: {
   frame: Frame;
   sizes: string;
   onOpen: () => void;
   className?: string;
+  style?: React.CSSProperties;
 }) {
   const coarse = useMediaQuery("(pointer: coarse)");
   const [hudOn, setHudOn] = useState(false);
   const landscape = frame.width > frame.height;
 
   return (
-    <figure className={className}>
+    <figure className={className} style={style}>
       <button
         type="button"
         className="group relative block w-full cursor-zoom-in text-left"
@@ -101,7 +103,13 @@ export function Sequence({ frames, title }: { frames: Frame[]; title: string }) 
               frame={f}
               onOpen={() => setOpen(indexOf(f))}
               sizes={landscape ? "100vw" : "(min-width: 768px) 70vw, 100vw"}
-              className={landscape ? "-mx-[var(--gutter)]" : "mx-auto w-full md:w-[min(70vw,calc(88svh*0.8))]"}
+              className={landscape ? "-mx-[var(--gutter)]" : "mx-auto w-full md:w-[var(--full-w)]"}
+              // A portrait frame fills the screen's height at its own aspect ratio.
+              style={
+                landscape
+                  ? undefined
+                  : ({ "--full-w": `min(70vw, calc(86svh * ${f.width / f.height}))` } as React.CSSProperties)
+              }
             />
           );
         }

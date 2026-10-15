@@ -1,7 +1,7 @@
 {
   "slug": "japan",
   "title": "Japan",
-  "subtitle": "Tokyo → Kamakura → Kyoto → Hiroshima",
+  "subtitle": "Tokyo → Kamakura → Kyoto → Nara → Osaka → Hiroshima",
   "kind": "place",
   "region": "Asia",
   "stops": [
@@ -24,9 +24,21 @@
       "tz": "Asia/Tokyo"
     },
     {
+      "name": "Nara",
+      "lat": 34.6851,
+      "lng": 135.8048,
+      "tz": "Asia/Tokyo"
+    },
+    {
       "name": "Arashiyama",
       "lat": 35.0094,
       "lng": 135.6668,
+      "tz": "Asia/Tokyo"
+    },
+    {
+      "name": "Osaka",
+      "lat": 34.6937,
+      "lng": 135.5023,
       "tz": "Asia/Tokyo"
     },
     {
@@ -41,5 +53,141 @@
     "end": "2026-05"
   },
   "order": 11,
-  "placeholders": 6
+  "cover": "DSCF2035.JPG",
+  "photos": {
+    "DSCF1644.JPG": {
+      "alt": "A shaded stone path leading to a shrine in Tokyo",
+      "stop": "Tokyo"
+    },
+    "DSCF1646.JPG": {
+      "alt": "The red eaves of a shrine against a blue sky",
+      "stop": "Tokyo"
+    },
+    "DSCF1648.JPG": {
+      "alt": "Wooden ema prayer plaques hanging at a red shrine stand",
+      "stop": "Tokyo"
+    },
+    "DSCF1663.JPG": {
+      "alt": "A pavilion beside a pond in Shinjuku Gyoen",
+      "stop": "Tokyo"
+    },
+    "DSCF1666.JPG": {
+      "alt": "The Docomo tower framed by trees in Shinjuku Gyoen",
+      "stop": "Tokyo"
+    },
+    "DSCF1672.JPG": {
+      "alt": "A crowded Shibuya street at golden hour",
+      "stop": "Tokyo",
+      "people": true
+    },
+    "DSCF1679.JPG": {
+      "alt": "Neon karaoke signs at night in Tokyo",
+      "stop": "Tokyo"
+    },
+    "DSCF1710.JPG": {
+      "alt": "A bronze statue in front of Sensō-ji's main hall",
+      "stop": "Tokyo"
+    },
+    "DSCF1713.JPG": {
+      "alt": "A palm tree above old gravestones in a Tokyo cemetery",
+      "stop": "Tokyo"
+    },
+    "DSCF1723.jpg": {
+      "alt": "A figure walking through a room of glowing glass lights at teamLab",
+      "stop": "Tokyo"
+    },
+    "DSCF1744.jpg": {
+      "alt": "Two people sitting in a stream of projected light at teamLab",
+      "stop": "Tokyo",
+      "people": true
+    },
+    "DSCF1758.JPG": {
+      "alt": "Tokyo Tower from directly below",
+      "stop": "Tokyo"
+    },
+    "DSCF1768.JPG": {
+      "alt": "Red banners with white characters at Maruyama Inari shrine",
+      "stop": "Fujisawa & Kamakura"
+    },
+    "DSCF1770.JPG": {
+      "alt": "Maruyama Inari shrine with a stone lantern and red fence",
+      "stop": "Fujisawa & Kamakura"
+    },
+    "DSCF1787.jpg": {
+      "alt": "The Great Buddha of Kamakura against green hills",
+      "stop": "Fujisawa & Kamakura"
+    },
+    "DSCF1828.JPG": {
+      "alt": "A wrapped classic Porsche on a wet street at night",
+      "stop": "Fujisawa & Kamakura"
+    },
+    "DSCF1840.JPG": {
+      "alt": "Red columns and hanging lanterns along a shrine hall in Kyoto",
+      "stop": "Kyoto"
+    },
+    "DSCF1861.jpg": {
+      "alt": "A crow perched on a stone among small red torii",
+      "stop": "Kyoto"
+    },
+    "DSCF1904.JPG": {
+      "alt": "A pachinko parlor lit up in neon at night",
+      "stop": "Kyoto"
+    },
+    "DSCF1931.JPG": {
+      "alt": "A deer standing in the grass in Nara Park",
+      "stop": "Nara"
+    },
+    "DSCF1990.JPG": {
+      "alt": "Tōdai-ji beyond a pond and a pine in Nara",
+      "stop": "Nara"
+    },
+    "DSCF2035.JPG": {
+      "alt": "The Yasaka pagoda above Kyoto's rooftops at sunset",
+      "stop": "Kyoto"
+    },
+    "DSCF2057.JPG": {
+      "alt": "A temple building and garden among pines in Kyoto",
+      "stop": "Kyoto"
+    },
+    "DSCF2068.jpg": {
+      "alt": "Two figures in white crossing the courtyard of Heian Shrine",
+      "stop": "Kyoto"
+    },
+    "DSCF2089.jpg": {
+      "alt": "A macaque sitting on a ledge above the forest at Arashiyama",
+      "stop": "Arashiyama"
+    },
+    "DSCF2110.JPG": {
+      "alt": "A macaque on a hilltop at Arashiyama looking over the hills",
+      "stop": "Arashiyama"
+    },
+    "DSCF2125.JPG": {
+      "alt": "Moss-covered stone figures at Otagi Nenbutsu-ji",
+      "stop": "Arashiyama"
+    },
+    "DSCF2256.JPG": {
+      "alt": "Osaka Castle above its stone walls on an overcast day",
+      "stop": "Osaka"
+    },
+    "DSCF2264.JPG": {
+      "alt": "The Atomic Bomb Dome in Hiroshima framed by trees",
+      "stop": "Hiroshima"
+    },
+    "DSCF2265.JPG": {
+      "alt": "The ruined dome of the Atomic Bomb Dome from below",
+      "stop": "Hiroshima"
+    },
+    "DSCF2266.JPG": {
+      "alt": "Weathered walls of the Atomic Bomb Dome",
+      "stop": "Hiroshima"
+    },
+    "DSCF2271.jpg": {
+      "alt": "The Atomic Bomb Dome framed by the arch of the Hiroshima cenotaph",
+      "stop": "Hiroshima"
+    },
+    "DSCF2274.JPG": {
+      "alt": "Hiroshima Castle among trees on a grey day",
+      "stop": "Hiroshima"
+    }
+  }
 }

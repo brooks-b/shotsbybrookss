@@ -7,6 +7,7 @@ Design and engineering calls made during the build, one line each.
 - **The globe is the opening.** The hero is a full-screen globe instead of a cycling photo, at Brooks's request; scrolling pins it and runs the travel tour. The EVF photo card in the readout shows each stop's cover once real photos exist.
 - **Type:** Inter Tight 500 (tight grotesk, uppercase titles), Geist (body), Geist Mono (data, EXIF, labels). All SIL OFL via Google Fonts. Replaced Archivo Condensed, which read as generic.
 - **No gradients over images.** No vignettes, scrims or glows. Placeholders are flat tiles in the right aspect ratio.
+- **Ambient tone:** the page's near-black surfaces lean toward the dominant colour of the photo filling the middle of the screen (or the open lightbox), and ease back to neutral otherwise. It brings the colour to full brightness (keeping its hue), mixes in 13–15%, then darkens until label text keeps ≥ 4.6:1 contrast. The background animates through registered CSS custom properties; under reduced motion it changes instantly.
 - **Accent:** safelight orange `#f0602f`, used only for the REC dot, pins, arcs and focus rings.
 - **Label grey** `#8a847a` passes WCAG AA (5.2:1 on the background, 4.6:1 on film-strip grey).
 - **Preloader:** a hairline progress bar with a 000–100 counter that waits for fonts and the globe, then lifts away. Once per session. No sound.
@@ -14,7 +15,7 @@ Design and engineering calls made during the build, one line each.
 - **Film grain** at 3.5% opacity; it stops animating under reduced motion.
 - **Dial:** the chapter index's dial is an ARIA slider (arrow keys, Home/End, Enter, drag/touch). Hidden on phones, where the list itself is the control.
 - **Copy:** plain and factual. No invented taglines or chapter blurbs; the only notes are facts from the brief and Brooks's own London caption.
-- **Dates shown as years** in the index, since most months are still estimates.
+- **Dates shown as years** in the index; chapter pages show months.
 
 ## Engineering
 
@@ -35,7 +36,12 @@ Design and engineering calls made during the build, one line each.
 
 ## Content
 
+- **First photo batch (81 originals):** sorted into chapters by EXIF date and by what's in the frame. Added Bangkok (Wat Arun, May 2026) and Rwanda (Volcanoes National Park, Jul 2026), and Nara and Osaka stops in Japan. Dates from EXIF replaced the estimates for Wyoming (Jul 2025), Italy, South of France and Central Europe (Dec 2025).
+- **Held back pending Brooks's OK:** London `DSCF1575.jpg` (woman feeding pigeons), Japan `DSCF1672.JPG` (Shibuya crowd, faces in foreground) and `DSCF1744.jpg` (two people at teamLab). Distant figures, backs and silhouettes were not flagged.
+- **Top 10 of 2025** is a draft selection from the 2025 photos, for Brooks to replace with his real top 10.
+- **Lenses** come from EXIF: XF35mmF2 R WR and XF50-140mmF2.8 R LM OIS WR.
+- **Per-photo details** (alt text, stop, people flag) live in each chapter's `collection.json` under `"photos"`.
 - **Lead chapter:** Japan (the index lists newest first). The globe follows travel order, oldest first.
 - **Geocoding** is city level. Dominican Republic uses Santo Domingo, and Wind River Range uses Pinedale, WY, until Brooks confirms.
-- **Approximate dates** (`datesApprox`) for Montclair, Dominican Republic, Italy, South of France, Central Europe, Wyoming and Nashville.
+- **Approximate dates** (`datesApprox`) remain only for Montclair, Dominican Republic and Nashville, which have no photos yet.
 - **Church** has no location yet, so it stays off the globe (`locationPending`). The Earth Day 2024 photo isn't placed in any chapter yet.

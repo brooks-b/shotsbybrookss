@@ -23,7 +23,7 @@ const GlobeCanvas = dynamic(() => import("./GlobeCanvas"), { ssr: false });
 const Globe2D = dynamic(() => import("./Globe2D"), { ssr: false });
 
 const YEARS = ["All", "2024", "2025", "2026"] as const;
-const REGIONS: ("All" | Region)[] = ["All", "North America", "Caribbean", "Europe", "Asia"];
+const REGIONS: ("All" | Region)[] = ["All", "North America", "Caribbean", "Europe", "Africa", "Asia"];
 /** Scroll distance per stop, in viewport heights. */
 const VH_PER_STOP = 0.4;
 /** Share of the pinned scroll spent on the intro before the tour starts. */
@@ -249,7 +249,11 @@ export function GlobeSection({ stops: allStops, covers }: { stops: TravelStop[];
                   <p className="micro text-paper-faint">
                     Around the world — {pad(stop.seq + 1, 2)} / {pad(allStops.length, 2)}
                   </p>
-                  <p className="display mt-3 text-[clamp(36px,5vw,80px)]">{stop.name}</p>
+                  <p
+                    className={`display mt-3 ${stop.name.length > 14 ? "text-[clamp(30px,3.6vw,56px)]" : "text-[clamp(36px,5vw,80px)]"}`}
+                  >
+                    {stop.name}
+                  </p>
                   <p className="mt-2 text-paper-dim">{stop.chapter}</p>
                   <dl className="hud mt-5 grid grid-cols-[auto_1fr] gap-x-8 gap-y-1 text-paper-dim">
                     <dt className="text-paper-faint">Lat</dt>

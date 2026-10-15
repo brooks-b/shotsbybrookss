@@ -1,0 +1,35 @@
+{
+  "slug": "bangkok",
+  "title": "Bangkok",
+  "subtitle": "Wat Arun",
+  "kind": "place",
+  "region": "Asia",
+  "stops": [
+    {
+      "name": "Bangkok",
+      "lat": 13.7563,
+      "lng": 100.5018,
+      "tz": "Asia/Bangkok"
+    }
+  ],
+  "dates": {
+    "start": "2026-05",
+    "end": "2026-05"
+  },
+  "order": 12,
+  "cover": "DSCF2370.JPG",
+  "photos": {
+    "DSCF2366.JPG": {
+      "alt": "Wat Arun lit at sunset above a crowd watching from across the river",
+      "stop": "Bangkok"
+    },
+    "DSCF2370.JPG": {
+      "alt": "Wat Arun glowing against a dusky sky, silhouettes in front",
+      "stop": "Bangkok"
+    },
+    "DSCF2375.JPG": {
+      "alt": "Wat Arun at dusk over the heads of a riverside crowd",
+      "stop": "Bangkok"
+    }
+  }
+}

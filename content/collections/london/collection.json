@@ -14,9 +14,40 @@
   ],
   "dates": {
     "start": "2026-03",
-    "end": "2026-04"
+    "end": "2026-03"
   },
   "order": 10,
   "note": "Probably my favorite. Just wanted a reason to post a gem.",
-  "placeholders": 3
+  "cover": "DSCF1594.JPG",
+  "photos": {
+    "DSCF1522.JPG": {
+      "alt": "The glass roof of the British Museum's Great Court",
+      "stop": "London"
+    },
+    "DSCF1532.JPG": {
+      "alt": "A skylit gallery in the British Museum full of visitors",
+      "stop": "London"
+    },
+    "DSCF1575.jpg": {
+      "alt": "A woman feeding pigeons on a London street",
+      "stop": "London",
+      "people": true
+    },
+    "DSCF1594.JPG": {
+      "alt": "A Union Jack hanging over a red-brick London street",
+      "stop": "London"
+    },
+    "DSCF1596.JPG": {
+      "alt": "A Union Jack and a street lamp against Victorian facades",
+      "stop": "London"
+    },
+    "DSCF1610.JPG": {
+      "alt": "Gilded iron gates in front of a stone palace",
+      "stop": "London"
+    },
+    "DSCF1642.JPG": {
+      "alt": "A Gothic building behind trees and a lawn in Westminster",
+      "stop": "London"
+    }
+  }
 }

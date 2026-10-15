@@ -51,3 +51,6 @@ next-env.d.ts
 
 # editor/agent local config
 /.claude
+
+# originals dropped in for sorting (never committed)
+/uploaded-photos

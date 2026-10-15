@@ -1,0 +1,47 @@
+{
+  "slug": "rwanda",
+  "title": "Rwanda",
+  "subtitle": "Volcanoes National Park",
+  "kind": "place",
+  "region": "Africa",
+  "stops": [
+    {
+      "name": "Volcanoes National Park",
+      "lat": -1.4998,
+      "lng": 29.6347,
+      "tz": "Africa/Kigali"
+    }
+  ],
+  "dates": {
+    "start": "2026-07",
+    "end": "2026-07"
+  },
+  "order": 13,
+  "cover": "DSCF2697.JPG",
+  "photos": {
+    "DSCF2593.JPG": {
+      "alt": "A young mountain gorilla looking out from the undergrowth",
+      "stop": "Volcanoes National Park"
+    },
+    "DSCF2644.JPG": {
+      "alt": "A mountain gorilla sitting in dense ferns",
+      "stop": "Volcanoes National Park"
+    },
+    "DSCF2697.JPG": {
+      "alt": "A gorilla's face peering through leaves",
+      "stop": "Volcanoes National Park"
+    },
+    "DSCF2756.JPG": {
+      "alt": "Young gorillas huddled together in the foliage",
+      "stop": "Volcanoes National Park"
+    },
+    "DSCF3033.jpg": {
+      "alt": "A baby gorilla on a slope above a misty forest",
+      "stop": "Volcanoes National Park"
+    },
+    "DSCF3081.jpg": {
+      "alt": "A gorilla among ferns, forested hills behind",
+      "stop": "Volcanoes National Park"
+    }
+  }
+}

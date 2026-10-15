@@ -25,6 +25,7 @@ export function FrameImage({ frame, sizes, priority = false, className = "", fit
   if (frame.kind === "photo") {
     return (
       <picture
+        data-tone={frame.tone ?? frame.color}
         className={`protect relative block h-full w-full ${className}`}
         style={{
           backgroundColor: frame.color,

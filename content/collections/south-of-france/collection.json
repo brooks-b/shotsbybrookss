@@ -19,10 +19,39 @@
     }
   ],
   "dates": {
-    "start": "2025-06",
-    "end": "2025-07"
+    "start": "2025-07",
+    "end": "2025-08"
   },
-  "datesApprox": true,
-  "order": 4,
-  "placeholders": 2
+  "order": 5,
+  "cover": "DSCF1207.jpg",
+  "photos": {
+    "DSCF1143.JPG": {
+      "alt": "A gravel lane past a stone house and cypress trees in Provence",
+      "stop": "Gordes"
+    },
+    "DSCF1207.jpg": {
+      "alt": "A road winding through golden Provençal countryside below Gordes",
+      "stop": "Gordes"
+    },
+    "DSCF1208.JPG": {
+      "alt": "A narrow stone street in Gordes under a blue sky",
+      "stop": "Gordes"
+    },
+    "DSCF1209.JPG": {
+      "alt": "A sliver of the Luberon valley between two stone walls in Gordes",
+      "stop": "Gordes"
+    },
+    "DSCF1214.jpg": {
+      "alt": "Stone houses at the edge of Gordes in evening light",
+      "stop": "Gordes"
+    },
+    "DSCF1295.JPG": {
+      "alt": "The rear of a red Ferrari with Monaco plates",
+      "stop": "Monaco"
+    },
+    "DSCF1306.JPG": {
+      "alt": "Palm trees and green hills above Monaco",
+      "stop": "Monaco"
+    }
+  }
 }

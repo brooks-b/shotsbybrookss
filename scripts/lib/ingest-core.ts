@@ -5,7 +5,7 @@ import sharp, { type Sharp } from "sharp";
 import { rgbaToThumbHash } from "thumbhash";
 import { readExif } from "../../src/lib/exif/read";
 import { distanceKm, toCityLevel } from "../../src/lib/geo";
-import type { Collection, Manifest, Photo } from "../../src/lib/types";
+import type { Collection, Manifest, Photo, PhotoOverride } from "../../src/lib/types";
 import type { Storage } from "./storage";
 
 /** Derivative widths. 2560 is the ceiling: nothing larger is ever published. */
@@ -31,6 +31,8 @@ export type IngestOptions = {
   contentDir: string;
   storage: Storage | null;
   log?: (line: string) => void;
+  /** Photos processed at once. */
+  concurrency?: number;
 };
 
 export async function loadCollections(contentDir: string): Promise<Collection[]> {
@@ -105,6 +107,7 @@ async function processPhoto(
   hash: string,
   previous: Photo | undefined,
   storage: Storage | null,
+  people: boolean | undefined,
 ): Promise<Photo> {
   const id = photoId(collection.slug, file);
   const { exif, gps } = await readExif(buf);
@@ -115,7 +118,6 @@ async function processPhoto(
   const oriented = await image.clone().toBuffer({ resolveWithObject: true });
   const { width, height } = oriented.info;
 
-  const people = previous?.people;
   const withheld = isWithheld(collection, people);
   const sources: Photo["sources"] = { avif: [], webp: [] };
   let derivativeBytes = 0;
@@ -158,7 +160,22 @@ async function processPhoto(
   };
 }
 
-export async function ingest({ contentDir, storage, log = () => {} }: IngestOptions) {
+/** Folds collection.json per-photo details into a manifest entry. Cheap: no image work. */
+function applyOverride(photo: Photo, collection: Collection, override: PhotoOverride | undefined): Photo {
+  if (!override) return photo;
+  const next = { ...photo };
+  if (override.alt && !next.alt.trim()) next.alt = override.alt;
+  if (override.caption && !next.caption) next.caption = override.caption;
+  if (override.people !== undefined) next.people = override.people;
+  const stop = override.stop ? collection.stops.find((s) => s.name === override.stop) : undefined;
+  if (stop) {
+    next.stop = stop.name;
+    next.coords = toCityLevel(stop);
+  }
+  return next;
+}
+
+export async function ingest({ contentDir, storage, log = () => {}, concurrency = 3 }: IngestOptions) {
   const collections = await loadCollections(contentDir);
   const previous = await loadManifest(contentDir);
   const prevById = new Map(previous?.photos.map((p) => [p.id, p]));
@@ -175,45 +192,60 @@ export async function ingest({ contentDir, storage, log = () => {} }: IngestOpti
   };
   const photos: Photo[] = [];
 
+  const jobs: { collection: Collection; file: string; dir: string }[] = [];
   for (const collection of collections) {
     const dir = path.join(contentDir, "collections", collection.slug, "photos");
-    let files: string[] = [];
     try {
-      files = (await readdir(dir)).filter((f) => PHOTO_EXT.test(f)).sort();
+      const files = (await readdir(dir)).filter((f) => PHOTO_EXT.test(f)).sort();
+      for (const file of files) jobs.push({ collection, file, dir });
     } catch {
       continue;
     }
+  }
 
-    for (const file of files) {
+  // A few photos at a time: each one is mostly CPU-bound encoding plus an
+  // upload, so a small pool keeps both busy without exhausting memory.
+  const results: { photo: Photo; status: "added" | "updated" | "unchanged" }[] = new Array(jobs.length);
+  let next = 0;
+  const worker = async () => {
+    while (next < jobs.length) {
+      const i = next++;
+      const { collection, file, dir } = jobs[i];
       const buf = await readFile(path.join(dir, file));
       const hash = createHash("sha1").update(buf).digest("hex").slice(0, 12);
       const id = photoId(collection.slug, file);
       const prev = prevById.get(id);
+      const override = collection.photos?.[file];
+      const people = override?.people ?? prev?.people;
 
       // Skip the expensive work when nothing changed: same bytes, same storage,
       // and the people gate hasn't flipped since last run.
-      const stillWithheld = isWithheld(collection, prev?.people);
+      const stillWithheld = isWithheld(collection, people);
       const reusable =
         prev && prev.hash === hash && previous?.storage === storageKind && Boolean(prev.withheld) === stillWithheld;
 
-      let photo: Photo;
       if (reusable) {
-        photo = prev;
-        summary.unchanged.push(id);
+        results[i] = { photo: applyOverride(prev, collection, override), status: "unchanged" };
       } else {
         log(`  processing ${collection.slug}/${file}`);
-        photo = await processPhoto(collection, file, buf, hash, prev, storage);
-        (prev ? summary.updated : summary.added).push(id);
+        const photo = await processPhoto(collection, file, buf, hash, prev, storage, people);
+        results[i] = { photo: applyOverride(photo, collection, override), status: prev ? "updated" : "added" };
       }
-
-      if (photo.withheld) summary.withheld.push(id);
-      if (!photo.coords && !collection.locationPending && collection.kind === "place") {
-        summary.missingLocation.push(id);
-      }
-      if (!photo.alt.trim()) summary.missingAlt.push(id);
-      photos.push(photo);
     }
-  }
+  };
+  await Promise.all(Array.from({ length: Math.min(concurrency, jobs.length) }, worker));
+
+  // Summaries in a stable order, whatever order the pool finished in.
+  results.forEach(({ photo, status }, i) => {
+    const { collection } = jobs[i];
+    summary[status].push(photo.id);
+    if (photo.withheld) summary.withheld.push(photo.id);
+    if (!photo.coords && !collection.locationPending && collection.kind === "place") {
+      summary.missingLocation.push(photo.id);
+    }
+    if (!photo.alt.trim()) summary.missingAlt.push(photo.id);
+    photos.push(photo);
+  });
 
   const kept = new Set(photos.map((p) => p.id));
   for (const p of previous?.photos ?? []) if (!kept.has(p.id)) summary.removed.push(p.id);

@@ -22,8 +22,8 @@ export const site = {
   ],
 
   camera: "Fujifilm X-T50",
-  /** Open item: Brooks to supply the lens list. */
-  lenses: [] as string[],
+  /** From the EXIF of the photos so far. */
+  lenses: ["XF35mmF2 R WR", "XF50-140mmF2.8 R LM OIS WR"] as string[],
 
   clocks: [
     { label: "Nashville", tz: "America/Chicago" },

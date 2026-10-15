@@ -20,6 +20,8 @@ export type Frame = {
   height: number;
   alt: string;
   color: string;
+  /** Saturation-weighted colour for the ambient page tint. */
+  tone?: string;
   /** Tiny PNG data URL decoded from the thumbhash. */
   blur?: string;
   avif?: string;

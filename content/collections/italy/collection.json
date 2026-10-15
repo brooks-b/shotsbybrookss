@@ -25,10 +25,47 @@
     }
   ],
   "dates": {
-    "start": "2025-06",
-    "end": "2025-06"
+    "start": "2025-07",
+    "end": "2025-07"
   },
-  "datesApprox": true,
-  "order": 3,
-  "placeholders": 3
+  "order": 4,
+  "cover": "DSCF0937.jpg",
+  "photos": {
+    "DSCF0645.JPG": {
+      "alt": "The gilded coffered ceiling and windows inside St. Peter's Basilica",
+      "stop": "Rome & Vatican City"
+    },
+    "DSCF0809.jpg": {
+      "alt": "Terracotta rooftops of a Tuscan hill town from above",
+      "stop": "Tuscany"
+    },
+    "DSCF0861.JPG": {
+      "alt": "Michelangelo's David under the dome of the Accademia, a crowd in front",
+      "stop": "Tuscany"
+    },
+    "DSCF0884.JPG": {
+      "alt": "David glimpsed between a stone block and a column in the Accademia",
+      "stop": "Tuscany"
+    },
+    "DSCF0886 2.JPG": {
+      "alt": "David framed by an unfinished marble block and a column, skylight above",
+      "stop": "Tuscany"
+    },
+    "DSCF0937.jpg": {
+      "alt": "Florence's Duomo and bell towers against a pink sunset",
+      "stop": "Tuscany"
+    },
+    "DSCF0955.jpg": {
+      "alt": "The Faraglioni rocks off Capri rising out of deep blue water",
+      "stop": "Amalfi Coast"
+    },
+    "DSCF0973.jpg": {
+      "alt": "Two boats moored beneath limestone cliffs in turquoise water off Capri",
+      "stop": "Amalfi Coast"
+    },
+    "DSCF1058.jpg": {
+      "alt": "A swimmer's legs disappearing into a splash of green water",
+      "stop": "Amalfi Coast"
+    }
+  }
 }

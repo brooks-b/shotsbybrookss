@@ -1,6 +1,6 @@
 // Shared content types. Used by the ingest script (Node) and the site (Next.js).
 
-export type Region = "Asia" | "Europe" | "North America" | "Caribbean";
+export type Region = "Asia" | "Europe" | "North America" | "Caribbean" | "Africa";
 
 export type Stop = {
   name: string;
@@ -34,8 +34,22 @@ export type Collection = {
   people?: { contains: boolean; cleared: boolean };
   /** Number of labeled placeholder frames to show until originals arrive. */
   placeholders?: number;
-  /** For editions: photo ids (or "slug/placeholder-n") to feature, in order. */
+  /** For editions: photo ids to feature, in order, e.g. "japan-dscf2035". */
   picks?: string[];
+  /**
+   * Per-photo details keyed by original filename. Applied on every ingest;
+   * alt text hand-edited in manifest.json still wins over `alt` here.
+   */
+  photos?: Record<string, PhotoOverride>;
+};
+
+export type PhotoOverride = {
+  alt?: string;
+  caption?: string;
+  /** Must match a stop name in this collection. */
+  stop?: string;
+  /** Shows a recognizable person: withheld until the chapter is cleared. */
+  people?: boolean;
 };
 
 export const FILM_SIMS = [

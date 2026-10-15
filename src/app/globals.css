@@ -2,6 +2,23 @@
 
 /* ── Tokens ─────────────────────────────────────────────────────────────── */
 
+/* Registered so the ambient tone (AmbientTone.tsx) can animate them. */
+@property --ink {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #0e0d0b;
+}
+@property --ink-2 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #151411;
+}
+@property --ink-3 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #1d1b18;
+}
+
 :root {
   /* Warm near-black, never pure black. */
   --ink: #0e0d0b;
@@ -46,6 +63,10 @@
 /* ── Base ───────────────────────────────────────────────────────────────── */
 
 html {
+  transition:
+    --ink 1.4s var(--ease-out),
+    --ink-2 1.4s var(--ease-out),
+    --ink-3 1.4s var(--ease-out);
   background: var(--ink);
   color: var(--paper);
   color-scheme: dark;
@@ -249,6 +270,9 @@ html.lenis body {
 /* ── Reduced motion ────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    transition: none;
+  }
   .grain {
     animation: none;
   }

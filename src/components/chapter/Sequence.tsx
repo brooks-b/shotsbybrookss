@@ -63,7 +63,11 @@ function Tile({
           else onOpen();
         }}
       >
-        <Reveal className="relative overflow-hidden" style={{ aspectRatio: `${frame.width} / ${frame.height}` }}>
+        <Reveal
+          variant="slow"
+          className="relative overflow-hidden"
+          style={{ aspectRatio: `${frame.width} / ${frame.height}` }}
+        >
           <div className="absolute inset-0">
             <FrameImage frame={frame} sizes={sizes} bare />
           </div>

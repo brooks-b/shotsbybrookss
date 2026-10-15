@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 
 type Props = {
   as?: "div" | "figure" | "section" | "p" | "h2" | "span";
-  /** "fade" fades photos in quickly; "lines" slides text lines up. */
-  variant?: "fade" | "lines";
+  /** "fade" fades photos in quickly, "slow" fades them in deliberately (chapter pages), "lines" slides text up. */
+  variant?: "fade" | "slow" | "lines";
   className?: string;
   style?: React.CSSProperties;
   children: React.ReactNode;
@@ -28,7 +28,8 @@ export function Reveal({ as = "div", variant = "fade", className = "", style, ch
           io.disconnect();
         }
       },
-      // Photos start fading a little before they arrive; text waits until it's in view.
+      // Quick fades start a little before the photo arrives; slow fades and
+      // text wait until they're in view, so the motion is actually seen.
       variant === "fade"
         ? { threshold: threshold ?? 0, rootMargin: "0px 0px 15% 0px" }
         : { threshold: threshold ?? 0.15, rootMargin: "0px 0px -6% 0px" },
@@ -42,7 +43,7 @@ export function Reveal({ as = "div", variant = "fade", className = "", style, ch
     <Tag
       ref={ref as React.Ref<HTMLDivElement>}
       data-open={open}
-      className={`${variant === "fade" ? "fade-in" : ""} ${className}`}
+      className={`${variant === "fade" ? "fade-in" : variant === "slow" ? "fade-in fade-in-slow" : ""} ${className}`}
       style={style}
     >
       {children}

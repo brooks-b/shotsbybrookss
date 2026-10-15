@@ -189,6 +189,12 @@ html.lenis body {
 .fade-in[data-open="true"] > * {
   opacity: 1;
 }
+/* Chapter pages: a slower, deliberate fade that starts once the photo is in view. */
+.fade-in-slow > * {
+  transition:
+    opacity 1.1s cubic-bezier(0.33, 0, 0.2, 1),
+    transform 0.7s var(--ease-out);
+}
 
 /* Line-by-line text reveal */
 .line-mask {
@@ -271,6 +277,7 @@ html.lenis body {
     animation: none;
   }
   .fade-in > *,
+  .fade-in-slow > *,
   .line-mask > span {
     clip-path: none;
     transform: none;

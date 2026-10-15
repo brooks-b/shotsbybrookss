@@ -1,0 +1,24 @@
+{
+  "generatedAt": "2026-10-15T06:25:36.029Z",
+  "buildSeconds": 2.9,
+  "routes": 16,
+  "firstLoadJsKb": null,
+  "lighthouse": {
+    "mobile": {
+      "performance": 91,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "formFactor": "mobile",
+      "url": "/"
+    },
+    "desktop": {
+      "performance": 96,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "formFactor": "desktop",
+      "url": "/"
+    }
+  }
+}

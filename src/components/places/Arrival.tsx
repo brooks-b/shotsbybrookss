@@ -11,7 +11,6 @@ import { ATMOSPHERES } from "../globe/atmospheres";
 import { PlaceAtmosphere } from "../globe/PlaceAtmosphere";
 import { useLenis } from "../motion/SmoothScroll";
 import { usePrefersReducedMotion } from "../motion/useReducedMotion";
-import { Foliage } from "./Foliage";
 import { VISIT_EVENT, type VisitDetail } from "./visit";
 
 const CLOSED = "inset(50% 50% 50% 50%)";
@@ -123,7 +122,6 @@ export function Arrival({ places }: { places: PlaceInfo[] }) {
       </div>
 
       <PlaceAtmosphere slug={slug} running />
-      {atmo?.foliage && <Foliage />}
 
       <div className="gutter relative z-10 flex h-full flex-col justify-between pb-[clamp(24px,5vh,56px)] pt-6">
         <div className="flex items-center justify-between">
@@ -153,12 +151,6 @@ export function Arrival({ places }: { places: PlaceInfo[] }) {
               {formatLat(c.lat, 2)} {formatLng(c.lng, 2)}
               <span className="mx-2 text-paper/50">·</span>
               {now ? `${clock(c.tz, now)} ${tzLabel(c.tz, now).split(" ")[0]}` : "--:--"}
-              {atmo && (
-                <>
-                  <span className="mx-2 text-paper/50">·</span>
-                  {atmo.label}
-                </>
-              )}
             </p>
 
             {place.cities.length > 1 && (

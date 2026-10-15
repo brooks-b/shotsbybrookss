@@ -172,7 +172,6 @@ export function Opening({ places, mosaic }: { places: PlaceInfo[]; mosaic: Frame
                     <span className="micro block text-paper/80">
                       {p.year}
                       {p.cities.length > 1 ? ` · ${p.cities.length} cities` : ""}
-                      {ATMOSPHERES[p.slug] ? ` · ${ATMOSPHERES[p.slug].label}` : ""}
                     </span>
                     <span className="display mt-2 block whitespace-nowrap text-[clamp(30px,4.2vw,72px)]">
                       {p.title}

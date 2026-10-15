@@ -10,11 +10,6 @@ export const site = {
   description: "Photography by Brooks Barrett. Shot on a Fujifilm X-T50.",
 
   /** Draft. Brooks to edit. */
-  statement:
-    "I started out shooting high school sports. In 2025 I started taking the camera with me when I traveled. This is where it's been since.",
-  arc: "From the sideline to the world",
-
-  /** Draft. Brooks to edit. */
   bio: [
     "Vanderbilt, class of 2029. Minors in National Security, Business, and Generative AI.",
     "Based between Nashville and the New York area.",

@@ -4,7 +4,6 @@ import { ChaptersIndex } from "@/components/home/ChaptersIndex";
 import { KitTeaser } from "@/components/home/KitTeaser";
 import { Preloader } from "@/components/home/Preloader";
 import { SelectedWorks } from "@/components/home/SelectedWorks";
-import { Statement } from "@/components/home/Statement";
 import { Arrival } from "@/components/places/Arrival";
 import { Opening } from "@/components/places/Opening";
 import { getAllFrames, getChapters, getMosaicFrames, getPlaces, getSelectedWorks, getTravelStops } from "@/lib/content";
@@ -19,7 +18,6 @@ export default function Home() {
     <>
       <Preloader />
       <Opening places={places} mosaic={getMosaicFrames()} />
-      <Statement />
       <GlobeSection stops={getTravelStops()} />
       <ChaptersIndex chapters={chapters} />
       <SelectedWorks frames={getSelectedWorks()} slug={edition?.slug ?? "top-10-2025"} />

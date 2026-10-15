@@ -4,7 +4,9 @@ Design and engineering calls made during the build, one line each.
 
 ## Design
 
-- **The globe is the opening.** The hero is a full-screen globe instead of a cycling photo, at Brooks's request; scrolling pins it and runs the travel tour. The EVF photo card in the readout shows each stop's cover once real photos exist.
+- **The opening is an aperture.** The page starts on a contact sheet: ~30 photos in staggered columns, one from each chapter in turn, with the name over it and an EVF focus point in the middle. Scrolling opens a hard-edged circular aperture from the focus point onto the globe, with the f-number counting down F16 → F2 on the ring while the columns drift apart. Then the globe tour runs. One pinned scroll drives the whole sequence via a single `--open` CSS variable. Under reduced motion the contact sheet is skipped.
+- **Contact-sheet photos load after the page does.** Tiles paint from their blur placeholder first, so the name, fonts and globe come first (mobile Lighthouse stays ~92).
+- **Blur placeholders are decoded in the browser** from each photo's ~30-byte thumbhash, rather than inlined as data URLs; that cut the home page HTML from 433 KB to 274 KB.
 - **Tour steps by place, not by city.** Each chapter is one step (11 instead of 23), with about 0.9 screens of scroll; the globe holds still for the first ~60% of each step before moving on. Each place shows a strip of photo cards, one per city; picking one turns the globe, zooms in a little, draws the route to it and tags the city's pin by name. The current place's pins stay bright while the rest dim.
 - **Photo reveal:** a 0.25s fade that starts just before each photo scrolls in, so photos are usually already there. Chapter pages use a slower 1.1s fade that starts once the photo is in view. Both replaced the shutter wipe at Brooks's request.
 - **Type:** Inter Tight 500 (tight grotesk, uppercase titles), Geist (body), Geist Mono (data, EXIF, labels). All SIL OFL via Google Fonts. Replaced Archivo Condensed, which read as generic.

@@ -22,8 +22,11 @@ export type Frame = {
   color: string;
   /** Saturation-weighted colour for the ambient page tint. */
   tone?: string;
-  /** Tiny PNG data URL decoded from the thumbhash. */
-  blur?: string;
+  /**
+   * Base64 thumbhash (~30 bytes). Decoded to a blur image in the browser, so
+   * the page HTML doesn't carry a data URL per photo.
+   */
+  thumbhash?: string;
   avif?: string;
   webp?: string;
   /** Largest WebP, used as the <img> fallback src. */

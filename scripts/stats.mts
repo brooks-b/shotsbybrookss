@@ -96,7 +96,12 @@ async function main() {
     await waitFor(`http://localhost:${PORT}/`);
     chrome = await chromeLauncher.launch({ chromeFlags: ["--headless=new", "--use-angle=swiftshader"] });
     const url = `http://localhost:${PORT}/`;
-    const mobile = await audit(url, "mobile", chrome.port);
+    // A throwaway pass warms the server and caches, then the median of three
+    // mobile runs smooths out Lighthouse's run-to-run noise.
+    await audit(url, "mobile", chrome.port);
+    const runs = [];
+    for (let i = 0; i < 3; i++) runs.push(await audit(url, "mobile", chrome.port));
+    const mobile = runs.sort((x, y) => x.performance - y.performance)[1];
     const desktop = await audit(url, "desktop", chrome.port);
 
     const stats = {

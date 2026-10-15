@@ -14,6 +14,7 @@ import { clock, tzLabel } from "@/lib/time";
 import type { Region } from "@/lib/types";
 import { FrameImage } from "../FrameImage";
 import { useMediaQuery, usePrefersReducedMotion } from "../motion/useReducedMotion";
+import { ApertureMosaic, F_STOPS } from "./ApertureMosaic";
 import type { GlobeDrive } from "./geo3d";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -26,8 +27,10 @@ const YEARS = ["All", "2024", "2025", "2026"] as const;
 const REGIONS: ("All" | Region)[] = ["All", "North America", "Caribbean", "Europe", "Africa", "Asia"];
 /** Scroll distance per place, in viewport heights. */
 const VH_PER_PLACE = 0.9;
-/** Share of the pinned scroll spent on the intro before the tour starts. */
-const INTRO = 0.06;
+/** Scroll spent opening the aperture from the contact sheet onto the globe. */
+const OPEN_VH = 1.1;
+/** A beat on the whole globe before the tour starts. */
+const IDLE_VH = 0.35;
 /** Share of each place's scroll where the globe holds still before moving on. */
 const HOLD = 0.62;
 
@@ -66,12 +69,20 @@ function Filter<T extends string>(props: { label: string; options: readonly T[];
 }
 
 /**
- * The opening. The globe is the hero: it idles under the name, and scrolling
- * pins the section and walks it place by place in travel order, holding on
- * each one and drawing the route as it goes. Places with several cities get
- * a city picker. A live readout reports where, and what time it is there.
+ * The opening. It starts on a contact sheet of photos; scrolling opens an
+ * aperture from the focus point onto the globe, then walks the globe place by
+ * place in travel order, holding on each one and drawing the route as it goes.
+ * Each place shows a strip of its cities' photos. One pinned scroll drives it all.
  */
-export function GlobeSection({ stops: allStops, covers }: { stops: TravelStop[]; covers: Record<string, Frame> }) {
+export function GlobeSection({
+  stops: allStops,
+  covers,
+  mosaic,
+}: {
+  stops: TravelStop[];
+  covers: Record<string, Frame>;
+  mosaic: Frame[];
+}) {
   const router = useRouter();
   const reduced = usePrefersReducedMotion();
   const lite = useMediaQuery("(max-width: 767px), (pointer: coarse)");
@@ -101,6 +112,7 @@ export function GlobeSection({ stops: allStops, covers }: { stops: TravelStop[];
   const root = useRef<HTMLElement>(null);
   /** Name tag that the globe renderers pin to the chosen city each frame. */
   const label = useRef<HTMLDivElement>(null);
+  const fstop = useRef<HTMLSpanElement>(null);
   const drive = useRef<GlobeDrive>({ intro: 0, progress: 0, shift: 0, zoom: 0 });
   const now = useNow();
 
@@ -128,16 +140,13 @@ export function GlobeSection({ stops: allStops, covers }: { stops: TravelStop[];
   const stop = active >= 0 ? stops[active] : undefined;
   const touring = Boolean(stop);
 
-  // Fade the globe in on load; stop rendering while off screen.
+  // The globe fades in as the aperture opens (instantly under reduced motion);
+  // it stops rendering while the section is off screen.
   useEffect(() => {
-    const d = drive.current;
-    const fade = gsap.to(d, { intro: 1, duration: reduced ? 0 : 1.6, ease: "power2.out", delay: 0.2 });
+    if (reduced) drive.current.intro = 1;
     const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting));
     if (root.current) io.observe(root.current);
-    return () => {
-      fade.kill();
-      io.disconnect();
-    };
+    return () => io.disconnect();
   }, [reduced]);
 
   // Slide aside while touring; zoom in on places with more than one city.
@@ -160,23 +169,38 @@ export function GlobeSection({ stops: allStops, covers }: { stops: TravelStop[];
         return p.indices.find((i) => stops[i].name === chosenRef.current[p.slug]) ?? p.first;
       };
 
+      const el = root.current!;
+      const aperture = el.querySelector<HTMLElement>("[data-aperture]");
+      const setOpen = (open: number) => {
+        el.style.setProperty("--open", open.toFixed(4));
+        drive.current.intro = smooth(Math.min(open * 1.4, 1));
+        if (fstop.current)
+          fstop.current.textContent = F_STOPS[Math.min(Math.floor(open * F_STOPS.length), F_STOPS.length - 1)];
+        // Once fully open, the contact sheet steps aside so the globe takes clicks.
+        if (aperture) aperture.style.visibility = open >= 0.999 ? "hidden" : "visible";
+      };
+      setOpen(0);
+      const units = OPEN_VH + IDLE_VH + Math.max(n, 3) * VH_PER_PLACE;
+
       const st = ScrollTrigger.create({
-        trigger: root.current,
+        trigger: el,
         start: "top top",
-        end: () => `+=${Math.max(n, 3) * VH_PER_PLACE * window.innerHeight}`,
+        end: () => `+=${units * window.innerHeight}`,
         pin: true,
         anticipatePin: 1,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
-          const p = self.progress;
-          if (p < INTRO) {
+          const u = self.progress * units;
+          // 1. The aperture opens onto the globe.
+          setOpen(Math.min(u / OPEN_VH, 1));
+          if (u < OPEN_VH + IDLE_VH) {
             drive.current.progress = 0;
             setPlaceIdx(-1);
             return;
           }
-          // Each place owns an equal slice of the scroll. The globe holds on it
-          // for the first part of the slice, then travels to the next place.
-          const x = Math.min((p - INTRO) / (0.97 - INTRO), 1) * n;
+          // 2. Each place owns an equal slice of the scroll. The globe holds on
+          // it for the first part of the slice, then travels to the next place.
+          const x = Math.min((u - OPEN_VH - IDLE_VH) / (Math.max(n, 3) * VH_PER_PLACE * 0.97), 1) * n;
           const seg = Math.min(Math.floor(x), n - 1);
           const t = seg < n - 1 ? smooth(Math.min(Math.max((x - seg - HOLD) / (1 - HOLD), 0), 1)) : 0;
           const from = held(seg);
@@ -215,7 +239,10 @@ export function GlobeSection({ stops: allStops, covers }: { stops: TravelStop[];
       id="globe"
       aria-label="Around the world"
       className="relative h-[100svh] min-h-[600px] overflow-hidden bg-ink"
+      style={{ "--open": reduced ? 1 : 0, "--r": "calc(var(--open) * 78vmax)" } as React.CSSProperties}
     >
+      {!reduced && mosaic.length > 0 && <ApertureMosaic frames={mosaic} now={now} fstop={fstop} />}
+
       <div className="absolute inset-x-0 bottom-[36%] top-[calc(var(--header-h)+64px)] md:inset-0">
         {boot &&
           (lite ? (
@@ -295,26 +322,35 @@ export function GlobeSection({ stops: allStops, covers }: { stops: TravelStop[];
         </div>
 
         <div className="relative grid items-end">
-          {/* Intro */}
-          <div
-            className="col-start-1 row-start-1 transition-[opacity,transform] duration-700 ease-[var(--ease-out)]"
-            style={{ opacity: touring ? 0 : 1, transform: touring ? "translateY(-16px)" : "none" }}
-            aria-hidden={touring}
-          >
-            <h1 className="display text-[clamp(52px,9.4vw,168px)]">
-              Brooks
-              <br />
-              Barrett
-            </h1>
-            <div className="mt-6 flex flex-wrap items-end justify-between gap-4 ">
-              <p className="max-w-[34ch] text-paper-dim">{site.description}</p>
-              <p className="hud flex gap-6 text-paper-dim">
-                {site.clocks.map((c) => (
-                  <span key={c.label}>
-                    {c.label} <span className="text-paper">{now ? clock(c.tz, now) : "--:--"}</span>
-                  </span>
-                ))}
-              </p>
+          {/* A beat on the whole globe once the aperture is open, before the tour.
+              The outer wrapper waits for the aperture to finish opening. */}
+          <div className="col-start-1 row-start-1" style={{ opacity: "clamp(0, (var(--open, 1) - 0.82) * 6, 1)" }}>
+            <div
+              className="transition-[opacity,transform] duration-700 ease-[var(--ease-out)]"
+              style={{ opacity: touring ? 0 : 1, transform: touring ? "translateY(-16px)" : "none" }}
+              aria-hidden={touring}
+            >
+              {reduced ? (
+                <h1 className="display text-[clamp(52px,9.4vw,168px)]">
+                  Brooks
+                  <br />
+                  Barrett
+                </h1>
+              ) : (
+                <>
+                  <p className="micro text-paper-faint">Around the world</p>
+                  <p className="display mt-3 text-[clamp(36px,5vw,80px)]">
+                    {places.length} places
+                    <br />
+                    {stops.length} cities
+                  </p>
+                </>
+              )}
+              <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
+                <p className="max-w-[34ch] text-paper-dim">
+                  {reduced ? site.description : "2024 — 2026, in the order they happened. Keep scrolling to travel."}
+                </p>
+              </div>
             </div>
           </div>
 

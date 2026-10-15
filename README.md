@@ -5,7 +5,7 @@ Live at **[shotsbybrookss.vercel.app](https://shotsbybrookss.vercel.app)**.
 
 ![Scrolling the home page: the globe walks through every stop in travel order](docs/demo.gif)
 
-The site opens on a globe. Scroll, and it pins and walks through every place the photos were taken, in travel order: the route draws itself, and a readout gives each stop's coordinates, local time and frame count. Every photo carries its own camera data (shutter, aperture, ISO, focal length, and the Fujifilm film simulation), read straight from the original file.
+The site opens on a contact sheet of photos with a camera focus point in the middle. Scroll, and an aperture opens from that point onto a globe, the f-number counting down as it widens. The globe then walks through every place the photos were taken, in travel order: the route draws itself, each place shows its cities as photo cards, and the chosen city is pinned by name. Every photo carries its own camera data (shutter, aperture, ISO, focal length, and the Fujifilm film simulation), read straight from the original file.
 
 ## Stack
 

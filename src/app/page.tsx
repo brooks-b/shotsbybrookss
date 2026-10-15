@@ -5,7 +5,14 @@ import { KitTeaser } from "@/components/home/KitTeaser";
 import { Preloader } from "@/components/home/Preloader";
 import { SelectedWorks } from "@/components/home/SelectedWorks";
 import { Statement } from "@/components/home/Statement";
-import { getAllFrames, getChapters, getPhotoCovers, getSelectedWorks, getTravelStops } from "@/lib/content";
+import {
+  getAllFrames,
+  getChapters,
+  getMosaicFrames,
+  getPhotoCovers,
+  getSelectedWorks,
+  getTravelStops,
+} from "@/lib/content";
 
 export default function Home() {
   const chapters = [...getChapters()].reverse();
@@ -15,7 +22,7 @@ export default function Home() {
   return (
     <>
       <Preloader />
-      <GlobeSection stops={getTravelStops()} covers={getPhotoCovers()} />
+      <GlobeSection stops={getTravelStops()} covers={getPhotoCovers()} mosaic={getMosaicFrames()} />
       <Statement />
       <ChaptersIndex chapters={chapters} />
       <SelectedWorks frames={getSelectedWorks()} slug={edition?.slug ?? "top-10-2025"} />

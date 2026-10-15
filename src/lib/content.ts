@@ -5,7 +5,7 @@
 import { readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { cache } from "react";
-import { thumbHashToDataURL, thumbHashToRGBA } from "thumbhash";
+import { thumbHashToRGBA } from "thumbhash";
 import type { ChapterSummary, Frame, TravelStop } from "./frames";
 import type { Collection, Manifest, Photo } from "./types";
 
@@ -84,7 +84,7 @@ function photoFrame(c: Collection, p: Photo, index: number, total: number): Fram
     ...base,
     kind: "photo",
     alt: p.alt || `${c.title}, frame ${index}`,
-    blur: p.thumbhash ? thumbHashToDataURL(Buffer.from(p.thumbhash, "base64")) : undefined,
+    thumbhash: p.thumbhash || undefined,
     tone: feltColor(p.thumbhash),
     avif: srcset(p.sources.avif),
     webp: srcset(p.sources.webp),
@@ -225,4 +225,27 @@ export function getSelectedWorks(): Frame[] {
 /** The newest chapter cover that is a real photo, for the site-wide share card. */
 export function getHomeCover(): Frame | undefined {
   return [...getChapters()].reverse().find((c) => c.cover.kind === "photo")?.cover;
+}
+
+/**
+ * Photos for the opening contact sheet: one from each chapter in turn, newest
+ * trips first, so the wall mixes places and colours instead of clumping.
+ */
+export function getMosaicFrames(count = 32): Frame[] {
+  const pools = [...getChapters()]
+    .reverse()
+    .filter((c) => c.kind === "place")
+    .map((c) => getFrames(c.slug).filter((f) => f.kind === "photo"))
+    .filter((pool) => pool.length > 0);
+  const out: Frame[] = [];
+  for (let round = 0; out.length < count && pools.some((p) => p.length > round); round++) {
+    for (const pool of pools) {
+      // Walk each chapter at a stride, so a long chapter shows its range, not just its first day.
+      const stride = Math.max(1, Math.floor(pool.length / 4));
+      const f = pool[(round * stride) % pool.length];
+      if (round * stride < pool.length * 2 && f && !out.includes(f)) out.push(f);
+      if (out.length >= count) break;
+    }
+  }
+  return out;
 }

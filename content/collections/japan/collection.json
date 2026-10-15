@@ -1,0 +1,45 @@
+{
+  "slug": "japan",
+  "title": "Japan",
+  "subtitle": "Tokyo → Kamakura → Kyoto → Hiroshima",
+  "kind": "place",
+  "region": "Asia",
+  "stops": [
+    {
+      "name": "Tokyo",
+      "lat": 35.6762,
+      "lng": 139.6503,
+      "tz": "Asia/Tokyo"
+    },
+    {
+      "name": "Fujisawa & Kamakura",
+      "lat": 35.3192,
+      "lng": 139.5467,
+      "tz": "Asia/Tokyo"
+    },
+    {
+      "name": "Kyoto",
+      "lat": 35.0116,
+      "lng": 135.7681,
+      "tz": "Asia/Tokyo"
+    },
+    {
+      "name": "Arashiyama",
+      "lat": 35.0094,
+      "lng": 135.6668,
+      "tz": "Asia/Tokyo"
+    },
+    {
+      "name": "Hiroshima",
+      "lat": 34.3853,
+      "lng": 132.4553,
+      "tz": "Asia/Tokyo"
+    }
+  ],
+  "dates": {
+    "start": "2026-05",
+    "end": "2026-05"
+  },
+  "order": 11,
+  "placeholders": 6
+}

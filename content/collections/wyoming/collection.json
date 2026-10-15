@@ -1,0 +1,28 @@
+{
+  "slug": "wyoming",
+  "title": "Wyoming",
+  "subtitle": "Wind River Range → Grand Teton",
+  "kind": "place",
+  "region": "North America",
+  "stops": [
+    {
+      "name": "Wind River Range",
+      "lat": 42.8666,
+      "lng": -109.8607,
+      "tz": "America/Denver"
+    },
+    {
+      "name": "Grand Teton",
+      "lat": 43.7904,
+      "lng": -110.6818,
+      "tz": "America/Denver"
+    }
+  ],
+  "dates": {
+    "start": "2025-08",
+    "end": "2025-08"
+  },
+  "datesApprox": true,
+  "order": 6,
+  "placeholders": 2
+}

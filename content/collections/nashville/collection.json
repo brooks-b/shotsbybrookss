@@ -1,0 +1,27 @@
+{
+  "slug": "nashville",
+  "title": "Nashville",
+  "subtitle": "Vanderbilt",
+  "kind": "place",
+  "region": "North America",
+  "stops": [
+    {
+      "name": "Nashville",
+      "lat": 36.1627,
+      "lng": -86.7816,
+      "tz": "America/Chicago"
+    }
+  ],
+  "dates": {
+    "start": "2025-10",
+    "end": "2025-10"
+  },
+  "datesApprox": true,
+  "order": 7,
+  "note": "Vanderbilt women's basketball media day.",
+  "people": {
+    "contains": true,
+    "cleared": false
+  },
+  "placeholders": 2
+}

@@ -1,0 +1,28 @@
+{
+  "slug": "central-europe",
+  "title": "Central Europe",
+  "subtitle": "Budapest → Bratislava",
+  "kind": "place",
+  "region": "Europe",
+  "stops": [
+    {
+      "name": "Budapest",
+      "lat": 47.4979,
+      "lng": 19.0402,
+      "tz": "Europe/Budapest"
+    },
+    {
+      "name": "Bratislava",
+      "lat": 48.1486,
+      "lng": 17.1077,
+      "tz": "Europe/Bratislava"
+    }
+  ],
+  "dates": {
+    "start": "2025-07",
+    "end": "2025-07"
+  },
+  "datesApprox": true,
+  "order": 5,
+  "placeholders": 2
+}

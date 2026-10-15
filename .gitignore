@@ -39,3 +39,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# photo originals: only collection.json files and the manifest are committed
+/content/collections/*/photos/*
+!/content/collections/*/photos/.gitkeep
+# local-only derivatives from `npm run ingest -- --storage=local`
+/public/media
+
+# build brief (private)
+/PORTFOLIO_SPEC.md
+
+# editor/agent local config
+/.claude

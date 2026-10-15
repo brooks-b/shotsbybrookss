@@ -1,0 +1,28 @@
+{
+  "slug": "south-of-france",
+  "title": "South of France",
+  "subtitle": "Gordes → Monaco",
+  "kind": "place",
+  "region": "Europe",
+  "stops": [
+    {
+      "name": "Gordes",
+      "lat": 43.9116,
+      "lng": 5.2003,
+      "tz": "Europe/Paris"
+    },
+    {
+      "name": "Monaco",
+      "lat": 43.7384,
+      "lng": 7.4246,
+      "tz": "Europe/Monaco"
+    }
+  ],
+  "dates": {
+    "start": "2025-06",
+    "end": "2025-07"
+  },
+  "datesApprox": true,
+  "order": 4,
+  "placeholders": 2
+}

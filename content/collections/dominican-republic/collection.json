@@ -1,0 +1,22 @@
+{
+  "slug": "dominican-republic",
+  "title": "Dominican Republic",
+  "subtitle": "Dominican Republic",
+  "kind": "place",
+  "region": "Caribbean",
+  "stops": [
+    {
+      "name": "Dominican Republic",
+      "lat": 18.4861,
+      "lng": -69.9312,
+      "tz": "America/Santo_Domingo"
+    }
+  ],
+  "dates": {
+    "start": "2025-03",
+    "end": "2025-03"
+  },
+  "datesApprox": true,
+  "order": 2,
+  "placeholders": 1
+}

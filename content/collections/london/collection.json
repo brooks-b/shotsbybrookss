@@ -1,0 +1,22 @@
+{
+  "slug": "london",
+  "title": "London",
+  "subtitle": "London",
+  "kind": "place",
+  "region": "Europe",
+  "stops": [
+    {
+      "name": "London",
+      "lat": 51.5072,
+      "lng": -0.1276,
+      "tz": "Europe/London"
+    }
+  ],
+  "dates": {
+    "start": "2026-03",
+    "end": "2026-04"
+  },
+  "order": 10,
+  "note": "Probably my favorite. Just wanted a reason to post a gem.",
+  "placeholders": 3
+}

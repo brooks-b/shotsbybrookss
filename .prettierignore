@@ -1,0 +1,6 @@
+.next
+node_modules
+content/manifest.json
+public/globe
+package-lock.json
+PORTFOLIO_SPEC.md

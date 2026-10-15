@@ -1,0 +1,33 @@
+{
+  "slug": "montclair",
+  "title": "Montclair",
+  "subtitle": "Montclair → Livingston, NJ",
+  "kind": "place",
+  "region": "North America",
+  "stops": [
+    {
+      "name": "Montclair",
+      "lat": 40.8259,
+      "lng": -74.209,
+      "tz": "America/New_York"
+    },
+    {
+      "name": "Livingston",
+      "lat": 40.7959,
+      "lng": -74.3149,
+      "tz": "America/New_York"
+    }
+  ],
+  "dates": {
+    "start": "2024-04",
+    "end": "2024-11"
+  },
+  "datesApprox": true,
+  "order": 1,
+  "note": "MKA football, MKA boys lacrosse, Montclair vs Livingston.",
+  "people": {
+    "contains": true,
+    "cleared": false
+  },
+  "placeholders": 4
+}

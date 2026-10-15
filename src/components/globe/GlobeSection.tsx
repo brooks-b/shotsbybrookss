@@ -13,7 +13,6 @@ import { site } from "@/lib/site";
 import { clock, tzLabel } from "@/lib/time";
 import type { Region } from "@/lib/types";
 import { FrameImage } from "../FrameImage";
-import { Hud } from "../Hud";
 import { useMediaQuery, usePrefersReducedMotion } from "../motion/useReducedMotion";
 import type { GlobeDrive } from "./geo3d";
 
@@ -100,6 +99,8 @@ export function GlobeSection({ stops: allStops, covers }: { stops: TravelStop[];
   }, []);
   const [listOpen, setListOpen] = useState(false);
   const root = useRef<HTMLElement>(null);
+  /** Name tag that the globe renderers pin to the chosen city each frame. */
+  const label = useRef<HTMLDivElement>(null);
   const drive = useRef<GlobeDrive>({ intro: 0, progress: 0, shift: 0, zoom: 0 });
   const now = useNow();
 
@@ -126,7 +127,6 @@ export function GlobeSection({ stops: allStops, covers }: { stops: TravelStop[];
   const active = place ? cityOf(place) : -1;
   const stop = active >= 0 ? stops[active] : undefined;
   const touring = Boolean(stop);
-  const cover = stop ? (covers[`${stop.slug}|${stop.name}`] ?? covers[stop.slug]) : undefined;
 
   // Fade the globe in on load; stop rendering while off screen.
   useEffect(() => {
@@ -219,10 +219,36 @@ export function GlobeSection({ stops: allStops, covers }: { stops: TravelStop[];
       <div className="absolute inset-x-0 bottom-[36%] top-[calc(var(--header-h)+64px)] md:inset-0">
         {boot &&
           (lite ? (
-            <Globe2D stops={stops} active={active} drive={drive} lite running={visible} onPick={pick} />
+            <Globe2D
+              stops={stops}
+              active={active}
+              focus={place?.indices ?? []}
+              label={label}
+              drive={drive}
+              lite
+              running={visible}
+              onPick={pick}
+            />
           ) : (
-            <GlobeCanvas stops={stops} active={active} drive={drive} lite={false} running={visible} onPick={pick} />
+            <GlobeCanvas
+              stops={stops}
+              active={active}
+              focus={place?.indices ?? []}
+              label={label}
+              drive={drive}
+              lite={false}
+              running={visible}
+              onPick={pick}
+            />
           ))}
+        <div
+          ref={label}
+          aria-hidden
+          className="micro pointer-events-none absolute left-0 top-0 z-10 flex items-center gap-2 whitespace-nowrap text-paper opacity-0 transition-opacity duration-300 will-change-transform"
+        >
+          <span className="h-px w-5 bg-paper/60" />
+          {stop?.name}
+        </div>
       </div>
 
       <div className="gutter pointer-events-none relative z-10 flex h-full flex-col justify-end pb-[clamp(24px,5vh,56px)] pt-[var(--header-h)]">
@@ -297,63 +323,69 @@ export function GlobeSection({ stops: allStops, covers }: { stops: TravelStop[];
             className="pointer-events-auto col-start-1 row-start-1 transition-opacity duration-500"
             style={{ opacity: touring ? 1 : 0, visibility: touring ? "visible" : "hidden" }}
           >
-            {stop && (
-              <div aria-live="polite" className="flex items-end gap-6">
-                {cover && (
-                  <div className="relative hidden aspect-[4/5] w-[180px] overflow-hidden lg:block">
-                    <FrameImage frame={cover} sizes="180px" />
-                    <Hud frame={cover} compact />
-                  </div>
-                )}
-                <div>
-                  <p className="micro text-paper-faint">
-                    Around the world — {pad(placeIdx + 1, 2)} / {pad(places.length, 2)}
-                  </p>
-                  <p
-                    className={`display mt-3 ${stop.chapter.length > 14 ? "text-[clamp(30px,3.6vw,56px)]" : "text-[clamp(36px,5vw,80px)]"}`}
-                  >
-                    {stop.chapter}
-                  </p>
-                  {place && place.indices.length > 1 ? (
-                    <div
-                      role="group"
-                      aria-label={`Cities in ${stop.chapter}`}
-                      className="mt-4 flex max-w-[340px] flex-wrap gap-x-4 gap-y-2"
-                    >
-                      {place.indices.map((i) => (
+            {stop && place && (
+              <div aria-live="polite">
+                <p className="micro text-paper-faint">
+                  Around the world — {pad(placeIdx + 1, 2)} / {pad(places.length, 2)}
+                </p>
+                <p
+                  className={`display mt-3 ${stop.chapter.length > 14 ? "text-[clamp(30px,3.6vw,56px)]" : "text-[clamp(36px,5vw,80px)]"}`}
+                >
+                  {stop.chapter}
+                </p>
+                <p className="hud mt-3 text-paper-dim" suppressHydrationWarning>
+                  <span className="text-paper">{stop.name}</span>
+                  <span className="mx-2 text-paper-faint">·</span>
+                  {formatLat(stop.lat, 2)} {formatLng(stop.lng, 2)}
+                  <span className="mx-2 text-paper-faint">·</span>
+                  {now ? `${clock(stop.tz, now)} ${tzLabel(stop.tz, now).split(" ")[0]}` : "--:--"}
+                </p>
+
+                {/* One card per city: its photo, name and frame count. Picking one turns the globe. */}
+                <ul
+                  role="group"
+                  aria-label={`Cities in ${stop.chapter}`}
+                  className="mt-5 flex max-w-full gap-2 overflow-x-auto pb-1 md:max-w-[min(560px,38vw)]"
+                >
+                  {place.indices.map((i) => {
+                    const s = stops[i];
+                    const photo = covers[`${s.slug}|${s.name}`];
+                    const on = i === active;
+                    return (
+                      <li key={s.name} className="w-[84px] shrink-0 md:w-[100px]">
                         <button
-                          key={stops[i].name}
                           type="button"
-                          aria-pressed={i === active}
+                          aria-pressed={on}
+                          aria-label={`${s.name}, ${s.frames} frames`}
                           onClick={() => chooseCity(i)}
-                          className="micro border-b border-transparent pb-0.5 text-paper-faint transition-colors hover:text-paper aria-pressed:border-signal aria-pressed:text-paper"
+                          className="group block w-full text-left"
                         >
-                          {stops[i].name}
+                          <span
+                            className={`relative block aspect-[4/5] overflow-hidden bg-ink-2 transition-opacity duration-300 ${on ? "opacity-100" : "opacity-45 group-hover:opacity-80"}`}
+                          >
+                            {photo && <FrameImage frame={photo} sizes="100px" bare />}
+                          </span>
+                          <span
+                            className={`mt-1.5 block h-px transition-colors ${on ? "bg-signal" : "bg-transparent"}`}
+                          />
+                          <span
+                            className={`micro mt-1.5 flex justify-between gap-1 ${on ? "text-paper" : "text-paper-faint group-hover:text-paper-dim"}`}
+                          >
+                            <span className="truncate">{s.name}</span>
+                            <span className="shrink-0">{s.frames}</span>
+                          </span>
                         </button>
-                      ))}
-                    </div>
-                  ) : (
-                    stop.name !== stop.chapter && <p className="mt-2 text-paper-dim">{stop.name}</p>
-                  )}
-                  <dl className="hud mt-5 grid grid-cols-[auto_1fr] gap-x-8 gap-y-1 text-paper-dim">
-                    <dt className="text-paper-faint">Lat</dt>
-                    <dd>{formatLat(stop.lat)}</dd>
-                    <dt className="text-paper-faint">Lon</dt>
-                    <dd>{formatLng(stop.lng)}</dd>
-                    <dt className="text-paper-faint">Local time</dt>
-                    <dd suppressHydrationWarning>{now ? clock(stop.tz, now, true) : "--:--:--"}</dd>
-                    <dt className="text-paper-faint">Time zone</dt>
-                    <dd suppressHydrationWarning>{now ? tzLabel(stop.tz, now) : "—"}</dd>
-                    <dt className="text-paper-faint">Frames</dt>
-                    <dd>[{stop.frames}]</dd>
-                  </dl>
-                  <Link
-                    href={`/chapters/${stop.slug}`}
-                    className="micro mt-5 inline-block text-paper-dim transition-colors hover:text-paper"
-                  >
-                    Open {stop.chapter} →
-                  </Link>
-                </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+
+                <Link
+                  href={`/chapters/${stop.slug}`}
+                  className="micro mt-4 inline-block text-paper-dim transition-colors hover:text-paper"
+                >
+                  Open {stop.chapter} →
+                </Link>
               </div>
             )}
           </div>

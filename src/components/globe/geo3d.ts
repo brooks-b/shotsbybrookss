@@ -21,6 +21,10 @@ export type GlobeProps = {
   stops: TravelStop[];
   /** Index of the stop to face, or −1 to idle-spin. */
   active: number;
+  /** Stops in the current place: their pins stay bright, the rest dim. */
+  focus: number[];
+  /** Name tag to pin beside the active stop (positioned by the renderer). */
+  label: React.RefObject<HTMLDivElement | null>;
   drive: React.RefObject<GlobeDrive>;
   lite: boolean;
   running: boolean;

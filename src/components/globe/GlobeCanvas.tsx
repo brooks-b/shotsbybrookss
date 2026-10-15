@@ -62,7 +62,7 @@ function useLandDots(lite: boolean) {
   return geometry;
 }
 
-function Earth({ stops, active, drive, lite, onPick }: Omit<Props, "running">) {
+function Earth({ stops, active, focus, label, drive, lite, onPick }: Omit<Props, "running">) {
   const group = useRef<Group>(null);
   const zoomed = useRef(0);
   const dots = useLandDots(lite);
@@ -166,6 +166,13 @@ function Earth({ stops, active, drive, lite, onPick }: Omit<Props, "running">) {
     };
   }, [hovered]);
 
+  const focusSet = useMemo(() => new Set(focus), [focus]);
+  // Scratch vectors for placing the name tag, reused every frame.
+  const tag = useMemo(
+    () => ({ pos: new Vector3(), centre: new Vector3(), normal: new Vector3(), view: new Vector3() }),
+    [],
+  );
+
   useFrame((state, delta) => {
     const g = group.current;
     const d = drive.current;
@@ -215,8 +222,30 @@ function Earth({ stops, active, drive, lite, onPick }: Omit<Props, "running">) {
       const on = i === active || i === hovered ? 1 : 0;
       u.uActive.value += (on - u.uActive.value) * ease(6);
       // Pins appear as the route reaches them; all show faintly when idle.
-      const reached = stop ? Math.min(Math.max(d.progress - i + 1, 0.3), 1) : 0.55;
-      u.uOpacity.value = d.intro * reached;
+      // While touring, the current place's pins stay bright and the rest recede.
+      const strength = stop ? (focusSet.has(i) ? 1 : 0.22) : 0.55;
+      u.uOpacity.value += (d.intro * strength - u.uOpacity.value) * ease(5);
+
+      // Pin the name tag beside the chosen city, hidden once it turns away.
+      const el = label.current;
+      if (el) {
+        const pin = stop ? pins[active] : undefined;
+        if (pin) {
+          g.updateMatrixWorld();
+          tag.pos.copy(pin.position).applyMatrix4(g.matrixWorld);
+          g.getWorldPosition(tag.centre);
+          tag.normal.copy(tag.pos).sub(tag.centre).normalize();
+          tag.view.copy(state.camera.position).sub(tag.pos).normalize();
+          const facing = tag.normal.dot(tag.view);
+          tag.pos.project(state.camera);
+          const x = ((tag.pos.x + 1) / 2) * state.size.width;
+          const y = ((1 - tag.pos.y) / 2) * state.size.height;
+          el.style.transform = `translate(${Math.round(x + 12)}px, ${Math.round(y)}px) translateY(-50%)`;
+          el.style.opacity = facing > 0.2 ? "1" : "0";
+        } else {
+          el.style.opacity = "0";
+        }
+      }
     });
   });
 

@@ -14,13 +14,15 @@ type V = Vec3;
  * canvas with an orthographic projection. No three.js renderer, no shader
  * compiles, so it stays smooth on mid-range phones.
  */
-export default function Globe2D({ stops, active, drive, running, onPick }: GlobeProps) {
+export default function Globe2D({ stops, active, focus, label, drive, running, onPick }: GlobeProps) {
   const canvas = useRef<HTMLCanvasElement>(null);
   // The draw loop reads these through refs so it never restarts on a new stop.
   const activeRef = useRef(active);
+  const focusRef = useRef(new Set(focus));
   const pickRef = useRef(onPick);
   useEffect(() => {
     activeRef.current = active;
+    focusRef.current = new Set(focus);
     pickRef.current = onPick;
   });
 
@@ -131,13 +133,16 @@ export default function Globe2D({ stops, active, drive, running, onPick }: Globe
       if (stop) legs((i) => Math.min(Math.max(d.progress - i, 0), 1), `rgba(${SIGNAL},0.95)`, 2);
 
       pins = [];
+      let tag: { x: number; y: number } | null = null;
       stopVecs.forEach((v, i) => {
         const p = project(v, R, cx, cy);
         if (p.z <= 0.05) return;
         pins.push({ x: p.x, y: p.y, i });
         const isActive = i === activeRef.current;
-        const reached = stop ? Math.min(Math.max(d.progress - i + 1, 0.3), 1) : 0.55;
-        ctx.fillStyle = `rgba(${SIGNAL},${reached})`;
+        if (isActive) tag = { x: p.x, y: p.y };
+        // While touring, the current place's pins stay bright and the rest recede.
+        const strength = stop ? (focusRef.current.has(i) ? 1 : 0.22) : 0.55;
+        ctx.fillStyle = `rgba(${SIGNAL},${strength})`;
         ctx.beginPath();
         ctx.arc(p.x, p.y, isActive ? 3.5 : 2.5, 0, Math.PI * 2);
         ctx.fill();
@@ -151,6 +156,14 @@ export default function Globe2D({ stops, active, drive, running, onPick }: Globe
       });
 
       ctx.globalAlpha = 1;
+
+      // Pin the name tag beside the chosen city.
+      const el = label.current;
+      if (el) {
+        const at = stop ? (tag as { x: number; y: number } | null) : null;
+        if (at) el.style.transform = `translate(${Math.round(at.x + 12)}px, ${Math.round(at.y)}px) translateY(-50%)`;
+        el.style.opacity = at ? "1" : "0";
+      }
       raf = requestAnimationFrame(frame);
     };
 
@@ -187,7 +200,7 @@ export default function Globe2D({ stops, active, drive, running, onPick }: Globe
       ro.disconnect();
       el.removeEventListener("pointerup", onUp);
     };
-  }, [stops, drive, running]);
+  }, [stops, drive, running, label]);
 
   return <canvas ref={canvas} className="h-full w-full" aria-hidden />;
 }

@@ -46,29 +46,11 @@ export const dotsFragment = /* glsl */ `
   }
 `;
 
-/** Fresnel rim on a back-faced shell: a faint warm atmosphere. */
-export const atmosphereVertex = /* glsl */ `
-  varying vec3 vNormal;
-  void main() {
-    vNormal = normalize(normalMatrix * normal);
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-  }
-`;
-
-export const atmosphereFragment = /* glsl */ `
-  uniform vec3 uColor;
-  uniform float uOpacity;
-  varying vec3 vNormal;
-  void main() {
-    float rim = pow(max(0.0, 0.66 - dot(vNormal, vec3(0.0, 0.0, 1.0))), 3.0);
-    gl_FragColor = vec4(uColor, rim * uOpacity);
-  }
-`;
-
 /**
  * Travel arcs. Tube UVs run 0 → 1 along the curve, so drawing an arc is a
- * single uniform: discard everything past uDraw, and brighten a short head
- * just behind it like a tracer.
+ * single uniform: everything up to uDraw is the travelled route at full
+ * strength with a bright tracer head; the rest of the route stays visible
+ * at uBase, so every leg reads from the first frame.
  */
 export const arcVertex = /* glsl */ `
   varying float vT;
@@ -82,12 +64,13 @@ export const arcFragment = /* glsl */ `
   uniform vec3 uColor;
   uniform float uDraw;
   uniform float uOpacity;
+  uniform float uBase;
   varying float vT;
   void main() {
-    if (vT > uDraw) discard;
-    float head = smoothstep(uDraw - 0.12, uDraw, vT) * step(uDraw, 0.999);
-    float tail = smoothstep(0.0, 0.06, vT);
-    gl_FragColor = vec4(uColor + head * 0.6, (0.55 + head * 0.45) * tail * uOpacity);
+    float drawn = step(vT, uDraw);
+    float head = smoothstep(uDraw - 0.12, uDraw, vT) * drawn * step(uDraw, 0.999);
+    float alpha = mix(uBase, 0.9 + head * 0.1, drawn);
+    gl_FragColor = vec4(uColor + head * 0.5, alpha * uOpacity);
   }
 `;
 

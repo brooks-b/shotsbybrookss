@@ -5,35 +5,29 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
-  AdditiveBlending,
-  BackSide,
   BufferAttribute,
   BufferGeometry,
   CatmullRomCurve3,
   Color,
   type Group,
   Quaternion,
+  ShaderMaterial,
   TubeGeometry,
   Vector3,
 } from "three";
 import { GLOBE_READY } from "@/lib/preloader";
 import { angleDelta, arcPoints, type GlobeProps, latLngToVec3, rotationToFace, type Vec3 } from "./geo3d";
-import {
-  arcFragment,
-  arcVertex,
-  atmosphereFragment,
-  atmosphereVertex,
-  dotsFragment,
-  dotsVertex,
-  pinFragment,
-  pinVertex,
-} from "./shaders";
+import { arcFragment, arcVertex, dotsFragment, dotsVertex, pinFragment, pinVertex } from "./shaders";
 
 export type { GlobeDrive, GlobeProps } from "./geo3d";
 type Props = GlobeProps;
 
-const PAPER = new Color("#ede8df");
-const SIGNAL = new Color("#f0602f");
+// The shaders write colour straight to the screen with no sRGB conversion,
+// so these hold raw sRGB values (setRGB) rather than linearized hex.
+const srgb = (hex: number) =>
+  new Color().setRGB(((hex >> 16) & 255) / 255, ((hex >> 8) & 255) / 255, (hex & 255) / 255);
+const PAPER = srgb(0xede8df);
+const SIGNAL = srgb(0xf0602f);
 const Z = new Vector3(0, 0, 1);
 const toV3 = (v: Vec3) => new Vector3(v.x, v.y, v.z);
 
@@ -82,36 +76,65 @@ function Earth({ stops, active, drive, lite, onPick }: Omit<Props, "running">) {
   }, [camera, size]);
   const [hovered, setHovered] = useState<number | null>(null);
 
-  const dotUniforms = useMemo(
-    () => ({
-      uSize: { value: lite ? 3.4 : 2.8 },
-      uPixelRatio: { value: 1 },
-      uActive: { value: new Vector3(0, 0, 1) },
-      uActiveStrength: { value: 0 },
-      uColor: { value: PAPER },
-      uAccent: { value: SIGNAL },
-      uOpacity: { value: 0 },
-      uTime: { value: 0 },
-    }),
+  // Materials are built here rather than as JSX props: R3F copies a `uniforms`
+  // prop into the material it creates, so per-frame writes to our own object
+  // would never reach the GPU. Owning the material keeps one uniforms object.
+  const dotsMaterial = useMemo(
+    () =>
+      new ShaderMaterial({
+        vertexShader: dotsVertex,
+        fragmentShader: dotsFragment,
+        uniforms: {
+          uSize: { value: lite ? 3.4 : 2.8 },
+          uPixelRatio: { value: 1 },
+          uActive: { value: new Vector3(0, 0, 1) },
+          uActiveStrength: { value: 0 },
+          uColor: { value: PAPER },
+          uAccent: { value: SIGNAL },
+          uOpacity: { value: 0 },
+          uTime: { value: 0 },
+        },
+        transparent: true,
+        depthWrite: false,
+      }),
     [lite],
   );
-
-  // Uniform objects are created once per stop list so re-renders never reset them.
-  const atmoUniforms = useMemo(() => ({ uColor: { value: PAPER }, uOpacity: { value: 0 } }), []);
-  const arcUniforms = useMemo(
-    () => stops.slice(1).map(() => ({ uColor: { value: SIGNAL }, uDraw: { value: 0 }, uOpacity: { value: 0 } })),
-    [stops],
-  );
-  const pinUniforms = useMemo(
+  const arcMaterials = useMemo(
     () =>
-      stops.map(() => ({
-        uColor: { value: SIGNAL },
-        uTime: { value: 0 },
-        uActive: { value: 0 },
-        uOpacity: { value: 0 },
-      })),
+      stops.slice(1).map(
+        () =>
+          new ShaderMaterial({
+            vertexShader: arcVertex,
+            fragmentShader: arcFragment,
+            uniforms: {
+              uColor: { value: SIGNAL },
+              uDraw: { value: 0 },
+              uOpacity: { value: 0 },
+              uBase: { value: 0.55 },
+            },
+            transparent: true,
+            depthWrite: false,
+          }),
+      ),
     [stops],
   );
+  const pinMaterials = useMemo(
+    () =>
+      stops.map(
+        () =>
+          new ShaderMaterial({
+            vertexShader: pinVertex,
+            fragmentShader: pinFragment,
+            uniforms: { uColor: { value: SIGNAL }, uTime: { value: 0 }, uActive: { value: 0 }, uOpacity: { value: 0 } },
+            transparent: true,
+            depthWrite: false,
+          }),
+      ),
+    [stops],
+  );
+  useEffect(() => () => dotsMaterial.dispose(), [dotsMaterial]);
+  useEffect(() => () => arcMaterials.forEach((m) => m.dispose()), [arcMaterials]);
+  useEffect(() => () => pinMaterials.forEach((m) => m.dispose()), [pinMaterials]);
 
   const pins = useMemo(
     () =>
@@ -129,7 +152,7 @@ function Earth({ stops, active, drive, lite, onPick }: Omit<Props, "running">) {
     () =>
       stops.slice(1).map((s, i) => {
         const curve = new CatmullRomCurve3(arcPoints(stops[i], s, lite ? 40 : 72).map(toV3));
-        return new TubeGeometry(curve, lite ? 40 : 96, lite ? 0.0045 : 0.0032, 6, false);
+        return new TubeGeometry(curve, lite ? 40 : 96, 0.0042, 6, false);
       }),
     [stops, lite],
   );
@@ -166,18 +189,20 @@ function Earth({ stops, active, drive, lite, onPick }: Omit<Props, "running">) {
     g.position.x += (shiftTarget - g.position.x) * ease(4);
     g.scale.setScalar(0.94 + 0.06 * d.intro);
 
-    dotUniforms.uTime.value = t;
-    dotUniforms.uOpacity.value = d.intro;
-    dotUniforms.uPixelRatio.value = gl.getPixelRatio();
-    if (stop) dotUniforms.uActive.value.lerp(toV3(latLngToVec3(stop.lat, stop.lng)), ease(5));
-    dotUniforms.uActiveStrength.value += ((stop ? 1 : 0) - dotUniforms.uActiveStrength.value) * ease(4);
-    atmoUniforms.uOpacity.value = 0.22 * d.intro;
+    const du = dotsMaterial.uniforms;
+    du.uTime.value = t;
+    du.uOpacity.value = d.intro;
+    du.uPixelRatio.value = gl.getPixelRatio();
+    if (stop) du.uActive.value.lerp(toV3(latLngToVec3(stop.lat, stop.lng)), ease(5));
+    du.uActiveStrength.value += ((stop ? 1 : 0) - du.uActiveStrength.value) * ease(4);
 
-    arcUniforms.forEach((u, i) => {
+    arcMaterials.forEach(({ uniforms: u }, i) => {
       u.uDraw.value = Math.min(Math.max(d.progress - i, 0), 1);
       u.uOpacity.value = d.intro;
+      // The whole route shows while idle; untravelled legs dim once the tour starts.
+      u.uBase.value += ((stop ? 0.28 : 0.55) - u.uBase.value) * ease(4);
     });
-    pinUniforms.forEach((u, i) => {
+    pinMaterials.forEach(({ uniforms: u }, i) => {
       u.uTime.value = t + i * 0.37;
       const on = i === active || i === hovered ? 1 : 0;
       u.uActive.value += (on - u.uActive.value) * ease(6);
@@ -195,54 +220,16 @@ function Earth({ stops, active, drive, lite, onPick }: Omit<Props, "running">) {
         <meshBasicMaterial color="#11100e" />
       </mesh>
 
-      {dots && (
-        <points geometry={dots}>
-          <shaderMaterial
-            vertexShader={dotsVertex}
-            fragmentShader={dotsFragment}
-            uniforms={dotUniforms}
-            transparent
-            depthWrite={false}
-          />
-        </points>
-      )}
-
-      <mesh scale={1.16}>
-        <sphereGeometry args={[1, 48, 48]} />
-        <shaderMaterial
-          vertexShader={atmosphereVertex}
-          fragmentShader={atmosphereFragment}
-          uniforms={atmoUniforms}
-          side={BackSide}
-          blending={AdditiveBlending}
-          transparent
-          depthWrite={false}
-        />
-      </mesh>
+      {dots && <points geometry={dots} material={dotsMaterial} />}
 
       {arcs.map((geometry, i) => (
-        <mesh key={`arc-${stops[i].slug}-${stops[i].name}-${i}`} geometry={geometry}>
-          <shaderMaterial
-            vertexShader={arcVertex}
-            fragmentShader={arcFragment}
-            uniforms={arcUniforms[i]}
-            transparent
-            depthWrite={false}
-          />
-        </mesh>
+        <mesh key={`arc-${stops[i].slug}-${stops[i].name}-${i}`} geometry={geometry} material={arcMaterials[i]} />
       ))}
 
       {pins.map((p, i) => (
         <group key={`pin-${stops[i].slug}-${stops[i].name}`} position={p.position} quaternion={p.quaternion}>
-          <mesh>
+          <mesh material={pinMaterials[i]}>
             <planeGeometry args={[0.11, 0.11]} />
-            <shaderMaterial
-              vertexShader={pinVertex}
-              fragmentShader={pinFragment}
-              uniforms={pinUniforms[i]}
-              transparent
-              depthWrite={false}
-            />
           </mesh>
           {/* Generous invisible hit area */}
           <mesh

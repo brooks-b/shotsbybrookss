@@ -103,11 +103,14 @@ export default function Globe2D({ stops, active, drive, running, onPick }: Globe
         }
       }
 
-      // Route: arcs draw in travel order with scroll progress.
-      ctx.strokeStyle = `rgba(${SIGNAL},0.9)`;
-      ctx.lineWidth = 1.25;
-      arcs.forEach((points, i) => {
-        const f = Math.min(Math.max(d.progress - i, 0), 1);
+      // Route: every leg is always visible; the travelled part draws brighter
+      // and thicker with scroll progress.
+      const legs = (f: (i: number) => number, style: string, width: number) => {
+        ctx.strokeStyle = style;
+        ctx.lineWidth = width;
+        arcs.forEach((points, i) => drawLeg(points, f(i)));
+      };
+      const drawLeg = (points: V[], f: number) => {
         if (f <= 0) return;
         const n = Math.max(1, Math.round(f * (points.length - 1)));
         ctx.beginPath();
@@ -120,7 +123,9 @@ export default function Globe2D({ stops, active, drive, running, onPick }: Globe
           pen = shown;
         }
         ctx.stroke();
-      });
+      };
+      legs(() => 1, `rgba(${SIGNAL},${stop ? 0.3 : 0.55})`, 1.25);
+      if (stop) legs((i) => Math.min(Math.max(d.progress - i, 0), 1), `rgba(${SIGNAL},0.95)`, 2);
 
       pins = [];
       stopVecs.forEach((v, i) => {

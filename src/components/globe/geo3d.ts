@@ -63,7 +63,7 @@ export function arcPoints(a: { lat: number; lng: number }, b: { lat: number; lng
   const vb = latLngToVec3(b.lat, b.lng);
   const dot = Math.min(Math.max(va.x * vb.x + va.y * vb.y + va.z * vb.z, -1), 1);
   const angle = Math.acos(dot);
-  const lift = Math.min(Math.max(angle * 0.22, 0.015), 0.42);
+  const lift = Math.min(Math.max(angle * 0.09, 0.01), 0.11);
   const sinA = Math.sin(angle);
   const points: Vec3[] = [];
   for (let i = 0; i <= segments; i++) {

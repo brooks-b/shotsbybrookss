@@ -196,6 +196,14 @@ html.lenis body {
     transform 0.7s var(--ease-out);
 }
 
+/* Readout swaps in when you pick a place. */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
 /* Line-by-line text reveal */
 .line-mask {
   display: block;

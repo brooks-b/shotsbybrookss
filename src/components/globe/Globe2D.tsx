@@ -130,7 +130,7 @@ export default function Globe2D({ stops, active, focus, label, drive, running, o
         ctx.stroke();
       };
       legs(() => 1, `rgba(${SIGNAL},${stop ? 0.3 : 0.55})`, 1.25);
-      if (stop) legs((i) => Math.min(Math.max(d.progress - i, 0), 1), `rgba(${SIGNAL},0.95)`, 2);
+      if (stop) legs((i) => (i < d.from - 1 ? 0 : Math.min(Math.max(d.progress - i, 0), 1)), `rgba(${SIGNAL},0.95)`, 2);
 
       pins = [];
       let tag: { x: number; y: number } | null = null;

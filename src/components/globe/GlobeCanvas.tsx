@@ -212,7 +212,7 @@ function Earth({ stops, active, focus, label, drive, lite, onPick }: Omit<Props,
     du.uActiveStrength.value += ((stop ? 1 : 0) - du.uActiveStrength.value) * ease(4);
 
     arcMaterials.forEach(({ uniforms: u }, i) => {
-      u.uDraw.value = Math.min(Math.max(d.progress - i, 0), 1);
+      u.uDraw.value = i < d.from - 1 ? 0 : Math.min(Math.max(d.progress - i, 0), 1);
       u.uOpacity.value = d.intro;
       // The whole route shows while idle; untravelled legs dim once the tour starts.
       u.uBase.value += ((stop ? 0.28 : 0.55) - u.uBase.value) * ease(4);

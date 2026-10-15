@@ -15,6 +15,8 @@ export type GlobeDrive = {
   shift: number;
   /** 0 → 1: zooms in on a place with several cities close together. */
   zoom: number;
+  /** Legs before this stop index stay faint, so only the way in is lit. */
+  from: number;
 };
 
 export type GlobeProps = {

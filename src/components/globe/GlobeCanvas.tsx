@@ -64,6 +64,7 @@ function useLandDots(lite: boolean) {
 
 function Earth({ stops, active, drive, lite, onPick }: Omit<Props, "running">) {
   const group = useRef<Group>(null);
+  const zoomed = useRef(0);
   const dots = useLandDots(lite);
   const { gl, viewport, camera, size } = useThree();
 
@@ -177,7 +178,9 @@ function Earth({ stops, active, drive, lite, onPick }: Omit<Props, "running">) {
     const stop = stops[active];
     if (stop) {
       const target = rotationToFace(stop.lat, stop.lng);
-      g.rotation.x += (target.x * 0.85 - g.rotation.x) * ease(3.2);
+      // Tilt slightly short of the city's latitude (north stays readable), but
+      // centre it exactly when zoomed in on a place.
+      g.rotation.x += (target.x * (0.85 + 0.15 * zoomed.current) - g.rotation.x) * ease(3.2);
       g.rotation.y += angleDelta(g.rotation.y, target.y) * ease(3.2);
     } else {
       g.rotation.x += (0.32 - g.rotation.x) * ease(2);
@@ -185,9 +188,14 @@ function Earth({ stops, active, drive, lite, onPick }: Omit<Props, "running">) {
     }
 
     // On wide screens the globe slides right while the tour runs.
-    const shiftTarget = viewport.width / viewport.height < 1.15 ? 0 : d.shift * Math.min(viewport.width * 0.14, 0.55);
+    const shiftTarget =
+      viewport.width / viewport.height < 1.15
+        ? 0
+        : d.shift * Math.min(viewport.width * 0.14, 0.55) * (1 + 0.7 * zoomed.current);
     g.position.x += (shiftTarget - g.position.x) * ease(4);
-    g.scale.setScalar(0.94 + 0.06 * d.intro);
+    // Zoom eases in and out rather than snapping between places.
+    zoomed.current += (d.zoom - zoomed.current) * ease(2.5);
+    g.scale.setScalar((0.94 + 0.06 * d.intro) * (1 + 0.35 * zoomed.current));
 
     const du = dotsMaterial.uniforms;
     du.uTime.value = t;

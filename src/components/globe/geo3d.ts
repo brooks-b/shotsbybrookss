@@ -13,6 +13,8 @@ export type GlobeDrive = {
   progress: number;
   /** 0 → 1: slides the globe sideways to make room for the readout. */
   shift: number;
+  /** 0 → 1: zooms in on a place with several cities close together. */
+  zoom: number;
 };
 
 export type GlobeProps = {

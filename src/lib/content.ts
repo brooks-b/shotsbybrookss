@@ -195,13 +195,24 @@ export const getAllFrames = cache((): Frame[] =>
     .flatMap((c) => getFrames(c.slug)),
 );
 
-/** Chapter covers that are real photos, keyed by slug. Shown in the globe readout. */
+/**
+ * Photos for the globe readout card, keyed "slug|stop": the chapter cover if
+ * it was taken at that stop, otherwise the first photo from the stop. Also
+ * keyed by bare slug for stops with no photo of their own.
+ */
 export function getPhotoCovers(): Record<string, Frame> {
-  return Object.fromEntries(
-    getChapters()
-      .filter((c) => c.cover.kind === "photo")
-      .map((c) => [c.slug, c.cover]),
-  );
+  const out: Record<string, Frame> = {};
+  for (const c of getChapters()) {
+    if (c.kind !== "place") continue;
+    if (c.cover.kind === "photo") out[c.slug] = c.cover;
+    const photos = getFrames(c.slug).filter((f) => f.kind === "photo");
+    for (const s of c.stops) {
+      const pick =
+        c.cover.kind === "photo" && c.cover.stop === s.name ? c.cover : photos.find((f) => f.stop === s.name);
+      if (pick) out[`${c.slug}|${s.name}`] = pick;
+    }
+  }
+  return out;
 }
 
 /** "Selected works": the Top 10 edition's frames. */

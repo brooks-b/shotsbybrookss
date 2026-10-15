@@ -34,6 +34,7 @@ export default function Globe2D({ stops, active, drive, running, onPick }: Globe
     let w = 0;
     let h = 0;
     const rot = { x: 0.32, y: 0 };
+    let zoomed = 0;
     const stopVecs: V[] = stops.map((s) => latLngToVec3(s.lat, s.lng));
     const arcs: V[][] = stops.slice(1).map((s, i) => arcPoints(stops[i], s, 40));
     let pins: { x: number; y: number; i: number }[] = [];
@@ -73,14 +74,16 @@ export default function Globe2D({ stops, active, drive, running, onPick }: Globe
 
       if (stop) {
         const t = rotationToFace(stop.lat, stop.lng);
-        rot.x += (t.x * 0.85 - rot.x) * ease(3.2);
+        rot.x += (t.x * (0.85 + 0.15 * zoomed) - rot.x) * ease(3.2);
         rot.y += angleDelta(rot.y, t.y) * ease(3.2);
       } else {
         rot.x += (0.32 - rot.x) * ease(2);
         rot.y += dt * 0.06;
       }
 
-      const R = Math.min(w, h) * 0.44 * (0.94 + 0.06 * d.intro);
+      zoomed += (d.zoom - zoomed) * ease(2.5);
+      // Capped so the zoomed globe stays inside its box on small screens.
+      const R = Math.min(Math.min(w, h) * 0.44 * (0.94 + 0.06 * d.intro) * (1 + 0.35 * zoomed), Math.min(w, h) * 0.5);
       const cx = w / 2;
       const cy = h / 2;
       ctx.clearRect(0, 0, w, h);

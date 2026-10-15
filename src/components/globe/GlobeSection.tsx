@@ -4,6 +4,7 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Frame, TravelStop } from "@/lib/frames";
@@ -24,10 +25,17 @@ const Globe2D = dynamic(() => import("./Globe2D"), { ssr: false });
 
 const YEARS = ["All", "2024", "2025", "2026"] as const;
 const REGIONS: ("All" | Region)[] = ["All", "North America", "Caribbean", "Europe", "Africa", "Asia"];
-/** Scroll distance per stop, in viewport heights. */
-const VH_PER_STOP = 0.4;
+/** Scroll distance per place, in viewport heights. */
+const VH_PER_PLACE = 0.9;
 /** Share of the pinned scroll spent on the intro before the tour starts. */
-const INTRO = 0.08;
+const INTRO = 0.06;
+/** Share of each place's scroll where the globe holds still before moving on. */
+const HOLD = 0.62;
+
+/** A chapter's run of consecutive stops: one step of the tour. */
+type Place = { slug: string; chapter: string; first: number; indices: number[] };
+
+const smooth = (t: number) => t * t * (3 - 2 * t);
 
 function useNow() {
   const [now, setNow] = useState<Date | null>(null);
@@ -60,8 +68,9 @@ function Filter<T extends string>(props: { label: string; options: readonly T[];
 
 /**
  * The opening. The globe is the hero: it idles under the name, and scrolling
- * pins the section and walks it through every stop in travel order, drawing
- * the route as it goes. A live readout reports where, and what time it is there.
+ * pins the section and walks it place by place in travel order, holding on
+ * each one and drawing the route as it goes. Places with several cities get
+ * a city picker. A live readout reports where, and what time it is there.
  */
 export function GlobeSection({ stops: allStops, covers }: { stops: TravelStop[]; covers: Record<string, Frame> }) {
   const router = useRouter();
@@ -69,7 +78,13 @@ export function GlobeSection({ stops: allStops, covers }: { stops: TravelStop[];
   const lite = useMediaQuery("(max-width: 767px), (pointer: coarse)");
   const [year, setYear] = useState<(typeof YEARS)[number]>("All");
   const [region, setRegion] = useState<"All" | Region>("All");
-  const [active, setActive] = useState(-1);
+  const [placeIdx, setPlaceIdx] = useState(-1);
+  /** The city picked in each place, by name. Defaults to the first. */
+  const [chosen, setChosen] = useState<Record<string, string>>({});
+  const chosenRef = useRef(chosen);
+  useEffect(() => {
+    chosenRef.current = chosen;
+  }, [chosen]);
   const [visible, setVisible] = useState(true);
   // Wait until after hydration (when `lite` is known) and the browser is idle,
   // so the globe never competes with first paint.
@@ -85,7 +100,7 @@ export function GlobeSection({ stops: allStops, covers }: { stops: TravelStop[];
   }, []);
   const [listOpen, setListOpen] = useState(false);
   const root = useRef<HTMLElement>(null);
-  const drive = useRef<GlobeDrive>({ intro: 0, progress: 0, shift: 0 });
+  const drive = useRef<GlobeDrive>({ intro: 0, progress: 0, shift: 0, zoom: 0 });
   const now = useNow();
 
   const stops = useMemo(
@@ -93,9 +108,25 @@ export function GlobeSection({ stops: allStops, covers }: { stops: TravelStop[];
       allStops.filter((s) => (year === "All" || String(s.year) === year) && (region === "All" || s.region === region)),
     [allStops, year, region],
   );
-  const stop = active >= 0 ? stops[Math.min(active, stops.length - 1)] : undefined;
+  const places = useMemo(() => {
+    const out: Place[] = [];
+    stops.forEach((s, i) => {
+      const last = out.at(-1);
+      if (last && last.slug === s.slug) last.indices.push(i);
+      else out.push({ slug: s.slug, chapter: s.chapter, first: i, indices: [i] });
+    });
+    return out;
+  }, [stops]);
+
+  /** Index (into `stops`) of the city showing for a place. */
+  const cityOf = (p: Place, picks: Record<string, string> = chosen) =>
+    p.indices.find((i) => stops[i].name === picks[p.slug]) ?? p.first;
+
+  const place = placeIdx >= 0 ? places[Math.min(placeIdx, places.length - 1)] : undefined;
+  const active = place ? cityOf(place) : -1;
+  const stop = active >= 0 ? stops[active] : undefined;
   const touring = Boolean(stop);
-  const cover = stop ? covers[stop.slug] : undefined;
+  const cover = stop ? (covers[`${stop.slug}|${stop.name}`] ?? covers[stop.slug]) : undefined;
 
   // Fade the globe in on load; stop rendering while off screen.
   useEffect(() => {
@@ -109,21 +140,30 @@ export function GlobeSection({ stops: allStops, covers }: { stops: TravelStop[];
     };
   }, [reduced]);
 
+  // Slide aside while touring; zoom in on places with more than one city.
+  const multiCity = Boolean(place && place.indices.length > 1);
   useEffect(() => {
     drive.current.shift = touring ? 1 : 0;
-  }, [touring]);
+    drive.current.zoom = touring && multiCity ? 1 : 0;
+  }, [touring, multiCity]);
 
   useGSAP(
     () => {
-      const n = stops.length;
-      drive.current.progress = reduced ? n - 1 : 0;
+      const n = places.length;
+      drive.current.progress = reduced ? stops.length - 1 : 0;
       if (reduced || n === 0) return;
-      setActive(-1);
+      setPlaceIdx(-1);
+      setChosen({});
+
+      const held = (k: number) => {
+        const p = places[k];
+        return p.indices.find((i) => stops[i].name === chosenRef.current[p.slug]) ?? p.first;
+      };
 
       const st = ScrollTrigger.create({
         trigger: root.current,
         start: "top top",
-        end: () => `+=${Math.max(n, 3) * VH_PER_STOP * window.innerHeight}`,
+        end: () => `+=${Math.max(n, 3) * VH_PER_PLACE * window.innerHeight}`,
         pin: true,
         anticipatePin: 1,
         invalidateOnRefresh: true,
@@ -131,21 +171,41 @@ export function GlobeSection({ stops: allStops, covers }: { stops: TravelStop[];
           const p = self.progress;
           if (p < INTRO) {
             drive.current.progress = 0;
-            setActive(-1);
+            setPlaceIdx(-1);
             return;
           }
-          const route = Math.min((p - INTRO) / (0.96 - INTRO), 1) * (n - 1);
-          drive.current.progress = route;
-          setActive(Math.round(route));
+          // Each place owns an equal slice of the scroll. The globe holds on it
+          // for the first part of the slice, then travels to the next place.
+          const x = Math.min((p - INTRO) / (0.97 - INTRO), 1) * n;
+          const seg = Math.min(Math.floor(x), n - 1);
+          const t = seg < n - 1 ? smooth(Math.min(Math.max((x - seg - HOLD) / (1 - HOLD), 0), 1)) : 0;
+          const from = held(seg);
+          const to = seg < n - 1 ? places[seg + 1].first : from;
+          drive.current.progress = from + (to - from) * t;
+          setPlaceIdx(t > 0.5 ? seg + 1 : seg);
         },
       });
       return () => st.kill();
     },
-    { scope: root, dependencies: [stops, reduced], revertOnUpdate: true },
+    { scope: root, dependencies: [places, reduced], revertOnUpdate: true },
   );
 
+  /** Pick a city within the current place: the globe turns and the route draws to it. */
+  const chooseCity = (i: number) => {
+    const s = stops[i];
+    setChosen((c) => ({ ...c, [s.slug]: s.name }));
+    gsap.to(drive.current, { progress: i, duration: reduced ? 0 : 0.9, ease: "power2.inOut" });
+  };
+
+  /** Jump the readout to any stop (keyboard focus in the full stop list). */
+  const focusStop = (i: number) => {
+    const k = places.findIndex((p) => p.indices.includes(i));
+    if (k >= 0) setPlaceIdx(k);
+    chooseCity(i);
+  };
+
   const pick = (i: number) => {
-    setActive(i);
+    focusStop(i);
     window.setTimeout(() => router.push(`/chapters/${stops[i].slug}`), reduced ? 0 : 600);
   };
 
@@ -189,7 +249,7 @@ export function GlobeSection({ stops: allStops, covers }: { stops: TravelStop[];
                   <button
                     type="button"
                     onClick={() => pick(i)}
-                    onFocus={() => setActive(i)}
+                    onFocus={() => focusStop(i)}
                     aria-current={i === active ? "location" : undefined}
                     className="text-paper-dim transition-colors hover:text-paper aria-[current=location]:text-paper"
                   >
@@ -247,14 +307,34 @@ export function GlobeSection({ stops: allStops, covers }: { stops: TravelStop[];
                 )}
                 <div>
                   <p className="micro text-paper-faint">
-                    Around the world — {pad(stop.seq + 1, 2)} / {pad(allStops.length, 2)}
+                    Around the world — {pad(placeIdx + 1, 2)} / {pad(places.length, 2)}
                   </p>
                   <p
-                    className={`display mt-3 ${stop.name.length > 14 ? "text-[clamp(30px,3.6vw,56px)]" : "text-[clamp(36px,5vw,80px)]"}`}
+                    className={`display mt-3 ${stop.chapter.length > 14 ? "text-[clamp(30px,3.6vw,56px)]" : "text-[clamp(36px,5vw,80px)]"}`}
                   >
-                    {stop.name}
+                    {stop.chapter}
                   </p>
-                  <p className="mt-2 text-paper-dim">{stop.chapter}</p>
+                  {place && place.indices.length > 1 ? (
+                    <div
+                      role="group"
+                      aria-label={`Cities in ${stop.chapter}`}
+                      className="mt-4 flex max-w-[340px] flex-wrap gap-x-4 gap-y-2"
+                    >
+                      {place.indices.map((i) => (
+                        <button
+                          key={stops[i].name}
+                          type="button"
+                          aria-pressed={i === active}
+                          onClick={() => chooseCity(i)}
+                          className="micro border-b border-transparent pb-0.5 text-paper-faint transition-colors hover:text-paper aria-pressed:border-signal aria-pressed:text-paper"
+                        >
+                          {stops[i].name}
+                        </button>
+                      ))}
+                    </div>
+                  ) : (
+                    stop.name !== stop.chapter && <p className="mt-2 text-paper-dim">{stop.name}</p>
+                  )}
                   <dl className="hud mt-5 grid grid-cols-[auto_1fr] gap-x-8 gap-y-1 text-paper-dim">
                     <dt className="text-paper-faint">Lat</dt>
                     <dd>{formatLat(stop.lat)}</dd>
@@ -267,6 +347,12 @@ export function GlobeSection({ stops: allStops, covers }: { stops: TravelStop[];
                     <dt className="text-paper-faint">Frames</dt>
                     <dd>[{stop.frames}]</dd>
                   </dl>
+                  <Link
+                    href={`/chapters/${stop.slug}`}
+                    className="micro mt-5 inline-block text-paper-dim transition-colors hover:text-paper"
+                  >
+                    Open {stop.chapter} →
+                  </Link>
                 </div>
               </div>
             )}

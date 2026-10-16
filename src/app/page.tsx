@@ -1,6 +1,5 @@
 import { GlobeSection } from "@/components/globe/GlobeSection";
 import { ArchiveStrip } from "@/components/home/ArchiveStrip";
-import { ChaptersIndex } from "@/components/home/ChaptersIndex";
 import { KitTeaser } from "@/components/home/KitTeaser";
 import { Preloader } from "@/components/home/Preloader";
 import { SelectedWorks } from "@/components/home/SelectedWorks";
@@ -19,7 +18,6 @@ export default function Home() {
       <Preloader />
       <Opening places={places} mosaic={getMosaicFrames()} />
       <GlobeSection stops={getTravelStops()} />
-      <ChaptersIndex chapters={chapters} />
       <SelectedWorks frames={getSelectedWorks()} slug={edition?.slug ?? "top-10-2025"} />
       <ArchiveStrip frames={all.slice(0, 24)} total={all.length} />
       <KitTeaser />

@@ -407,11 +407,21 @@ export function PlaceAtmosphere({ slug, running }: { slug: string | null; runnin
         else drawShape(ctx, p, t);
         keep.push(p);
       }
-      // The nearest particles are drawn out of focus, like they're right at the lens.
+      // The nearest particles read as out of focus: drawn larger and fainter. (A real
+      // canvas blur filter per frame is expensive, so it's faked.)
       if (near.length) {
-        ctx.filter = "blur(2.5px)";
-        for (const p of near) drawShape(ctx, p, t);
-        ctx.filter = "none";
+        ctx.save();
+        ctx.globalAlpha = 1;
+        for (const p of near) {
+          const size = p.size;
+          const fade = p.fade;
+          p.size = size * 1.35;
+          p.fade = fade * 0.55;
+          drawShape(ctx, p, t);
+          p.size = size;
+          p.fade = fade;
+        }
+        ctx.restore();
       }
       particles = keep;
       ctx.globalAlpha = 1;

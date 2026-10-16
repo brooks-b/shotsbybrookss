@@ -1,20 +1,22 @@
 "use client";
 
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import { usePathname } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 import { usePrefersReducedMotion } from "./useReducedMotion";
 
-gsap.registerPlugin(ScrollTrigger);
-
 const LenisContext = createContext<Lenis | null>(null);
 export const useLenis = () => useContext(LenisContext);
 
+/** Input that can start a scroll. The frame loop sleeps until one of these happens. */
+const WAKE_EVENTS = ["wheel", "touchstart", "touchmove", "keydown", "pointerdown", "scroll"] as const;
+/** Frames to keep running after the scroll settles, so it lands cleanly. */
+const SETTLE_FRAMES = 8;
+
 /**
- * Lenis smooth scroll driven by GSAP's ticker, so ScrollTrigger and Lenis
- * share one clock. Off entirely under prefers-reduced-motion.
+ * Lenis smooth scroll, run on demand. The animation-frame loop only runs
+ * while a scroll is easing; the rest of the time the page does no per-frame
+ * work at all, which matters for battery. Off entirely under prefers-reduced-motion.
  */
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
   const reduced = usePrefersReducedMotion();
@@ -23,25 +25,43 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (reduced) return;
-    const instance = new Lenis({ lerp: 0.1, wheelMultiplier: 1, anchors: true });
-    instance.on("scroll", ScrollTrigger.update);
-    const tick = (time: number) => instance.raf(time * 1000);
-    gsap.ticker.add(tick);
-    gsap.ticker.lagSmoothing(0);
+    const instance = new Lenis({ lerp: 0.1, wheelMultiplier: 1, anchors: true, autoRaf: false });
+
+    let raf = 0;
+    let settled = 0;
+    const loop = (time: number) => {
+      instance.raf(time);
+      settled = instance.isScrolling ? 0 : settled + 1;
+      raf = settled > SETTLE_FRAMES ? 0 : requestAnimationFrame(loop);
+    };
+    const wake = () => {
+      settled = 0;
+      if (raf) return;
+      // Lenis eases by elapsed time; restart its clock so a long sleep isn't one giant step.
+      (instance as unknown as { time: number }).time = performance.now();
+      raf = requestAnimationFrame(loop);
+    };
+    WAKE_EVENTS.forEach((e) => window.addEventListener(e, wake, { passive: true }));
+    // Programmatic scrolls (route changes, anchors) wake it too.
+    const scrollTo = instance.scrollTo.bind(instance);
+    instance.scrollTo = ((...args: Parameters<Lenis["scrollTo"]>) => {
+      wake();
+      return scrollTo(...args);
+    }) as Lenis["scrollTo"];
+
     // eslint-disable-next-line react-hooks/set-state-in-effect -- the instance only exists client-side
     setLenis(instance);
     return () => {
-      gsap.ticker.remove(tick);
+      cancelAnimationFrame(raf);
+      WAKE_EVENTS.forEach((e) => window.removeEventListener(e, wake));
       instance.destroy();
       setLenis(null);
     };
   }, [reduced]);
 
-  // New route: jump to top (or the hash) and let triggers re-measure.
+  // New route: jump to the top (unless there's a hash to land on).
   useEffect(() => {
     if (!window.location.hash) lenis?.scrollTo(0, { immediate: true });
-    const id = requestAnimationFrame(() => ScrollTrigger.refresh());
-    return () => cancelAnimationFrame(id);
   }, [pathname, lenis]);
 
   return <LenisContext.Provider value={lenis}>{children}</LenisContext.Provider>;

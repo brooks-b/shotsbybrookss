@@ -68,6 +68,11 @@ export default function Globe2D({ stops, active, focus, label, drive, running, o
 
     let last = performance.now();
     const frame = (now: number) => {
+      // 30fps is plenty for a slow drift, and halves the battery cost.
+      if (now - last < 1000 / 30 - 2) {
+        raf = requestAnimationFrame(frame);
+        return;
+      }
       const dt = Math.min((now - last) / 1000, 1 / 20);
       last = now;
       const d = drive.current;

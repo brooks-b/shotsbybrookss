@@ -21,12 +21,14 @@ Design and engineering calls made during the build, one line each.
 - **Preloader:** a hairline progress bar with a 000–100 counter that waits for fonts and the globe, then lifts away. Once per session. No sound.
 - **Viewfinder HUD only on real photos.** Placeholders get no corner brackets or EXIF readout.
 - **Film grain** at 3.5% opacity; it stops animating under reduced motion.
-- **Dial:** the chapter index's dial is an ARIA slider (arrow keys, Home/End, Enter, drag/touch). Hidden on phones, where the list itself is the control.
+- **No chapter index (and so no dial).** Brooks removed the home page's chapter list as redundant with the photo board; the dial went with it. "Work" in the header now goes to the open board (`/#places`).
 - **No statement section and no theme names.** Brooks removed the "From the sideline to the world" statement block, and the weather isn't labelled anywhere (no "Sakura", "Rain"); it just plays.
 - **Copy:** plain and factual. No invented taglines or chapter blurbs; the only notes are facts from the brief and Brooks's own London caption.
 - **Dates shown as years** in the index; chapter pages show months.
 
 ## Engineering
+
+- **Battery: an idle page does no per-frame work.** Measured in Chrome: 0 animation frames per second when idle on every page (was ~60), and no running CSS animations. How: Lenis's frame loop only runs while a scroll is easing; GSAP ScrollTrigger is gone (it keeps an empty frame loop alive forever) and the opening pins with CSS `position: sticky`; scroll-linked effects only work on frames where the page scrolled; the film grain is static; the route globe renders at a fixed 30fps from a timer (no frame requests), on the low-power GPU, at most 1.5× resolution, and only while on screen; the 2D globes cap at 30fps; arrival particles fake their out-of-focus look instead of running a canvas blur each frame.
 
 - **Static everywhere.** Cache Components and Partial Prefetching are off: every page is prerendered and there's no request-time data, and their `<Activity>`-based route hiding fights with pinned ScrollTrigger sections.
 - **Phones get a 2D-canvas globe** (same route, arcs, pins, tap targets) and never load three.js. That took mobile Lighthouse performance from 50 to about 90.

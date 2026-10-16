@@ -289,13 +289,29 @@ function Earth({ stops, active, focus, label, drive, lite, onPick }: Omit<Props,
   );
 }
 
+/**
+ * Renders exactly `fps` frames a second while on screen and none otherwise.
+ * The canvas's own loop is off; each tick advances one frame directly. The
+ * globe only drifts and eases, so 60fps would double the GPU work for nothing.
+ */
+function Throttle({ running, fps = 30 }: { running: boolean; fps?: number }) {
+  const advance = useThree((s) => s.advance);
+  useEffect(() => {
+    if (!running) return;
+    advance(performance.now());
+    const id = setInterval(() => advance(performance.now()), 1000 / fps);
+    return () => clearInterval(id);
+  }, [running, fps, advance]);
+  return null;
+}
+
 export default function GlobeCanvas({ running, lite, ...props }: Props) {
   return (
     <Canvas
-      frameloop={running ? "always" : "never"}
-      dpr={lite ? [1, 1.5] : [1, 2]}
+      frameloop="never"
+      dpr={[1, 1.5]}
       camera={{ position: [0, 0, lite ? 4.2 : 3.3], fov: 34 }}
-      gl={{ antialias: !lite, alpha: true, powerPreference: "high-performance" }}
+      gl={{ antialias: !lite, alpha: true, powerPreference: "low-power" }}
       fallback={
         <p className="micro p-6 text-paper-dim">
           WebGL isn&apos;t available, so the globe is off. The stop list still works.
@@ -303,6 +319,7 @@ export default function GlobeCanvas({ running, lite, ...props }: Props) {
       }
       aria-hidden
     >
+      <Throttle running={running} />
       <Earth lite={lite} {...props} />
     </Canvas>
   );

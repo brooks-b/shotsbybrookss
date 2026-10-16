@@ -44,8 +44,8 @@ export default async function ChapterPage({ params }: PageProps<"/chapters/[slug
       {/* Cover */}
       <header className="gutter grid min-h-[100svh] gap-10 pb-12 pt-[calc(var(--header-h)+48px)] md:grid-cols-12 md:items-end">
         <div className="md:col-span-6 lg:col-span-7">
-          <Link href="/#chapters" className="micro text-paper-faint transition-colors hover:text-paper">
-            ← Chapters
+          <Link href="/#places" className="micro text-paper-faint transition-colors hover:text-paper">
+            ← All places
           </Link>
           <h1 className="display mt-8 text-[clamp(52px,9vw,160px)]">{chapter.title}</h1>
           {chapter.note && <p className="mt-6 max-w-[40ch] text-paper-dim">{chapter.note}</p>}

@@ -29,7 +29,7 @@ export function MiniGlobe({ stops, others, size = 260 }: { stops: Stop[]; others
     const c = size / 2;
     let dots: Int16Array | null = null;
     let raf = 0;
-    let visible = true;
+    let visible = false;
 
     const project = (lat: number, lng: number, center: number) => {
       const phi = lat * D2R;
@@ -83,8 +83,13 @@ export function MiniGlobe({ stops, others, size = 260 }: { stops: Stop[]; others
       }
     };
 
+    // Drawn at 30fps, only while on screen (it starts hidden until the observer says otherwise).
+    let lastDraw = 0;
     const loop = (t: number) => {
-      draw(t);
+      if (t - lastDraw >= 1000 / 30 - 2) {
+        draw(t);
+        lastDraw = t;
+      }
       if (!reduced && visible) raf = requestAnimationFrame(loop);
     };
 
@@ -92,7 +97,9 @@ export function MiniGlobe({ stops, others, size = 260 }: { stops: Stop[]; others
       .then((r) => r.arrayBuffer())
       .then((b) => {
         dots = new Int16Array(b);
-        raf = requestAnimationFrame(loop);
+        // Paint once so it's never blank; the loop runs only when visible.
+        draw(performance.now());
+        if (visible) raf = requestAnimationFrame(loop);
       });
 
     const io = new IntersectionObserver(([e]) => {

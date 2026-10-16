@@ -146,7 +146,7 @@ html.lenis body {
   padding-inline: var(--gutter);
 }
 
-/* ── Film grain: barely there ──────────────────────────────────────────── */
+/* ── Film grain: barely there, and static (an animated full-screen layer costs battery) ── */
 
 .grain {
   position: fixed;
@@ -155,25 +155,6 @@ html.lenis body {
   pointer-events: none;
   opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation: grain 1.2s steps(5) infinite;
-}
-
-@keyframes grain {
-  0% {
-    transform: translate(0, 0);
-  }
-  25% {
-    transform: translate(-4%, 3%);
-  }
-  50% {
-    transform: translate(3%, -5%);
-  }
-  75% {
-    transform: translate(-2%, 6%);
-  }
-  100% {
-    transform: translate(5%, 1%);
-  }
 }
 
 /* ── Photo reveal ──────────────────────────────────────────────────────── */
@@ -290,9 +271,6 @@ html.lenis body {
 @media (prefers-reduced-motion: reduce) {
   html {
     transition: none;
-  }
-  .grain {
-    animation: none;
   }
   .fade-in > *,
   .fade-in-slow > *,

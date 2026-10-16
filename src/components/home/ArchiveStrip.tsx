@@ -1,37 +1,50 @@
 "use client";
 
-import { useGSAP } from "@gsap/react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import type { Frame } from "@/lib/frames";
 import { pad } from "@/lib/format";
 import { FrameImage } from "../FrameImage";
 import { usePrefersReducedMotion } from "../motion/useReducedMotion";
-
-gsap.registerPlugin(ScrollTrigger);
 
 /** A contact-sheet strip that drifts sideways as you scroll past it. */
 export function ArchiveStrip({ frames, total }: { frames: Frame[]; total: number }) {
   const root = useRef<HTMLElement>(null);
   const reduced = usePrefersReducedMotion();
 
-  useGSAP(
-    () => {
-      if (reduced) return;
-      gsap.fromTo(
-        "[data-strip]",
-        { xPercent: 0 },
-        {
-          xPercent: -22,
-          ease: "none",
-          scrollTrigger: { trigger: root.current, start: "top bottom", end: "bottom top", scrub: 0.6 },
-        },
-      );
-    },
-    { scope: root, dependencies: [reduced] },
-  );
+  const strip = useRef<HTMLDivElement>(null);
+
+  // Drift with scroll, only while the strip is on screen and only on frames
+  // where the page actually moved.
+  useEffect(() => {
+    const el = root.current;
+    const s = strip.current;
+    if (reduced || !el || !s) return;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const r = el.getBoundingClientRect();
+      const p = Math.min(Math.max((window.innerHeight - r.top) / (window.innerHeight + r.height), 0), 1);
+      s.style.transform = `translateX(${(-22 * p).toFixed(3)}%)`;
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) {
+        update();
+        window.addEventListener("scroll", onScroll, { passive: true });
+      } else {
+        window.removeEventListener("scroll", onScroll);
+      }
+    });
+    io.observe(el);
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [reduced]);
 
   return (
     <section ref={root} aria-labelledby="archive-title" className="overflow-hidden py-24">
@@ -45,7 +58,7 @@ export function ArchiveStrip({ frames, total }: { frames: Frame[]; total: number
       </div>
 
       <Link href="/archive" aria-label="Open the archive" className="block">
-        <div data-strip className="w-max bg-ink-3 will-change-transform">
+        <div ref={strip} className="w-max bg-ink-3 will-change-transform">
           <div className="sprockets" />
           <ul className="flex gap-1 px-1">
             {frames.map((f, i) => (

@@ -35,12 +35,12 @@ export function SiteHeader({ chapters, frames }: Props) {
   }, [open]);
 
   const links = [
-    { href: "/#chapters", label: "Work", count: chapters },
+    { href: "/#places", label: "Work", count: chapters },
     { href: "/archive", label: "Archive", count: frames },
     { href: "/colophon", label: "Colophon" },
     { href: "/about", label: "About" },
   ];
-  const isActive = (href: string) => href !== "/#chapters" && pathname.startsWith(href);
+  const isActive = (href: string) => href !== "/#places" && pathname.startsWith(href);
 
   return (
     <header

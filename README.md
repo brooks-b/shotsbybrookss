@@ -9,16 +9,16 @@ The site opens on a contact sheet of photos with a camera focus point in the mid
 
 ## Stack
 
-|                                         |                                                                                      |
-| --------------------------------------- | ------------------------------------------------------------------------------------ |
-| **Next.js 16** (App Router, TypeScript) | Every page is prerendered; there is no runtime server work.                          |
-| **Tailwind CSS 4**                      | Design tokens in CSS variables.                                                      |
-| **three.js + React Three Fiber**        | Desktop globe: ~18k land dots in one draw call, custom GLSL for dots, arcs and pins. |
-| **Canvas 2D**                           | Phone globe: the same projection without WebGL, so three.js never loads on phones.   |
-| **GSAP ScrollTrigger + Lenis**          | Pins the globe section and maps scroll to the route.                                 |
-| **sharp + exifr**                       | Image derivatives and EXIF; a small custom parser reads Fujifilm maker notes.        |
-| **Vercel Blob**                         | Stores image derivatives outside the repo.                                           |
-| **Vitest + GitHub Actions**             | Lint, typecheck, format, tests and build on every push.                              |
+|                                         |                                                                                                       |
+| --------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| **Next.js 16** (App Router, TypeScript) | Every page is prerendered; there is no runtime server work.                                           |
+| **Tailwind CSS 4**                      | Design tokens in CSS variables.                                                                       |
+| **three.js + React Three Fiber**        | Desktop globe: ~18k land dots in one draw call, custom GLSL for dots, arcs and pins.                  |
+| **Canvas 2D**                           | Phone globe: the same projection without WebGL, so three.js never loads on phones.                    |
+| **Lenis**                               | Smooth scrolling that runs only while you scroll; the opening pins with plain CSS `position: sticky`. |
+| **sharp + exifr**                       | Image derivatives and EXIF; a small custom parser reads Fujifilm maker notes.                         |
+| **Vercel Blob**                         | Stores image derivatives outside the repo.                                                            |
+| **Vitest + GitHub Actions**             | Lint, typecheck, format, tests and build on every push.                                               |
 
 ## How it works
 

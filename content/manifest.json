@@ -1,8 +1,561 @@
 {
   "version": 1,
-  "generatedAt": "2026-10-16T23:25:05.551Z",
+  "generatedAt": "2026-10-16T23:32:48.806Z",
   "storage": "blob",
   "photos": [
+    {
+      "id": "montclair-dscf2428",
+      "collection": "montclair",
+      "file": "DSCF2428.JPG",
+      "hash": "f50314a09c23",
+      "width": 5152,
+      "height": 7728,
+      "alt": "A red Lamborghini Diablo on the lawn at a car show",
+      "exif": {
+        "make": "FUJIFILM",
+        "model": "X-T50",
+        "lens": "XF35mmF2 R WR",
+        "focalLength": 35,
+        "exposureTime": 0.002,
+        "fNumber": 4,
+        "iso": 400,
+        "takenAt": "2026-06-07T15:32:55",
+        "filmSim": "Classic Chrome"
+      },
+      "thumbhash": "qQgWHQJ3eI93p4dnh4Z3qIeAagWJ",
+      "color": "#f8f8f8",
+      "sources": {
+        "avif": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2428-f50314a09c23-480.avif"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2428-f50314a09c23-960.avif"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2428-f50314a09c23-1440.avif"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2428-f50314a09c23-1920.avif"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2428-f50314a09c23-2560.avif"
+          }
+        ],
+        "webp": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2428-f50314a09c23-480.webp"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2428-f50314a09c23-960.webp"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2428-f50314a09c23-1440.webp"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2428-f50314a09c23-1920.webp"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2428-f50314a09c23-2560.webp"
+          }
+        ]
+      },
+      "bytes": {
+        "original": 23116465,
+        "derivatives": 3433200,
+        "served": 692756
+      },
+      "people": false,
+      "stop": "Montclair",
+      "coords": {
+        "lat": 40.8,
+        "lng": -74.2
+      }
+    },
+    {
+      "id": "montclair-dscf2434",
+      "collection": "montclair",
+      "file": "DSCF2434.JPG",
+      "hash": "eebd19779d75",
+      "width": 5152,
+      "height": 7728,
+      "alt": "A blue Ferrari Dino with its rear deck open",
+      "exif": {
+        "make": "FUJIFILM",
+        "model": "X-T50",
+        "lens": "XF35mmF2 R WR",
+        "focalLength": 35,
+        "exposureTime": 0.001,
+        "fNumber": 4,
+        "iso": 400,
+        "takenAt": "2026-06-07T15:51:56",
+        "filmSim": "Classic Chrome"
+      },
+      "thumbhash": "bfgNLQSFeI93uIknh2h3mIdwegl3",
+      "color": "#f8f8f8",
+      "sources": {
+        "avif": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2434-eebd19779d75-480.avif"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2434-eebd19779d75-960.avif"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2434-eebd19779d75-1440.avif"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2434-eebd19779d75-1920.avif"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2434-eebd19779d75-2560.avif"
+          }
+        ],
+        "webp": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2434-eebd19779d75-480.webp"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2434-eebd19779d75-960.webp"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2434-eebd19779d75-1440.webp"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2434-eebd19779d75-1920.webp"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2434-eebd19779d75-2560.webp"
+          }
+        ]
+      },
+      "bytes": {
+        "original": 25843304,
+        "derivatives": 3846680,
+        "served": 872020
+      },
+      "people": false,
+      "stop": "Montclair",
+      "coords": {
+        "lat": 40.8,
+        "lng": -74.2
+      }
+    },
+    {
+      "id": "montclair-dscf2437",
+      "collection": "montclair",
+      "file": "DSCF2437.JPG",
+      "hash": "814a111926dd",
+      "width": 5152,
+      "height": 7728,
+      "alt": "A silver Ferrari coupe parked on the grass",
+      "exif": {
+        "make": "FUJIFILM",
+        "model": "X-T50",
+        "lens": "XF35mmF2 R WR",
+        "focalLength": 35,
+        "exposureTime": 0.0005,
+        "fNumber": 4,
+        "iso": 400,
+        "takenAt": "2026-06-07T15:54:14",
+        "filmSim": "Classic Chrome"
+      },
+      "thumbhash": "nwgSDQJWZ3aJp3b3d4aYd4qGsAVI",
+      "color": "#f8f8e8",
+      "sources": {
+        "avif": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2437-814a111926dd-480.avif"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2437-814a111926dd-960.avif"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2437-814a111926dd-1440.avif"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2437-814a111926dd-1920.avif"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2437-814a111926dd-2560.avif"
+          }
+        ],
+        "webp": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2437-814a111926dd-480.webp"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2437-814a111926dd-960.webp"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2437-814a111926dd-1440.webp"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2437-814a111926dd-1920.webp"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2437-814a111926dd-2560.webp"
+          }
+        ]
+      },
+      "bytes": {
+        "original": 22929377,
+        "derivatives": 4493118,
+        "served": 962472
+      },
+      "people": false,
+      "stop": "Montclair",
+      "coords": {
+        "lat": 40.8,
+        "lng": -74.2
+      }
+    },
+    {
+      "id": "montclair-dscf2438",
+      "collection": "montclair",
+      "file": "DSCF2438.JPG",
+      "hash": "b1e01fc90a89",
+      "width": 5152,
+      "height": 7728,
+      "alt": "A teal Ferrari coupe with wire wheels",
+      "exif": {
+        "make": "FUJIFILM",
+        "model": "X-T50",
+        "lens": "XF35mmF2 R WR",
+        "focalLength": 35,
+        "exposureTime": 0.0005,
+        "fNumber": 4,
+        "iso": 400,
+        "takenAt": "2026-06-07T15:55:43",
+        "filmSim": "Classic Chrome"
+      },
+      "thumbhash": "YfgRFQJ3iI+Hl4eoeItHaIiwrFj9",
+      "color": "#d8e8e8",
+      "sources": {
+        "avif": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2438-b1e01fc90a89-480.avif"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2438-b1e01fc90a89-960.avif"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2438-b1e01fc90a89-1440.avif"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2438-b1e01fc90a89-1920.avif"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2438-b1e01fc90a89-2560.avif"
+          }
+        ],
+        "webp": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2438-b1e01fc90a89-480.webp"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2438-b1e01fc90a89-960.webp"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2438-b1e01fc90a89-1440.webp"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2438-b1e01fc90a89-1920.webp"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2438-b1e01fc90a89-2560.webp"
+          }
+        ]
+      },
+      "bytes": {
+        "original": 22923351,
+        "derivatives": 4546641,
+        "served": 984312
+      },
+      "people": false,
+      "stop": "Montclair",
+      "coords": {
+        "lat": 40.8,
+        "lng": -74.2
+      }
+    },
+    {
+      "id": "montclair-dscf2444",
+      "collection": "montclair",
+      "file": "DSCF2444.JPG",
+      "hash": "6747edbe2897",
+      "width": 5152,
+      "height": 7728,
+      "alt": "The polished engine bay of a red race car",
+      "exif": {
+        "make": "FUJIFILM",
+        "model": "X-T50",
+        "lens": "XF35mmF2 R WR",
+        "focalLength": 35,
+        "exposureTime": 0.00025,
+        "fNumber": 2.5,
+        "iso": 400,
+        "takenAt": "2026-06-07T16:50:23",
+        "filmSim": "Classic Chrome"
+      },
+      "thumbhash": "XnkGFQhydbV5aJNnm5B2KbvJv1z9",
+      "color": "#886858",
+      "sources": {
+        "avif": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2444-6747edbe2897-480.avif"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2444-6747edbe2897-960.avif"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2444-6747edbe2897-1440.avif"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2444-6747edbe2897-1920.avif"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2444-6747edbe2897-2560.avif"
+          }
+        ],
+        "webp": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2444-6747edbe2897-480.webp"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2444-6747edbe2897-960.webp"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2444-6747edbe2897-1440.webp"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2444-6747edbe2897-1920.webp"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2444-6747edbe2897-2560.webp"
+          }
+        ]
+      },
+      "bytes": {
+        "original": 23069697,
+        "derivatives": 4416964,
+        "served": 984794
+      },
+      "people": false,
+      "stop": "Montclair",
+      "coords": {
+        "lat": 40.8,
+        "lng": -74.2
+      }
+    },
+    {
+      "id": "montclair-dscf2450",
+      "collection": "montclair",
+      "file": "DSCF2450.JPG",
+      "hash": "7393bb5df64b",
+      "width": 5152,
+      "height": 7728,
+      "alt": "A red racing barchetta numbered 142, its wood-rimmed wheel inside",
+      "exif": {
+        "make": "FUJIFILM",
+        "model": "X-T50",
+        "lens": "XF35mmF2 R WR",
+        "focalLength": 35,
+        "exposureTime": 0.00025,
+        "fNumber": 3.6,
+        "iso": 400,
+        "takenAt": "2026-06-07T16:51:10",
+        "filmSim": "Classic Chrome"
+      },
+      "thumbhash": "25kKFQhzdq+HOJeYd6WHt3XfiVdP",
+      "color": "#080808",
+      "sources": {
+        "avif": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2450-7393bb5df64b-480.avif"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2450-7393bb5df64b-960.avif"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2450-7393bb5df64b-1440.avif"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2450-7393bb5df64b-1920.avif"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2450-7393bb5df64b-2560.avif"
+          }
+        ],
+        "webp": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2450-7393bb5df64b-480.webp"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2450-7393bb5df64b-960.webp"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2450-7393bb5df64b-1440.webp"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2450-7393bb5df64b-1920.webp"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2450-7393bb5df64b-2560.webp"
+          }
+        ]
+      },
+      "bytes": {
+        "original": 23192725,
+        "derivatives": 4111214,
+        "served": 939687
+      },
+      "people": false,
+      "stop": "Montclair",
+      "coords": {
+        "lat": 40.8,
+        "lng": -74.2
+      }
+    },
+    {
+      "id": "montclair-dscf2454",
+      "collection": "montclair",
+      "file": "DSCF2454.JPG",
+      "hash": "7fc382b356e7",
+      "width": 5152,
+      "height": 7728,
+      "alt": "A yellow Ferrari on a field of parked cars",
+      "exif": {
+        "make": "FUJIFILM",
+        "model": "X-T50",
+        "lens": "XF35mmF2 R WR",
+        "focalLength": 35,
+        "exposureTime": 0.00025,
+        "fNumber": 3.2,
+        "iso": 500,
+        "takenAt": "2026-06-07T16:57:21",
+        "filmSim": "Classic Chrome"
+      },
+      "thumbhash": "XQkGRQiqc8RX2Xn3lFkYlYdgdghX",
+      "color": "#b8a858",
+      "sources": {
+        "avif": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2454-7fc382b356e7-480.avif"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2454-7fc382b356e7-960.avif"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2454-7fc382b356e7-1440.avif"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2454-7fc382b356e7-1920.avif"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2454-7fc382b356e7-2560.avif"
+          }
+        ],
+        "webp": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2454-7fc382b356e7-480.webp"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2454-7fc382b356e7-960.webp"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2454-7fc382b356e7-1440.webp"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2454-7fc382b356e7-1920.webp"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2454-7fc382b356e7-2560.webp"
+          }
+        ]
+      },
+      "bytes": {
+        "original": 23010068,
+        "derivatives": 3982456,
+        "served": 959178
+      },
+      "people": false,
+      "stop": "Montclair",
+      "coords": {
+        "lat": 40.8,
+        "lng": -74.2
+      }
+    },
     {
       "id": "wyoming-dscf0333",
       "collection": "wyoming",
@@ -7915,6 +8468,84 @@
       }
     },
     {
+      "id": "japan-dscf2211",
+      "collection": "japan",
+      "file": "DSCF2211.JPG",
+      "hash": "16e6e6a03d2e",
+      "width": 5152,
+      "height": 7728,
+      "alt": "Osaka Castle rising above its stone walls on a grey day",
+      "exif": {
+        "make": "FUJIFILM",
+        "model": "X-T50",
+        "lens": "XF35mmF2 R WR",
+        "focalLength": 35,
+        "exposureTime": 0.002,
+        "fNumber": 2.8,
+        "iso": 400,
+        "takenAt": "2026-05-20T09:07:44",
+        "filmSim": "Classic Chrome"
+      },
+      "thumbhash": "oBgWDQB5h594eIaIdoh4eESQBCFu",
+      "color": "#d8c8c8",
+      "sources": {
+        "avif": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf2211-16e6e6a03d2e-480.avif"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf2211-16e6e6a03d2e-960.avif"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf2211-16e6e6a03d2e-1440.avif"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf2211-16e6e6a03d2e-1920.avif"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf2211-16e6e6a03d2e-2560.avif"
+          }
+        ],
+        "webp": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf2211-16e6e6a03d2e-480.webp"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf2211-16e6e6a03d2e-960.webp"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf2211-16e6e6a03d2e-1440.webp"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf2211-16e6e6a03d2e-1920.webp"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf2211-16e6e6a03d2e-2560.webp"
+          }
+        ]
+      },
+      "bytes": {
+        "original": 23039186,
+        "derivatives": 5097053,
+        "served": 1055975
+      },
+      "stop": "Osaka",
+      "coords": {
+        "lat": 34.7,
+        "lng": 135.5
+      }
+    },
+    {
       "id": "japan-dscf2256",
       "collection": "japan",
       "file": "DSCF2256.JPG",
@@ -9631,13 +10262,13 @@
       }
     },
     {
-      "id": "bangkok-dscf2410",
+      "id": "bangkok-dscf2409",
       "collection": "bangkok",
-      "file": "DSCF2410.JPG",
-      "hash": "d6e22bc25527",
+      "file": "DSCF2409.JPG",
+      "hash": "68dc456d4748",
       "width": 5152,
       "height": 7728,
-      "alt": "A Muay Thai fighter in the ring before a bout",
+      "alt": "A Muay Thai fighter's arm raised in victory as a camera operator films",
       "stop": "Bangkok",
       "coords": {
         "lat": 13.8,
@@ -9651,63 +10282,141 @@
         "exposureTime": 0.002,
         "fNumber": 2.8,
         "iso": 1600,
-        "takenAt": "2026-05-24T13:44:00",
+        "takenAt": "2026-05-24T13:43:45",
         "filmSim": "Classic Chrome"
       },
-      "thumbhash": "SBgKDQJpl3CHmIiXd4h4V0lwdwI4",
+      "thumbhash": "AggGBQJbU4pmCHWJiJ5IB0qJkJQI",
       "color": "#080808",
       "sources": {
         "avif": [
           {
             "width": 480,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2410-d6e22bc25527-480.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2409-68dc456d4748-480.avif"
           },
           {
             "width": 960,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2410-d6e22bc25527-960.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2409-68dc456d4748-960.avif"
           },
           {
             "width": 1440,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2410-d6e22bc25527-1440.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2409-68dc456d4748-1440.avif"
           },
           {
             "width": 1920,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2410-d6e22bc25527-1920.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2409-68dc456d4748-1920.avif"
           },
           {
             "width": 2560,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2410-d6e22bc25527-2560.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2409-68dc456d4748-2560.avif"
           }
         ],
         "webp": [
           {
             "width": 480,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2410-d6e22bc25527-480.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2409-68dc456d4748-480.webp"
           },
           {
             "width": 960,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2410-d6e22bc25527-960.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2409-68dc456d4748-960.webp"
           },
           {
             "width": 1440,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2410-d6e22bc25527-1440.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2409-68dc456d4748-1440.webp"
           },
           {
             "width": 1920,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2410-d6e22bc25527-1920.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2409-68dc456d4748-1920.webp"
           },
           {
             "width": 2560,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2410-d6e22bc25527-2560.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2409-68dc456d4748-2560.webp"
           }
         ]
       },
       "bytes": {
-        "original": 22498436,
-        "derivatives": 2280853,
-        "served": 514095
+        "original": 14421519,
+        "derivatives": 659685,
+        "served": 140725
       },
       "people": false
+    },
+    {
+      "id": "bangkok-dscf2412",
+      "collection": "bangkok",
+      "file": "DSCF2412.JPG",
+      "hash": "fd6c1fca41e3",
+      "width": 5152,
+      "height": 7728,
+      "alt": "The giant golden Buddha at Wat Paknam seen through a glass roof",
+      "stop": "Bangkok",
+      "coords": {
+        "lat": 13.8,
+        "lng": 100.5
+      },
+      "exif": {
+        "make": "FUJIFILM",
+        "model": "X-T50",
+        "lens": "XF16-55mmF2.8 R LM WR II",
+        "focalLength": 23.3,
+        "exposureTime": 0.001,
+        "fNumber": 5,
+        "iso": 400,
+        "takenAt": "2026-05-25T05:11:02",
+        "filmSim": "Classic Chrome"
+      },
+      "thumbhash": "RwgGDQJn1YaYBqdpZnp2lwp2o4BF",
+      "color": "#080808",
+      "sources": {
+        "avif": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2412-fd6c1fca41e3-480.avif"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2412-fd6c1fca41e3-960.avif"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2412-fd6c1fca41e3-1440.avif"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2412-fd6c1fca41e3-1920.avif"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2412-fd6c1fca41e3-2560.avif"
+          }
+        ],
+        "webp": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2412-fd6c1fca41e3-480.webp"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2412-fd6c1fca41e3-960.webp"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2412-fd6c1fca41e3-1440.webp"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2412-fd6c1fca41e3-1920.webp"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2412-fd6c1fca41e3-2560.webp"
+          }
+        ]
+      },
+      "bytes": {
+        "original": 23509963,
+        "derivatives": 2595214,
+        "served": 608395
+      }
     },
     {
       "id": "bangkok-dscf2413",
@@ -13144,10 +13853,10 @@
     }
   ],
   "stats": {
-    "photos": 169,
-    "derivatives": 1678,
-    "bytesOriginal": 3661865416,
-    "bytesDerivatives": 845998364,
-    "bytesSaved": 3487358104
+    "photos": 178,
+    "derivatives": 1768,
+    "bytesOriginal": 3864422635,
+    "bytesDerivatives": 880899736,
+    "bytesSaved": 3682229104
   }
 }

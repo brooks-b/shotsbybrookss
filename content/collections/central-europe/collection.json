@@ -55,11 +55,13 @@
     },
     "DSCF1462.JPG": {
       "alt": "A red-roofed tower seen through an arched window in Bratislava",
-      "stop": "Bratislava"
+      "stop": "Bratislava",
+      "hidden": true
     },
     "DSCF1465.jpg": {
       "alt": "A red-roofed tower above Bratislava's rooftops in fog",
-      "stop": "Bratislava"
+      "stop": "Bratislava",
+      "hidden": true
     }
   }
 }

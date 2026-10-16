@@ -51,9 +51,10 @@ Design and engineering calls made during the build, one line each.
 ## Content
 
 - **First photo batch (81 originals):** sorted into chapters by EXIF date and by what's in the frame. Added Bangkok (Wat Arun, May 2026) and Rwanda (Volcanoes National Park, Jul 2026), and Nara and Osaka stops in Japan. Dates from EXIF replaced the estimates for Wyoming (Jul 2025), Italy, South of France and Central Europe (Dec 2025).
-- **SD card batch (Oct 2026):** 1,586 JPEGs reviewed from the card (read only; nothing on the card was changed). 88 added: 37 Japan, 17 Bangkok, 34 Rwanda, with near-duplicates of each other and of photos already on the site left out. The June 7 car show isn't in yet: no chapter or location for it.
+- **SD card batch (Oct 2026):** 1,586 JPEGs reviewed from the card (read only; nothing on the card was changed). 88 added: 37 Japan, 17 Bangkok, 34 Rwanda, with near-duplicates of each other and of photos already on the site left out.
 - **`npm run review`** is a local page of every photo with a checkbox. Unchecking sets `hidden` in collection.json; the site filters hidden photos out when it reads the manifest, so they stay uploaded and can come back without re-running the pipeline.
 - **London `DSCF1575.jpg`** (woman feeding pigeons) cleared by Brooks in Oct 2026, his favourite photo; now London's cover.
+- **Brooks's follow-ups (Oct 2026):** Japan's cover is now Tokyo Tower (`DSCF1758`). Added Osaka Castle (`DSCF2211`) and, in Bangkok, the Wat Paknam Buddha through a glass roof (`DSCF2412`); the Muay Thai photo is now the winner's raised arm (`DSCF2409`) instead of `DSCF2410`. The June 7 car show is in Montclair (7 photos, cover `DSCF2450`), which extends that chapter's dates to June 2026.
 - **People photos all cleared (Oct 2026):** Brooks cleared the four that were still held back: Japan `DSCF1672` (Shibuya crowd) and `DSCF1744` (teamLab), Bangkok `DSCF2410` (Muay Thai fighter), Rwanda `DSCF2562` (rangers). Nothing is withheld now; the gate still applies to new photos marked `people: true`.
 - **Top 10 of 2025** is a draft selection from the 2025 photos, for Brooks to replace with his real top 10.
 - **Lenses** come from EXIF: XF35mmF2 R WR and XF50-140mmF2.8 R LM OIS WR.

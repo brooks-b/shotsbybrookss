@@ -53,7 +53,7 @@
     "end": "2026-05"
   },
   "order": 11,
-  "cover": "DSCF2035.JPG",
+  "cover": "DSCF1758.JPG",
   "photos": {
     "DSCF1644.JPG": {
       "alt": "A shaded stone path leading to a shrine in Tokyo",
@@ -73,7 +73,8 @@
     },
     "DSCF1666.JPG": {
       "alt": "The Docomo tower framed by trees in Shinjuku Gyoen",
-      "stop": "Tokyo"
+      "stop": "Tokyo",
+      "hidden": true
     },
     "DSCF1672.JPG": {
       "alt": "A crowded Shibuya street at golden hour",
@@ -127,7 +128,8 @@
     },
     "DSCF1861.jpg": {
       "alt": "A crow perched on a stone among small red torii",
-      "stop": "Kyoto"
+      "stop": "Kyoto",
+      "hidden": true
     },
     "DSCF1904.JPG": {
       "alt": "A pachinko parlor lit up in neon at night",
@@ -171,11 +173,13 @@
     },
     "DSCF2264.JPG": {
       "alt": "The Atomic Bomb Dome in Hiroshima framed by trees",
-      "stop": "Hiroshima"
+      "stop": "Hiroshima",
+      "hidden": true
     },
     "DSCF2265.JPG": {
       "alt": "The ruined dome of the Atomic Bomb Dome from below",
-      "stop": "Hiroshima"
+      "stop": "Hiroshima",
+      "hidden": true
     },
     "DSCF2266.JPG": {
       "alt": "Weathered walls of the Atomic Bomb Dome",
@@ -191,15 +195,18 @@
     },
     "DSCF1656.JPG": {
       "alt": "Shinjuku Gyoen's pond and bridge below the Docomo tower",
-      "stop": "Tokyo"
+      "stop": "Tokyo",
+      "hidden": true
     },
     "DSCF1662.JPG": {
       "alt": "A Taiwanese pavilion above a still pond in Shinjuku Gyoen",
-      "stop": "Tokyo"
+      "stop": "Tokyo",
+      "hidden": true
     },
     "DSCF1675.JPG": {
       "alt": "Shibuya's signs stacked up a street at dusk",
-      "stop": "Tokyo"
+      "stop": "Tokyo",
+      "hidden": true
     },
     "DSCF1688.JPG": {
       "alt": "The five-storey pagoda at Senso-ji against a clear sky",
@@ -207,19 +214,23 @@
     },
     "DSCF1692.JPG": {
       "alt": "Senso-ji's pagoda framed by a dark temple doorway",
-      "stop": "Tokyo"
+      "stop": "Tokyo",
+      "hidden": true
     },
     "DSCF1693.JPG": {
       "alt": "A visitor silhouetted under the giant lantern at Senso-ji",
-      "stop": "Tokyo"
+      "stop": "Tokyo",
+      "hidden": true
     },
     "DSCF1730.JPG": {
       "alt": "Silver lights hanging in the dark at teamLab",
-      "stop": "Tokyo"
+      "stop": "Tokyo",
+      "hidden": true
     },
     "DSCF1759.JPG": {
       "alt": "The red lattice of Tokyo Tower against a blue sky",
-      "stop": "Tokyo"
+      "stop": "Tokyo",
+      "hidden": true
     },
     "DSCF1772.JPG": {
       "alt": "A road tunnel opening onto green hills in Kamakura",
@@ -231,7 +242,8 @@
     },
     "DSCF1795.JPG": {
       "alt": "A red torii in front of the gate at Enoshima Shrine",
-      "stop": "Fujisawa & Kamakura"
+      "stop": "Fujisawa & Kamakura",
+      "hidden": true
     },
     "DSCF1803.JPG": {
       "alt": "A weathered bronze torii over Enoshima's rainy main street",
@@ -239,7 +251,8 @@
     },
     "DSCF1806.JPG": {
       "alt": "An Odakyu train waiting at the platform",
-      "stop": "Fujisawa & Kamakura"
+      "stop": "Fujisawa & Kamakura",
+      "hidden": true
     },
     "DSCF1844.JPG": {
       "alt": "Rows of vermilion torii gates at Fushimi Inari",
@@ -247,7 +260,8 @@
     },
     "DSCF1850.JPG": {
       "alt": "Torii gates winding through the forest at Fushimi Inari",
-      "stop": "Kyoto"
+      "stop": "Kyoto",
+      "hidden": true
     },
     "DSCF1866.JPG": {
       "alt": "A stone path through a tunnel of torii, lit from behind",
@@ -255,23 +269,28 @@
     },
     "DSCF1871.JPG": {
       "alt": "The setting sun through a gap in a torii gate",
-      "stop": "Kyoto"
+      "stop": "Kyoto",
+      "hidden": true
     },
     "DSCF1875.JPG": {
       "alt": "The sun going down over Kyoto from Mount Inari",
-      "stop": "Kyoto"
+      "stop": "Kyoto",
+      "hidden": true
     },
     "DSCF1880.JPG": {
       "alt": "A cat sitting on a stone base beside a red torii post",
-      "stop": "Kyoto"
+      "stop": "Kyoto",
+      "hidden": true
     },
     "DSCF1889.JPG": {
       "alt": "The Kamo River at night, lights along the bank",
-      "stop": "Kyoto"
+      "stop": "Kyoto",
+      "hidden": true
     },
     "DSCF1909.JPG": {
       "alt": "A red ramen lantern glowing in a Kyoto alley at night",
-      "stop": "Kyoto"
+      "stop": "Kyoto",
+      "hidden": true
     },
     "DSCF1924.JPG": {
       "alt": "A Nara deer in close-up, looking off to the side",
@@ -279,63 +298,82 @@
     },
     "DSCF1940.JPG": {
       "alt": "A stone torii framing a temple hall in Nara",
-      "stop": "Nara"
+      "stop": "Nara",
+      "hidden": true
     },
     "DSCF1953.JPG": {
       "alt": "A long covered wooden corridor climbing toward Nigatsu-do",
-      "stop": "Nara"
+      "stop": "Nara",
+      "hidden": true
     },
     "DSCF1977.JPG": {
       "alt": "The Great Buddha of Todai-ji, its hand raised",
-      "stop": "Nara"
+      "stop": "Nara",
+      "hidden": true
     },
     "DSCF1985.JPG": {
       "alt": "A gilded guardian statue inside Todai-ji",
-      "stop": "Nara"
+      "stop": "Nara",
+      "hidden": true
     },
     "DSCF2007.JPG": {
       "alt": "Sunlight falling into a narrow wooden lane in Kyoto",
-      "stop": "Kyoto"
+      "stop": "Kyoto",
+      "hidden": true
     },
     "DSCF2010.JPG": {
       "alt": "An empty street of old wooden houses in Gion",
-      "stop": "Kyoto"
+      "stop": "Kyoto",
+      "hidden": true
     },
     "DSCF2023.JPG": {
       "alt": "The Yasaka pagoda behind willow leaves",
-      "stop": "Kyoto"
+      "stop": "Kyoto",
+      "hidden": true
     },
     "DSCF2044.JPG": {
       "alt": "The top of the Yasaka pagoda against a pale sky",
-      "stop": "Kyoto"
+      "stop": "Kyoto",
+      "hidden": true
     },
     "DSCF2074.JPG": {
       "alt": "A white turret of Nijo Castle above a stone wall",
-      "stop": "Kyoto"
+      "stop": "Kyoto",
+      "hidden": true
     },
     "DSCF2114.JPG": {
       "alt": "A macaque by a small pond at the monkey park",
-      "stop": "Arashiyama"
+      "stop": "Arashiyama",
+      "hidden": true
     },
     "DSCF2129.JPG": {
       "alt": "Smiling stone faces covered in moss at Otagi Nenbutsu-ji",
-      "stop": "Arashiyama"
+      "stop": "Arashiyama",
+      "hidden": true
     },
     "DSCF2132.JPG": {
       "alt": "The giant lion head of Namba Yasaka Shrine",
-      "stop": "Osaka"
+      "stop": "Osaka",
+      "hidden": true
     },
     "DSCF2163.JPG": {
       "alt": "A golden fish ornament on Osaka Castle above the city",
-      "stop": "Osaka"
+      "stop": "Osaka",
+      "hidden": true
     },
     "DSCF2172.JPG": {
       "alt": "Osaka Castle's roofs from below on a grey day",
-      "stop": "Osaka"
+      "stop": "Osaka",
+      "hidden": true
     },
     "DSCF2275.JPG": {
       "alt": "The black and white tiers of Hiroshima Castle",
-      "stop": "Hiroshima"
+      "stop": "Hiroshima",
+      "hidden": true
+    },
+    "DSCF2211.JPG": {
+      "alt": "Osaka Castle rising above its stone walls on a grey day",
+      "stop": "Osaka"
     }
   }
 }

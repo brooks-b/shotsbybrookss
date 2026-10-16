@@ -29,7 +29,8 @@
     },
     "DSCF2697.JPG": {
       "alt": "A gorilla's face peering through leaves",
-      "stop": "Volcanoes National Park"
+      "stop": "Volcanoes National Park",
+      "hidden": true
     },
     "DSCF2756.JPG": {
       "alt": "Young gorillas huddled together in the foliage",
@@ -53,15 +54,18 @@
     },
     "DSCF2517.JPG": {
       "alt": "A volcano peak floating above the clouds",
-      "stop": "Volcanoes National Park"
+      "stop": "Volcanoes National Park",
+      "hidden": true
     },
     "DSCF2525.JPG": {
       "alt": "A motorcyclist in a red helmet on a misty road",
-      "stop": "Volcanoes National Park"
+      "stop": "Volcanoes National Park",
+      "hidden": true
     },
     "DSCF2530.JPG": {
       "alt": "A tree-lined road disappearing into fog",
-      "stop": "Volcanoes National Park"
+      "stop": "Volcanoes National Park",
+      "hidden": true
     },
     "DSCF2539.JPG": {
       "alt": "A cow in a terraced field below cloud-covered hills",
@@ -69,7 +73,8 @@
     },
     "DSCF2552.JPG": {
       "alt": "Moss-hung trees above a misty valley",
-      "stop": "Volcanoes National Park"
+      "stop": "Volcanoes National Park",
+      "hidden": true
     },
     "DSCF2562.JPG": {
       "alt": "Two park rangers standing in a misty clearing",
@@ -78,15 +83,18 @@
     },
     "DSCF2573.JPG": {
       "alt": "A young gorilla scratching its nose",
-      "stop": "Volcanoes National Park"
+      "stop": "Volcanoes National Park",
+      "hidden": true
     },
     "DSCF2603.JPG": {
       "alt": "A gorilla chewing on a leafy stem",
-      "stop": "Volcanoes National Park"
+      "stop": "Volcanoes National Park",
+      "hidden": true
     },
     "DSCF2648.JPG": {
       "alt": "A gorilla walking toward the camera through the brush",
-      "stop": "Volcanoes National Park"
+      "stop": "Volcanoes National Park",
+      "hidden": true
     },
     "DSCF2685.JPG": {
       "alt": "A gorilla's face behind out-of-focus leaves",
@@ -110,11 +118,13 @@
     },
     "DSCF2880.JPG": {
       "alt": "A mother gorilla holding her baby in the leaves",
-      "stop": "Volcanoes National Park"
+      "stop": "Volcanoes National Park",
+      "hidden": true
     },
     "DSCF2897.JPG": {
       "alt": "A silverback walking past a hillside",
-      "stop": "Volcanoes National Park"
+      "stop": "Volcanoes National Park",
+      "hidden": true
     },
     "DSCF2914.JPG": {
       "alt": "A gorilla sitting in bright green undergrowth",
@@ -122,7 +132,8 @@
     },
     "DSCF2922.JPG": {
       "alt": "A baby gorilla clinging to its mother's shoulder",
-      "stop": "Volcanoes National Park"
+      "stop": "Volcanoes National Park",
+      "hidden": true
     },
     "DSCF2944.JPG": {
       "alt": "A silverback chewing, eyes half closed",
@@ -134,11 +145,13 @@
     },
     "DSCF2989.JPG": {
       "alt": "A gorilla peering out from the leaves",
-      "stop": "Volcanoes National Park"
+      "stop": "Volcanoes National Park",
+      "hidden": true
     },
     "DSCF2997.JPG": {
       "alt": "A mother gorilla with her baby tucked against her",
-      "stop": "Volcanoes National Park"
+      "stop": "Volcanoes National Park",
+      "hidden": true
     },
     "DSCF3004.JPG": {
       "alt": "A gorilla on a green slope above a misty valley",
@@ -146,7 +159,8 @@
     },
     "DSCF3016.JPG": {
       "alt": "A young gorilla looking at the camera beside an adult",
-      "stop": "Volcanoes National Park"
+      "stop": "Volcanoes National Park",
+      "hidden": true
     },
     "DSCF3029.JPG": {
       "alt": "A gorilla lying back in bamboo, looking up",
@@ -154,7 +168,8 @@
     },
     "DSCF3098.JPG": {
       "alt": "A gorilla chewing a stalk of wild celery",
-      "stop": "Volcanoes National Park"
+      "stop": "Volcanoes National Park",
+      "hidden": true
     },
     "DSCF3111.JPG": {
       "alt": "A mother gorilla holding her baby to her chest",
@@ -162,23 +177,28 @@
     },
     "DSCF3155.JPG": {
       "alt": "A gorilla on all fours in the undergrowth",
-      "stop": "Volcanoes National Park"
+      "stop": "Volcanoes National Park",
+      "hidden": true
     },
     "DSCF3159.JPG": {
       "alt": "A young gorilla's eye in close-up",
-      "stop": "Volcanoes National Park"
+      "stop": "Volcanoes National Park",
+      "hidden": true
     },
     "DSCF3179.JPG": {
       "alt": "A baby gorilla in bamboo beside its mother",
-      "stop": "Volcanoes National Park"
+      "stop": "Volcanoes National Park",
+      "hidden": true
     },
     "DSCF3186.JPG": {
       "alt": "A silverback eating a stem in tall grass",
-      "stop": "Volcanoes National Park"
+      "stop": "Volcanoes National Park",
+      "hidden": true
     },
     "DSCF3239.JPG": {
       "alt": "Farmland and a stone pile below the mountains",
-      "stop": "Volcanoes National Park"
+      "stop": "Volcanoes National Park",
+      "hidden": true
     }
   }
 }

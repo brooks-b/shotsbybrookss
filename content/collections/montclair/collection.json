@@ -20,7 +20,7 @@
   ],
   "dates": {
     "start": "2024-04",
-    "end": "2024-11"
+    "end": "2026-06"
   },
   "datesApprox": true,
   "order": 1,
@@ -29,5 +29,43 @@
     "contains": true,
     "cleared": false
   },
-  "placeholders": 4
+  "placeholders": 4,
+  "photos": {
+    "DSCF2428.JPG": {
+      "alt": "A red Lamborghini Diablo on the lawn at a car show",
+      "stop": "Montclair",
+      "people": false
+    },
+    "DSCF2434.JPG": {
+      "alt": "A blue Ferrari Dino with its rear deck open",
+      "stop": "Montclair",
+      "people": false
+    },
+    "DSCF2437.JPG": {
+      "alt": "A silver Ferrari coupe parked on the grass",
+      "stop": "Montclair",
+      "people": false
+    },
+    "DSCF2438.JPG": {
+      "alt": "A teal Ferrari coupe with wire wheels",
+      "stop": "Montclair",
+      "people": false
+    },
+    "DSCF2444.JPG": {
+      "alt": "The polished engine bay of a red race car",
+      "stop": "Montclair",
+      "people": false
+    },
+    "DSCF2450.JPG": {
+      "alt": "A red racing barchetta numbered 142, its wood-rimmed wheel inside",
+      "stop": "Montclair",
+      "people": false
+    },
+    "DSCF2454.JPG": {
+      "alt": "A yellow Ferrari on a field of parked cars",
+      "stop": "Montclair",
+      "people": false
+    }
+  },
+  "cover": "DSCF2450.JPG"
 }

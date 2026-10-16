@@ -11,10 +11,17 @@ import { Lightbox } from "../Lightbox";
 type Option = { value: string; label: string };
 type Collection = { slug: string; title: string; year: number; cover: Frame };
 
-/** Small photos beside each big cover: a 3×3 block. */
-const SMALLS = 9;
+/** A stable shuffle key, so the mosaic mixes places but never reshuffles between visits. */
+const hash = (key: string) => {
+  let h = 2166136261;
+  for (let i = 0; i < key.length; i++) h = Math.imul(h ^ key.charCodeAt(i), 16777619);
+  return h >>> 0;
+};
+
+type Tile = { kind: "cover"; c: Collection; frame: Frame; count: number } | { kind: "photo"; frame: Frame };
+
 const VIEWS = [
-  { value: "collections", label: "Collections" },
+  { value: "mosaic", label: "Mosaic" },
   { value: "grid", label: "Grid" },
   { value: "sheet", label: "Contact sheet" },
 ] as const;
@@ -62,8 +69,8 @@ function Select({
 
 /**
  * Every frame, filterable by place, year, film simulation and focal length,
- * in three views: Collections (each place's cover, big, leading into its
- * chapter, beside smaller photos), Grid, and Contact sheet. Filters and the
+ * in three views: Mosaic (every photo in one field, each place's cover set
+ * large and leading into its chapter), Grid, and Contact sheet. Filters and the
  * view live in the URL (?place=japan&sim=classic-chrome&view=grid), so any
  * view can be shared.
  */
@@ -85,7 +92,7 @@ export function ArchiveBrowser({
   const year = params.get("year") ?? "";
   const sim = params.get("sim") ?? "";
   const focal = params.get("focal") ?? "";
-  const view = VIEWS.find((v) => v.value === params.get("view"))?.value ?? "collections";
+  const view = VIEWS.find((v) => v.value === params.get("view"))?.value ?? "mosaic";
 
   const set = (name: string, value: string) => {
     const next = new URLSearchParams(params);
@@ -129,19 +136,29 @@ export function ArchiveBrowser({
       (!focal || (f.exif?.focalLength && String(Math.round(f.exif.focalLength)) === focal)),
   );
 
-  // Collections: the shown photos grouped by place, newest place first. The
-  // big tile is the place's cover when the filters still include it.
-  const groups = useMemo(
-    () =>
-      collections
-        .map((c) => {
-          const photos = shown.filter((f) => f.collection === c.slug && f.kind === "photo");
-          const lead = photos.find((f) => f.key === c.cover.key) ?? photos[0];
-          return { ...c, lead, rest: photos.filter((f) => f !== lead), total: photos.length };
-        })
-        .filter((g) => g.lead),
-    [collections, shown],
-  );
+  // Mosaic: every shown photo in one field, places mixed together. Each
+  // place's cover is set in large, spread evenly through the field, and
+  // leads into its chapter; everything else opens in the viewer.
+  const tiles = useMemo(() => {
+    const covers: Tile[] = [];
+    const leads = new Set<Frame>();
+    for (const c of collections) {
+      const photos = shown.filter((f) => f.collection === c.slug && f.kind === "photo");
+      const lead = photos.find((f) => f.key === c.cover.key) ?? photos[0];
+      if (!lead) continue;
+      leads.add(lead);
+      covers.push({ kind: "cover", c, frame: lead, count: photos.length });
+    }
+    const rest: Tile[] = shown
+      .filter((f) => f.kind === "photo" && !leads.has(f))
+      .sort((a, b) => hash(a.key) - hash(b.key))
+      .map((frame) => ({ kind: "photo", frame }));
+    // Covers go in back to front so earlier insertions don't shift later slots.
+    for (let i = covers.length - 1; i >= 0; i--) {
+      rest.splice(Math.round((i * rest.length) / covers.length) + (i % 2) * 2, 0, covers[i]);
+    }
+    return rest;
+  }, [collections, shown]);
 
   const rolls = useMemo(() => {
     const map = new Map<string, Frame[]>();
@@ -166,7 +183,7 @@ export function ArchiveBrowser({
                 key={v.value}
                 type="button"
                 aria-pressed={view === v.value}
-                onClick={() => set("view", v.value === "collections" ? "" : v.value)}
+                onClick={() => set("view", v.value === "mosaic" ? "" : v.value)}
                 className="text-paper-faint transition-colors hover:text-paper aria-pressed:text-paper"
               >
                 {v.label}
@@ -178,73 +195,53 @@ export function ArchiveBrowser({
 
       {shown.length === 0 && <p className="text-paper-dim">Nothing matches those filters.</p>}
 
-      {view === "collections" ? (
-        <div className="flex flex-col gap-[clamp(64px,10vh,120px)]">
-          {groups.map((g, gi) => {
-            const smalls = g.rest.slice(0, g.rest.length > SMALLS ? SMALLS - 1 : SMALLS);
-            const more = g.total - 1 - smalls.length;
-            const right = gi % 2 === 1;
-            return (
-              <section
-                key={g.slug}
-                aria-label={g.title}
-                className={`flex flex-col gap-2 md:items-start md:gap-3 ${right ? "md:flex-row-reverse" : "md:flex-row"}`}
-              >
-                {/* The big one: this place's cover, leading into its chapter. */}
-                <Link
-                  href={`/chapters/${g.slug}`}
-                  className="group relative block aspect-[4/5] w-full overflow-hidden md:w-1/2"
+      {view === "mosaic" ? (
+        // Rows are a sixth (a third on phones) of the width, so every tile is square
+        // and the large ones are exactly four small ones; dense flow fills the gaps.
+        <div className="[container-type:inline-size]">
+          <ul className="grid grid-flow-dense auto-rows-[calc((100cqw-16px)/3)] grid-cols-3 gap-2 md:auto-rows-[calc((100cqw-60px)/6)] md:grid-cols-6 md:gap-3">
+            {tiles.map((t, i) =>
+              t.kind === "cover" ? (
+                <li key={`cover-${t.c.slug}`} className="col-span-2 row-span-2">
+                  <Link href={`/chapters/${t.c.slug}`} className="group relative block h-full overflow-hidden">
+                    <span className="absolute inset-0 block transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.03]">
+                      <FrameImage frame={t.frame} sizes="(min-width: 768px) 33vw, 66vw" bare />
+                    </span>
+                    <span className="absolute inset-x-0 bottom-0 p-4 md:p-5">
+                      <span className="micro block text-paper/85 [text-shadow:0_1px_8px_rgb(0_0_0/0.5)]">
+                        {t.c.year} · {t.count} {t.count === 1 ? "photo" : "photos"}
+                      </span>
+                      <span className="display mt-1 block text-[clamp(26px,3vw,52px)] [text-shadow:0_2px_24px_rgb(0_0_0/0.35)]">
+                        {t.c.title}
+                      </span>
+                      <span className="micro mt-2 inline-block border-b border-paper/60 pb-0.5 text-paper">
+                        Open collection →
+                      </span>
+                    </span>
+                  </Link>
+                </li>
+              ) : (
+                <li
+                  key={t.frame.key}
+                  // Every other portrait stands two rows tall, to break up the squares (not near the end, so it finishes flat).
+                  className={
+                    t.frame.height > t.frame.width && i % 2 === 0 && i < tiles.length - 12 ? "row-span-2" : undefined
+                  }
                 >
-                  <span className="absolute inset-0 block transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.03]">
-                    <FrameImage frame={g.lead} sizes="(min-width: 768px) 50vw, 100vw" bare />
-                  </span>
-                  <span className="absolute inset-x-0 bottom-0 p-5 md:p-7">
-                    <span className="micro block text-paper/85 [text-shadow:0_1px_8px_rgb(0_0_0/0.5)]">
-                      {g.year} · {g.total} {g.total === 1 ? "photo" : "photos"}
-                    </span>
-                    <span className="display mt-2 block text-[clamp(40px,5.4vw,96px)] [text-shadow:0_2px_24px_rgb(0_0_0/0.35)]">
-                      {g.title}
-                    </span>
-                    <span className="micro mt-3 inline-block border-b border-paper/60 pb-0.5 text-paper">
-                      Open collection →
-                    </span>
-                  </span>
-                </Link>
-
-                {/* The small ones open in the viewer. Nine of them stand exactly as tall as the big one. */}
-                {smalls.length > 0 && (
-                  <div
-                    className={`grid w-full gap-2 md:w-1/2 md:gap-3 ${smalls.length <= 4 ? "grid-cols-2" : "grid-cols-3"}`}
+                  <button
+                    type="button"
+                    onClick={() => setOpen(shown.indexOf(t.frame))}
+                    className="group relative block h-full w-full overflow-hidden"
+                    aria-label={`Open ${t.frame.alt}`}
                   >
-                    {smalls.map((f) => (
-                      <button
-                        key={f.key}
-                        type="button"
-                        onClick={() => setOpen(shown.indexOf(f))}
-                        className="group relative block aspect-[4/5] overflow-hidden"
-                        aria-label={`Open ${f.alt}`}
-                      >
-                        <span className="absolute inset-0 block transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.04]">
-                          <FrameImage frame={f} sizes="(min-width: 768px) 16vw, 33vw" bare />
-                        </span>
-                      </button>
-                    ))}
-                    {more > 0 && (
-                      <Link
-                        href={`/chapters/${g.slug}`}
-                        className="group flex aspect-[4/5] flex-col items-start justify-end bg-ink-2 p-3 transition-colors hover:bg-ink-3 md:p-4"
-                      >
-                        <span className="display text-[clamp(28px,2.6vw,44px)] text-paper-dim transition-colors group-hover:text-paper">
-                          +{more}
-                        </span>
-                        <span className="micro mt-1 text-paper-faint">More in {g.title} →</span>
-                      </Link>
-                    )}
-                  </div>
-                )}
-              </section>
-            );
-          })}
+                    <span className="absolute inset-0 block transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.04]">
+                      <FrameImage frame={t.frame} sizes="(min-width: 768px) 16vw, 33vw" bare />
+                    </span>
+                  </button>
+                </li>
+              ),
+            )}
+          </ul>
         </div>
       ) : view === "grid" ? (
         <ul className="grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-3 lg:grid-cols-5">

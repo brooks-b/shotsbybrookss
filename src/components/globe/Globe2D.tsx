@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { GLOBE_READY } from "@/lib/preloader";
-import { angleDelta, arcPoints, type GlobeProps, latLngToVec3, rotationToFace, type Vec3 } from "./geo3d";
+import { angleDelta, applySpin, arcPoints, type GlobeProps, latLngToVec3, rotationToFace, type Vec3 } from "./geo3d";
 
 const PAPER = "237,232,223";
 const SIGNAL = "240,96,47";
@@ -14,7 +14,7 @@ type V = Vec3;
  * canvas with an orthographic projection. No three.js renderer, no shader
  * compiles, so it stays smooth on mid-range phones.
  */
-export default function Globe2D({ stops, active, focus, label, drive, running, onPick }: GlobeProps) {
+export default function Globe2D({ stops, active, focus, label, drive, running, onPick, spin }: GlobeProps) {
   const canvas = useRef<HTMLCanvasElement>(null);
   // The draw loop reads these through refs so it never restarts on a new stop.
   const activeRef = useRef(active);
@@ -83,8 +83,8 @@ export default function Globe2D({ stops, active, focus, label, drive, running, o
         const t = rotationToFace(stop.lat, stop.lng);
         rot.x += (t.x * (0.85 + 0.15 * zoomed) - rot.x) * ease(3.2);
         rot.y += angleDelta(rot.y, t.y) * ease(3.2);
-      } else {
-        rot.x += (0.32 - rot.x) * ease(2);
+      } else if (!applySpin(spin?.current, rot, dt)) {
+        rot.x += (0.32 - rot.x) * ease(1.2);
         rot.y += dt * 0.06;
       }
 
@@ -205,7 +205,7 @@ export default function Globe2D({ stops, active, focus, label, drive, running, o
       ro.disconnect();
       el.removeEventListener("pointerup", onUp);
     };
-  }, [stops, drive, running, label]);
+  }, [stops, drive, running, label, spin]);
 
   return <canvas ref={canvas} className="h-full w-full" aria-hidden />;
 }

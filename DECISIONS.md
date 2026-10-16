@@ -22,6 +22,8 @@ Design and engineering calls made during the build, one line each.
 - **Viewfinder HUD only on real photos.** Placeholders get no corner brackets or EXIF readout.
 - **Film grain** at 3.5% opacity; it stops animating under reduced motion.
 - **No chapter index (and so no dial).** Brooks removed the home page's chapter list as redundant with the photo board; the dial went with it. "Work" in the header now goes to the open board (`/#places`).
+- **The archive opens on Collections.** Each place gets one big tile (its cover, linking into the chapter) beside up to nine smaller photos that open the viewer, alternating sides; nine small 4:5 tiles stand exactly as tall as the big one. Grid and Contact sheet are still there, and the filters apply to all three.
+- **The route globe turns by hand.** Drag to turn it; let go mid-swipe and it keeps spinning, then slows. After a pause it goes back to its slow drift. On touch only sideways drags turn it, so the page still scrolls, and a drag that ends on a pin doesn't count as a click.
 - **No statement section and no theme names.** Brooks removed the "From the sideline to the world" statement block, and the weather isn't labelled anywhere (no "Sakura", "Rain"); it just plays.
 - **Copy:** plain and factual. No invented taglines or chapter blurbs; the only notes are facts from the brief and Brooks's own London caption.
 - **Dates shown as years** in the index; chapter pages show months.

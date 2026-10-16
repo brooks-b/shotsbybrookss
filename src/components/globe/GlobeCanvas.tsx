@@ -16,7 +16,7 @@ import {
   Vector3,
 } from "three";
 import { GLOBE_READY } from "@/lib/preloader";
-import { angleDelta, arcPoints, type GlobeProps, latLngToVec3, rotationToFace, type Vec3 } from "./geo3d";
+import { angleDelta, applySpin, arcPoints, type GlobeProps, latLngToVec3, rotationToFace, type Vec3 } from "./geo3d";
 import { arcFragment, arcVertex, dotsFragment, dotsVertex, pinFragment, pinVertex } from "./shaders";
 
 export type { GlobeDrive, GlobeProps } from "./geo3d";
@@ -62,7 +62,7 @@ function useLandDots(lite: boolean) {
   return geometry;
 }
 
-function Earth({ stops, active, focus, label, drive, lite, onPick }: Omit<Props, "running">) {
+function Earth({ stops, active, focus, label, drive, lite, onPick, spin }: Omit<Props, "running">) {
   const group = useRef<Group>(null);
   const zoomed = useRef(0);
   const dots = useLandDots(lite);
@@ -159,12 +159,10 @@ function Earth({ stops, active, focus, label, drive, lite, onPick }: Omit<Props,
   );
   useEffect(() => () => arcs.forEach((g) => g.dispose()), [arcs]);
 
+  // On the canvas itself, so it wins over the section's grab cursor.
   useEffect(() => {
-    document.body.style.cursor = hovered === null ? "" : "pointer";
-    return () => {
-      document.body.style.cursor = "";
-    };
-  }, [hovered]);
+    gl.domElement.style.cursor = hovered === null ? "" : "pointer";
+  }, [hovered, gl]);
 
   const focusSet = useMemo(() => new Set(focus), [focus]);
   // Scratch vectors for placing the name tag, reused every frame.
@@ -189,8 +187,9 @@ function Earth({ stops, active, focus, label, drive, lite, onPick }: Omit<Props,
       // centre it exactly when zoomed in on a place.
       g.rotation.x += (target.x * (0.85 + 0.15 * zoomed.current) - g.rotation.x) * ease(3.2);
       g.rotation.y += angleDelta(g.rotation.y, target.y) * ease(3.2);
-    } else {
-      g.rotation.x += (0.32 - g.rotation.x) * ease(2);
+    } else if (!applySpin(spin?.current, g.rotation, dt)) {
+      // Drift slowly, and settle the tilt back once the hand lets go.
+      g.rotation.x += (0.32 - g.rotation.x) * ease(1.2);
       g.rotation.y += dt * 0.06;
     }
 

@@ -19,6 +19,45 @@ export type GlobeDrive = {
   from: number;
 };
 
+/**
+ * Hand spin, written by the section's pointer handlers and read by whichever
+ * globe is drawing. Drag deltas queue up in `dx`/`dy`; on release the globe
+ * keeps the throw's velocity and slows to a stop.
+ */
+export type Spin = {
+  /** Queued rotation from the drag, in radians, since the last frame. */
+  dx: number;
+  dy: number;
+  /** Throw velocity in radians a second. */
+  vx: number;
+  vy: number;
+  held: boolean;
+  /** Pixels moved since the press: a real drag shouldn't count as a pin click. */
+  moved: number;
+  /** Seconds since release. The idle tilt only settles back after a pause. */
+  idle: number;
+};
+
+export const newSpin = (): Spin => ({ dx: 0, dy: 0, vx: 0, vy: 0, held: false, moved: 0, idle: 99 });
+
+/** Apply a frame of hand spin to a rotation. Returns true while the hand is in charge. */
+export function applySpin(s: Spin | undefined, rot: { x: number; y: number }, dt: number) {
+  if (!s) return false;
+  rot.x += s.dx;
+  rot.y += s.dy;
+  s.dx = s.dy = 0;
+  if (!s.held) {
+    rot.x += s.vx * dt;
+    rot.y += s.vy * dt;
+    const decay = Math.exp(-dt * 2.2);
+    s.vx *= decay;
+    s.vy *= decay;
+    s.idle += dt;
+  }
+  rot.x = Math.min(Math.max(rot.x, -1.2), 1.2);
+  return s.held || s.idle < 2;
+}
+
 export type GlobeProps = {
   stops: TravelStop[];
   /** Index of the stop to face, or −1 to idle-spin. */
@@ -31,6 +70,7 @@ export type GlobeProps = {
   lite: boolean;
   running: boolean;
   onPick: (index: number) => void;
+  spin?: React.RefObject<Spin>;
 };
 
 const D2R = Math.PI / 180;

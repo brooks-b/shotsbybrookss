@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-10-16T23:19:53.910Z",
+  "generatedAt": "2026-10-16T23:25:05.551Z",
   "storage": "blob",
   "photos": [
     {
@@ -3552,6 +3552,11 @@
       "width": 5152,
       "height": 7728,
       "alt": "A crowded Shibuya street at golden hour",
+      "stop": "Tokyo",
+      "coords": {
+        "lat": 35.7,
+        "lng": 139.7
+      },
       "exif": {
         "make": "FUJIFILM",
         "model": "X-T50",
@@ -3563,24 +3568,60 @@
         "takenAt": "2026-05-12T08:45:52",
         "filmSim": "Provia"
       },
-      "thumbhash": "",
-      "color": "#1a1816",
+      "thumbhash": "mCgSDQQ3ho92h5eIh4l3dw+68Ld8",
+      "color": "#080808",
       "sources": {
-        "avif": [],
-        "webp": []
+        "avif": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf1672-839e4aaef30c-480.avif"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf1672-839e4aaef30c-960.avif"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf1672-839e4aaef30c-1440.avif"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf1672-839e4aaef30c-1920.avif"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf1672-839e4aaef30c-2560.avif"
+          }
+        ],
+        "webp": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf1672-839e4aaef30c-480.webp"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf1672-839e4aaef30c-960.webp"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf1672-839e4aaef30c-1440.webp"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf1672-839e4aaef30c-1920.webp"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf1672-839e4aaef30c-2560.webp"
+          }
+        ]
       },
       "bytes": {
         "original": 22569307,
-        "derivatives": 0,
-        "served": 0
+        "derivatives": 4353915,
+        "served": 981137
       },
-      "people": true,
-      "withheld": true,
-      "stop": "Tokyo",
-      "coords": {
-        "lat": 35.7,
-        "lng": 139.7
-      }
+      "people": false
     },
     {
       "id": "japan-dscf1675",
@@ -4292,6 +4333,11 @@
       "width": 4866,
       "height": 7299,
       "alt": "Two people sitting in a stream of projected light at teamLab",
+      "stop": "Tokyo",
+      "coords": {
+        "lat": 35.7,
+        "lng": 139.7
+      },
       "exif": {
         "make": "FUJIFILM",
         "model": "X-T50",
@@ -4303,24 +4349,60 @@
         "takenAt": "2026-05-13T06:04:29",
         "filmSim": null
       },
-      "thumbhash": "",
-      "color": "#1a1816",
+      "thumbhash": "0ZYFDQRmaWV4B2dYh3m4eV+T+RXa",
+      "color": "#183848",
       "sources": {
-        "avif": [],
-        "webp": []
+        "avif": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf1744-347e912de893-480.avif"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf1744-347e912de893-960.avif"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf1744-347e912de893-1440.avif"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf1744-347e912de893-1920.avif"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf1744-347e912de893-2560.avif"
+          }
+        ],
+        "webp": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf1744-347e912de893-480.webp"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf1744-347e912de893-960.webp"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf1744-347e912de893-1440.webp"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf1744-347e912de893-1920.webp"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/japan/japan-dscf1744-347e912de893-2560.webp"
+          }
+        ]
       },
       "bytes": {
         "original": 12722590,
-        "derivatives": 0,
-        "served": 0
+        "derivatives": 4624949,
+        "served": 956235
       },
-      "people": true,
-      "withheld": true,
-      "stop": "Tokyo",
-      "coords": {
-        "lat": 35.7,
-        "lng": 139.7
-      }
+      "people": false
     },
     {
       "id": "japan-dscf1758",
@@ -9572,19 +9654,60 @@
         "takenAt": "2026-05-24T13:44:00",
         "filmSim": "Classic Chrome"
       },
-      "thumbhash": "",
-      "color": "#1a1816",
+      "thumbhash": "SBgKDQJpl3CHmIiXd4h4V0lwdwI4",
+      "color": "#080808",
       "sources": {
-        "avif": [],
-        "webp": []
+        "avif": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2410-d6e22bc25527-480.avif"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2410-d6e22bc25527-960.avif"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2410-d6e22bc25527-1440.avif"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2410-d6e22bc25527-1920.avif"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2410-d6e22bc25527-2560.avif"
+          }
+        ],
+        "webp": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2410-d6e22bc25527-480.webp"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2410-d6e22bc25527-960.webp"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2410-d6e22bc25527-1440.webp"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2410-d6e22bc25527-1920.webp"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/bangkok/bangkok-dscf2410-d6e22bc25527-2560.webp"
+          }
+        ]
       },
       "bytes": {
         "original": 22498436,
-        "derivatives": 0,
-        "served": 0
+        "derivatives": 2280853,
+        "served": 514095
       },
-      "people": true,
-      "withheld": true
+      "people": false
     },
     {
       "id": "bangkok-dscf2413",
@@ -10468,19 +10591,60 @@
         "takenAt": "2026-07-13T08:23:33",
         "filmSim": "Classic Chrome"
       },
-      "thumbhash": "",
-      "color": "#1a1816",
+      "thumbhash": "axkOJQB3iH93t3eIh4d4h4iAqAQ4",
+      "color": "#f8f8e8",
       "sources": {
-        "avif": [],
-        "webp": []
+        "avif": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/rwanda/rwanda-dscf2562-0800fb393ae6-480.avif"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/rwanda/rwanda-dscf2562-0800fb393ae6-960.avif"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/rwanda/rwanda-dscf2562-0800fb393ae6-1440.avif"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/rwanda/rwanda-dscf2562-0800fb393ae6-1920.avif"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/rwanda/rwanda-dscf2562-0800fb393ae6-2560.avif"
+          }
+        ],
+        "webp": [
+          {
+            "width": 480,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/rwanda/rwanda-dscf2562-0800fb393ae6-480.webp"
+          },
+          {
+            "width": 960,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/rwanda/rwanda-dscf2562-0800fb393ae6-960.webp"
+          },
+          {
+            "width": 1440,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/rwanda/rwanda-dscf2562-0800fb393ae6-1440.webp"
+          },
+          {
+            "width": 1920,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/rwanda/rwanda-dscf2562-0800fb393ae6-1920.webp"
+          },
+          {
+            "width": 2560,
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/rwanda/rwanda-dscf2562-0800fb393ae6-2560.webp"
+          }
+        ]
       },
       "bytes": {
         "original": 22977735,
-        "derivatives": 0,
-        "served": 0
+        "derivatives": 4662001,
+        "served": 1000531
       },
-      "people": true,
-      "withheld": true
+      "people": false
     },
     {
       "id": "rwanda-dscf2573",
@@ -12981,9 +13145,9 @@
   ],
   "stats": {
     "photos": 169,
-    "derivatives": 1638,
+    "derivatives": 1678,
     "bytesOriginal": 3661865416,
-    "bytesDerivatives": 830076646,
-    "bytesSaved": 3410042034
+    "bytesDerivatives": 845998364,
+    "bytesSaved": 3487358104
   }
 }

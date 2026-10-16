@@ -78,7 +78,7 @@
     "DSCF1672.JPG": {
       "alt": "A crowded Shibuya street at golden hour",
       "stop": "Tokyo",
-      "people": true
+      "people": false
     },
     "DSCF1679.JPG": {
       "alt": "Neon karaoke signs at night in Tokyo",
@@ -99,7 +99,7 @@
     "DSCF1744.jpg": {
       "alt": "Two people sitting in a stream of projected light at teamLab",
       "stop": "Tokyo",
-      "people": true
+      "people": false
     },
     "DSCF1758.JPG": {
       "alt": "Tokyo Tower from directly below",

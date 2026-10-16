@@ -15,6 +15,7 @@
     "fixture": "tsx scripts/make-fixture.ts",
     "globe:dots": "tsx scripts/globe-dots.ts",
     "stats": "node scripts/stats.mts",
+    "review": "node scripts/review.mts",
     "demo-gif": "node scripts/demo-gif.mts"
   },
   "dependencies": {

@@ -18,7 +18,7 @@
   },
   "order": 10,
   "note": "Probably my favorite. Just wanted a reason to post a gem.",
-  "cover": "DSCF1594.JPG",
+  "cover": "DSCF1575.jpg",
   "photos": {
     "DSCF1522.JPG": {
       "alt": "The glass roof of the British Museum's Great Court",
@@ -31,7 +31,7 @@
     "DSCF1575.jpg": {
       "alt": "A woman feeding pigeons on a London street",
       "stop": "London",
-      "people": true
+      "people": false
     },
     "DSCF1594.JPG": {
       "alt": "A Union Jack hanging over a red-brick London street",

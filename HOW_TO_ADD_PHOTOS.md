@@ -37,6 +37,8 @@ Then run `npm run ingest` again.
 
 ---
 
+**Choosing what's on the site:** run `npm run review` and open http://127.0.0.1:4317. Every photo is there with a checkbox, newest first. Uncheck any you don't want and press Save. Nothing is deleted: an unchecked photo just gets `"hidden": true` in its chapter's `collection.json`, so you can check it again later. Commit and push to publish.
+
 **Picking a cover:** set `"cover": "DSCF1234.JPG"` in the chapter's `collection.json`.
 **New chapter:** copy an existing chapter folder, rename it, and edit its `collection.json` (title, places, dates, order).
 **Top 10:** list photo ids in `"picks"` in `content/collections/top-10-2025/collection.json`, e.g. `"japan-dscf1234"`.

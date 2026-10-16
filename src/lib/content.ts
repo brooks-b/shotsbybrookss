@@ -20,7 +20,17 @@ export const getCollections = cache((): Collection[] => {
 });
 
 export const getManifest = cache((): Manifest => {
-  return JSON.parse(readFileSync(path.join(CONTENT, "manifest.json"), "utf8")) as Manifest;
+  const manifest = JSON.parse(readFileSync(path.join(CONTENT, "manifest.json"), "utf8")) as Manifest;
+  // Photos unchecked in `npm run review` stay in the manifest (so re-checking
+  // one needs no re-upload) but never reach a page.
+  const hidden = new Set(
+    getCollections().flatMap((c) =>
+      Object.entries(c.photos ?? {})
+        .filter(([, o]) => o.hidden)
+        .map(([file]) => `${c.slug}|${file.toLowerCase()}`),
+    ),
+  );
+  return { ...manifest, photos: manifest.photos.filter((p) => !hidden.has(`${p.collection}|${p.file.toLowerCase()}`)) };
 });
 
 const yearOf = (c: Collection) => Number(c.dates.start.slice(0, 4));

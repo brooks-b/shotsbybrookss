@@ -50,6 +50,8 @@ export type PhotoOverride = {
   stop?: string;
   /** Shows a recognizable person: withheld until the chapter is cleared. */
   people?: boolean;
+  /** Unchecked in `npm run review`: kept in the manifest, left off the site. */
+  hidden?: boolean;
 };
 
 export const FILM_SIMS = [

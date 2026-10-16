@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "generatedAt": "2026-10-16T23:32:48.806Z",
+  "generatedAt": "2026-10-16T23:41:58.007Z",
   "storage": "blob",
   "photos": [
     {
-      "id": "montclair-dscf2428",
-      "collection": "montclair",
+      "id": "new-jersey-dscf2428",
+      "collection": "new-jersey",
       "file": "DSCF2428.JPG",
       "hash": "f50314a09c23",
       "width": 5152,
@@ -28,45 +28,45 @@
         "avif": [
           {
             "width": 480,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2428-f50314a09c23-480.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2428-f50314a09c23-480.avif"
           },
           {
             "width": 960,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2428-f50314a09c23-960.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2428-f50314a09c23-960.avif"
           },
           {
             "width": 1440,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2428-f50314a09c23-1440.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2428-f50314a09c23-1440.avif"
           },
           {
             "width": 1920,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2428-f50314a09c23-1920.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2428-f50314a09c23-1920.avif"
           },
           {
             "width": 2560,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2428-f50314a09c23-2560.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2428-f50314a09c23-2560.avif"
           }
         ],
         "webp": [
           {
             "width": 480,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2428-f50314a09c23-480.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2428-f50314a09c23-480.webp"
           },
           {
             "width": 960,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2428-f50314a09c23-960.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2428-f50314a09c23-960.webp"
           },
           {
             "width": 1440,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2428-f50314a09c23-1440.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2428-f50314a09c23-1440.webp"
           },
           {
             "width": 1920,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2428-f50314a09c23-1920.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2428-f50314a09c23-1920.webp"
           },
           {
             "width": 2560,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2428-f50314a09c23-2560.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2428-f50314a09c23-2560.webp"
           }
         ]
       },
@@ -83,8 +83,8 @@
       }
     },
     {
-      "id": "montclair-dscf2434",
-      "collection": "montclair",
+      "id": "new-jersey-dscf2434",
+      "collection": "new-jersey",
       "file": "DSCF2434.JPG",
       "hash": "eebd19779d75",
       "width": 5152,
@@ -107,45 +107,45 @@
         "avif": [
           {
             "width": 480,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2434-eebd19779d75-480.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2434-eebd19779d75-480.avif"
           },
           {
             "width": 960,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2434-eebd19779d75-960.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2434-eebd19779d75-960.avif"
           },
           {
             "width": 1440,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2434-eebd19779d75-1440.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2434-eebd19779d75-1440.avif"
           },
           {
             "width": 1920,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2434-eebd19779d75-1920.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2434-eebd19779d75-1920.avif"
           },
           {
             "width": 2560,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2434-eebd19779d75-2560.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2434-eebd19779d75-2560.avif"
           }
         ],
         "webp": [
           {
             "width": 480,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2434-eebd19779d75-480.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2434-eebd19779d75-480.webp"
           },
           {
             "width": 960,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2434-eebd19779d75-960.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2434-eebd19779d75-960.webp"
           },
           {
             "width": 1440,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2434-eebd19779d75-1440.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2434-eebd19779d75-1440.webp"
           },
           {
             "width": 1920,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2434-eebd19779d75-1920.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2434-eebd19779d75-1920.webp"
           },
           {
             "width": 2560,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2434-eebd19779d75-2560.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2434-eebd19779d75-2560.webp"
           }
         ]
       },
@@ -162,8 +162,8 @@
       }
     },
     {
-      "id": "montclair-dscf2437",
-      "collection": "montclair",
+      "id": "new-jersey-dscf2437",
+      "collection": "new-jersey",
       "file": "DSCF2437.JPG",
       "hash": "814a111926dd",
       "width": 5152,
@@ -186,45 +186,45 @@
         "avif": [
           {
             "width": 480,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2437-814a111926dd-480.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2437-814a111926dd-480.avif"
           },
           {
             "width": 960,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2437-814a111926dd-960.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2437-814a111926dd-960.avif"
           },
           {
             "width": 1440,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2437-814a111926dd-1440.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2437-814a111926dd-1440.avif"
           },
           {
             "width": 1920,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2437-814a111926dd-1920.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2437-814a111926dd-1920.avif"
           },
           {
             "width": 2560,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2437-814a111926dd-2560.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2437-814a111926dd-2560.avif"
           }
         ],
         "webp": [
           {
             "width": 480,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2437-814a111926dd-480.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2437-814a111926dd-480.webp"
           },
           {
             "width": 960,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2437-814a111926dd-960.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2437-814a111926dd-960.webp"
           },
           {
             "width": 1440,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2437-814a111926dd-1440.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2437-814a111926dd-1440.webp"
           },
           {
             "width": 1920,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2437-814a111926dd-1920.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2437-814a111926dd-1920.webp"
           },
           {
             "width": 2560,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2437-814a111926dd-2560.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2437-814a111926dd-2560.webp"
           }
         ]
       },
@@ -241,8 +241,8 @@
       }
     },
     {
-      "id": "montclair-dscf2438",
-      "collection": "montclair",
+      "id": "new-jersey-dscf2438",
+      "collection": "new-jersey",
       "file": "DSCF2438.JPG",
       "hash": "b1e01fc90a89",
       "width": 5152,
@@ -265,45 +265,45 @@
         "avif": [
           {
             "width": 480,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2438-b1e01fc90a89-480.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2438-b1e01fc90a89-480.avif"
           },
           {
             "width": 960,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2438-b1e01fc90a89-960.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2438-b1e01fc90a89-960.avif"
           },
           {
             "width": 1440,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2438-b1e01fc90a89-1440.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2438-b1e01fc90a89-1440.avif"
           },
           {
             "width": 1920,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2438-b1e01fc90a89-1920.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2438-b1e01fc90a89-1920.avif"
           },
           {
             "width": 2560,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2438-b1e01fc90a89-2560.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2438-b1e01fc90a89-2560.avif"
           }
         ],
         "webp": [
           {
             "width": 480,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2438-b1e01fc90a89-480.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2438-b1e01fc90a89-480.webp"
           },
           {
             "width": 960,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2438-b1e01fc90a89-960.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2438-b1e01fc90a89-960.webp"
           },
           {
             "width": 1440,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2438-b1e01fc90a89-1440.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2438-b1e01fc90a89-1440.webp"
           },
           {
             "width": 1920,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2438-b1e01fc90a89-1920.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2438-b1e01fc90a89-1920.webp"
           },
           {
             "width": 2560,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2438-b1e01fc90a89-2560.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2438-b1e01fc90a89-2560.webp"
           }
         ]
       },
@@ -320,8 +320,8 @@
       }
     },
     {
-      "id": "montclair-dscf2444",
-      "collection": "montclair",
+      "id": "new-jersey-dscf2444",
+      "collection": "new-jersey",
       "file": "DSCF2444.JPG",
       "hash": "6747edbe2897",
       "width": 5152,
@@ -344,45 +344,45 @@
         "avif": [
           {
             "width": 480,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2444-6747edbe2897-480.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2444-6747edbe2897-480.avif"
           },
           {
             "width": 960,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2444-6747edbe2897-960.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2444-6747edbe2897-960.avif"
           },
           {
             "width": 1440,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2444-6747edbe2897-1440.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2444-6747edbe2897-1440.avif"
           },
           {
             "width": 1920,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2444-6747edbe2897-1920.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2444-6747edbe2897-1920.avif"
           },
           {
             "width": 2560,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2444-6747edbe2897-2560.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2444-6747edbe2897-2560.avif"
           }
         ],
         "webp": [
           {
             "width": 480,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2444-6747edbe2897-480.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2444-6747edbe2897-480.webp"
           },
           {
             "width": 960,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2444-6747edbe2897-960.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2444-6747edbe2897-960.webp"
           },
           {
             "width": 1440,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2444-6747edbe2897-1440.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2444-6747edbe2897-1440.webp"
           },
           {
             "width": 1920,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2444-6747edbe2897-1920.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2444-6747edbe2897-1920.webp"
           },
           {
             "width": 2560,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2444-6747edbe2897-2560.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2444-6747edbe2897-2560.webp"
           }
         ]
       },
@@ -399,8 +399,8 @@
       }
     },
     {
-      "id": "montclair-dscf2450",
-      "collection": "montclair",
+      "id": "new-jersey-dscf2450",
+      "collection": "new-jersey",
       "file": "DSCF2450.JPG",
       "hash": "7393bb5df64b",
       "width": 5152,
@@ -423,45 +423,45 @@
         "avif": [
           {
             "width": 480,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2450-7393bb5df64b-480.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2450-7393bb5df64b-480.avif"
           },
           {
             "width": 960,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2450-7393bb5df64b-960.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2450-7393bb5df64b-960.avif"
           },
           {
             "width": 1440,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2450-7393bb5df64b-1440.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2450-7393bb5df64b-1440.avif"
           },
           {
             "width": 1920,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2450-7393bb5df64b-1920.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2450-7393bb5df64b-1920.avif"
           },
           {
             "width": 2560,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2450-7393bb5df64b-2560.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2450-7393bb5df64b-2560.avif"
           }
         ],
         "webp": [
           {
             "width": 480,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2450-7393bb5df64b-480.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2450-7393bb5df64b-480.webp"
           },
           {
             "width": 960,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2450-7393bb5df64b-960.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2450-7393bb5df64b-960.webp"
           },
           {
             "width": 1440,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2450-7393bb5df64b-1440.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2450-7393bb5df64b-1440.webp"
           },
           {
             "width": 1920,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2450-7393bb5df64b-1920.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2450-7393bb5df64b-1920.webp"
           },
           {
             "width": 2560,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2450-7393bb5df64b-2560.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2450-7393bb5df64b-2560.webp"
           }
         ]
       },
@@ -478,8 +478,8 @@
       }
     },
     {
-      "id": "montclair-dscf2454",
-      "collection": "montclair",
+      "id": "new-jersey-dscf2454",
+      "collection": "new-jersey",
       "file": "DSCF2454.JPG",
       "hash": "7fc382b356e7",
       "width": 5152,
@@ -502,45 +502,45 @@
         "avif": [
           {
             "width": 480,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2454-7fc382b356e7-480.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2454-7fc382b356e7-480.avif"
           },
           {
             "width": 960,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2454-7fc382b356e7-960.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2454-7fc382b356e7-960.avif"
           },
           {
             "width": 1440,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2454-7fc382b356e7-1440.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2454-7fc382b356e7-1440.avif"
           },
           {
             "width": 1920,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2454-7fc382b356e7-1920.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2454-7fc382b356e7-1920.avif"
           },
           {
             "width": 2560,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2454-7fc382b356e7-2560.avif"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2454-7fc382b356e7-2560.avif"
           }
         ],
         "webp": [
           {
             "width": 480,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2454-7fc382b356e7-480.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2454-7fc382b356e7-480.webp"
           },
           {
             "width": 960,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2454-7fc382b356e7-960.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2454-7fc382b356e7-960.webp"
           },
           {
             "width": 1440,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2454-7fc382b356e7-1440.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2454-7fc382b356e7-1440.webp"
           },
           {
             "width": 1920,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2454-7fc382b356e7-1920.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2454-7fc382b356e7-1920.webp"
           },
           {
             "width": 2560,
-            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/montclair/montclair-dscf2454-7fc382b356e7-2560.webp"
+            "url": "https://rm0l6hvbzsyatuqx.public.blob.vercel-storage.com/photos/new-jersey/new-jersey-dscf2454-7fc382b356e7-2560.webp"
           }
         ]
       },

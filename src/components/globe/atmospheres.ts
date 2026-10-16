@@ -81,7 +81,7 @@ export const ATMOSPHERES: Record<string, Atmosphere> = {
     layers: [{ kind: "firefly", colors: ["#e6f28a", "#f5e27a"], count: 30 }],
     tone: "#5c6a2f",
   },
-  montclair: {
+  "new-jersey": {
     layers: [{ kind: "leaf", colors: ["#c8642e", "#d88a3a", "#a8432a", "#e0b04a"], count: 30 }],
     tone: "#9a5530",
     entrance: "fill",

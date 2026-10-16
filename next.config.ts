@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  async redirects() {
+    // The New Jersey chapter used to be called Montclair.
+    return [{ source: "/chapters/montclair", destination: "/chapters/new-jersey", permanent: true }];
+  },
   async headers() {
     return [
       {

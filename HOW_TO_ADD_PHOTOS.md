@@ -29,7 +29,7 @@ It reads each photo's settings and film simulation, makes web-sized copies, stri
 **4. Clear photos of people.** Photos of recognizable people stay hidden until you're OK with them going public. Nothing is uploaded for them.
 
 - A single photo: in its chapter's `collection.json`, change `"people": true` to `"people": false`.
-- A whole chapter (Montclair, Nashville, Church): change `"cleared": false` to `"cleared": true`.
+- A whole chapter (Nashville, Church): change `"cleared": false` to `"cleared": true`.
 
 Then run `npm run ingest` again.
 

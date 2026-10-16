@@ -165,4 +165,10 @@ createServer((req, res) => {
   } else {
     res.writeHead(404).end();
   }
-}).listen(PORT, "127.0.0.1", () => console.log(`Photo review: http://127.0.0.1:${PORT}`));
+})
+  .on("error", (err: NodeJS.ErrnoException) => {
+    // Already open from an earlier run: just point at it.
+    if (err.code !== "EADDRINUSE") throw err;
+    console.log(`Photo review is already running: http://127.0.0.1:${PORT}`);
+  })
+  .listen(PORT, "127.0.0.1", () => console.log(`Photo review: http://127.0.0.1:${PORT}`));

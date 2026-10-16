@@ -143,9 +143,6 @@ export function Opening({ places, mosaic }: { places: PlaceInfo[]; mosaic: Frame
           <div className="mb-4 flex flex-wrap items-end justify-between gap-x-6 gap-y-1">
             {reduced && <h1 className="sr-only">Brooks Barrett</h1>}
             <h2 className="display text-balance text-[clamp(28px,3.4vw,56px)]">Where do you want to go?</h2>
-            <p className="micro text-paper-dim">
-              {places.length} places · {places.reduce((n, p) => n + p.cities.length, 0)} cities · 2024 — 2026
-            </p>
           </div>
 
           {/* The board: a strip of photo panels, one per place, in travel order. */}

@@ -13,7 +13,6 @@ export const site = {
   bio: [
     "Vanderbilt, class of 2029. Minors in National Security, Business, and Generative AI.",
     "Based between Nashville and the New York area.",
-    "Everything here is shot on a Fujifilm X-T50.",
   ],
 
   camera: "Fujifilm X-T50",

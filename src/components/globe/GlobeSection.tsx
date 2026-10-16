@@ -150,9 +150,6 @@ export function GlobeSection({ stops }: { stops: TravelStop[] }) {
         <h2 id="route-title" className="display mt-3 text-[clamp(36px,5vw,80px)]">
           2024 — 2026
         </h2>
-        <p className="mt-4 max-w-[34ch] text-paper-dim">
-          {stops.length} cities, in the order they happened. Drag to turn it. Pick a pin to go there.
-        </p>
       </div>
     </section>
   );

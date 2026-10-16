@@ -116,8 +116,7 @@ export function ApertureMosaic({
             <br />
             Barrett
           </h1>
-          <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
-            <p className="max-w-[34ch] text-paper/85">{site.description}</p>
+          <div className="mt-6 flex flex-wrap items-end justify-end gap-4">
             <p className="hud flex gap-6 text-paper/85" suppressHydrationWarning>
               {site.clocks.map((c) => (
                 <span key={c.label}>

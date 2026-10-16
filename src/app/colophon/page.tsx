@@ -12,16 +12,13 @@ export const metadata: Metadata = {
 };
 
 const STACK = [
-  ["Next.js 16 + TypeScript", "Every page is prerendered at build time. No server needed to serve the site."],
-  ["Tailwind CSS 4", "Design tokens live in CSS variables; utilities keep components readable."],
-  [
-    "Three.js + React Three Fiber",
-    "The globe: one draw call of point sprites with custom shaders, plus arcs and pins.",
-  ],
-  ["Lenis", "Smooth scrolling that only runs while you're scrolling, so an idle page does no per-frame work."],
-  ["sharp + exifr", "Resizes and encodes images, and reads EXIF. A small custom parser reads Fuji maker notes."],
-  ["Vercel Blob", "Stores image derivatives outside the repo, served with immutable caching."],
-  ["Vitest + GitHub Actions", "Tests the pipeline; lint, typecheck, tests and build run on every push."],
+  ["Next.js 16 + TypeScript", "Every page prerendered"],
+  ["Tailwind CSS 4", "Styling"],
+  ["Three.js + React Three Fiber", "The globe"],
+  ["Lenis", "Smooth scrolling"],
+  ["sharp + exifr", "Image encoding and EXIF, plus a Fuji maker-note parser"],
+  ["Vercel Blob", "Image hosting"],
+  ["Vitest + GitHub Actions", "Tests and CI"],
 ];
 
 const CREDITS = [
@@ -48,7 +45,6 @@ export default async function ColophonPage() {
   const lh = stats.lighthouse;
   const numbers: [string, string][] = [
     ["Photos published", String(stats.photos)],
-    ["Frames, incl. placeholders", String(stats.frames)],
     ["Image derivatives", String(stats.derivatives)],
     ["Bytes saved by pipeline", formatBytes(stats.bytesSaved)],
     ["Build time", stats.buildSeconds ? `${stats.buildSeconds.toFixed(1)} s` : "—"],
@@ -97,8 +93,7 @@ export default async function ColophonPage() {
             ))}
           </dl>
           <p className="hud mt-6 text-paper-faint">
-            Generated from content/manifest.json and src/data/build-stats.json
-            {stats.statsGeneratedAt ? `, last measured ${stats.statsGeneratedAt.slice(0, 10)}` : ""}.
+            {stats.statsGeneratedAt ? `Last measured ${stats.statsGeneratedAt.slice(0, 10)}` : ""}
           </p>
         </Section>
 

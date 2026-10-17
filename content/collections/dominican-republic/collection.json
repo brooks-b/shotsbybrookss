@@ -18,5 +18,6 @@
   },
   "datesApprox": true,
   "order": 2,
-  "placeholders": 1
+  "placeholders": 1,
+  "hidden": true
 }

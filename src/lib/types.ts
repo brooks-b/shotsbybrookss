@@ -13,6 +13,8 @@ export type Stop = {
 export type Collection = {
   slug: string;
   title: string;
+  /** Left off the site entirely (board, globe, archive, its own page) until removed. */
+  hidden?: boolean;
   subtitle?: string;
   /** "place" chapters sit on the globe; "edition" chapters are curated sets. */
   kind: "place" | "edition";

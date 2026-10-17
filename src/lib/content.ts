@@ -16,6 +16,7 @@ export const getCollections = cache((): Collection[] => {
   return readdirSync(dir, { withFileTypes: true })
     .filter((d) => d.isDirectory())
     .map((d) => JSON.parse(readFileSync(path.join(dir, d.name, "collection.json"), "utf8")) as Collection)
+    .filter((c) => !c.hidden)
     .sort((a, b) => a.order - b.order);
 });
 
@@ -120,14 +121,42 @@ function placeholderFrame(c: Collection, index: number, total: number): Frame {
   };
 }
 
+/** Shots more than this far apart start a new scene. */
+const SCENE_GAP_MS = 5 * 60 * 1000;
+
+/**
+ * Display order: stops in the order they were visited, but within each stop
+ * the photos are dealt out one scene at a time (a scene being shots taken
+ * within a few minutes of each other), so near-identical frames don't sit
+ * side by side.
+ */
+export function spreadOrder(photos: Photo[]): Photo[] {
+  const time = (p: Photo) => (p.exif.takenAt ? Date.parse(p.exif.takenAt) : NaN);
+  const byTime = [...photos].sort((a, b) => (a.exif.takenAt ?? a.file).localeCompare(b.exif.takenAt ?? b.file));
+  const stops = new Map<string, Photo[]>();
+  for (const p of byTime) stops.set(p.stop ?? "", [...(stops.get(p.stop ?? "") ?? []), p]);
+  return [...stops.values()].flatMap((group) => {
+    const scenes: Photo[][] = [];
+    for (const p of group) {
+      const last = scenes.at(-1)?.at(-1);
+      if (last && time(p) - time(last) <= SCENE_GAP_MS) scenes.at(-1)!.push(p);
+      else scenes.push([p]);
+    }
+    const out: Photo[] = [];
+    for (let round = 0; out.length < group.length; round++)
+      for (const scene of scenes) if (scene[round]) out.push(scene[round]);
+    return out;
+  });
+}
+
 /** Every frame in a chapter, in display order. */
 export const getFrames = cache((slug: string): Frame[] => {
   const c = getCollections().find((x) => x.slug === slug);
   if (!c) return [];
   // Withheld photos (people not yet cleared) are left out entirely.
-  const photos = getManifest()
-    .photos.filter((p) => p.collection === slug && !p.withheld && p.sources.webp.length > 0)
-    .sort((a, b) => (a.exif.takenAt ?? a.file).localeCompare(b.exif.takenAt ?? b.file));
+  const photos = spreadOrder(
+    getManifest().photos.filter((p) => p.collection === slug && !p.withheld && p.sources.webp.length > 0),
+  );
 
   if (photos.length > 0) return photos.map((p, i) => photoFrame(c, p, i + 1, photos.length));
 

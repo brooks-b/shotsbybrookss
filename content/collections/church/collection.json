@@ -14,5 +14,6 @@
     "contains": true,
     "cleared": false
   },
-  "placeholders": 2
+  "placeholders": 2,
+  "hidden": true
 }

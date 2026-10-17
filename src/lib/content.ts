@@ -149,9 +149,9 @@ export const getFrames = cache((slug: string): Frame[] => {
 
 export function getCover(c: Collection): Frame {
   const frames = getFrames(c.slug);
-  const chosen = c.cover
-    ? frames.find((f) => f.key.endsWith(c.cover!.toLowerCase().replace(/\.[^.]+$/, "")))
-    : undefined;
+  // Same normalisation as the ingest's photo ids, so "DSCF0886 2.JPG" finds "italy-dscf0886-2".
+  const id = c.cover && `${c.slug}-${c.cover.replace(/\.[^.]+$/, "")}`.toLowerCase().replace(/[^a-z0-9-]+/g, "-");
+  const chosen = id ? frames.find((f) => f.key === id) : undefined;
   return chosen ?? frames.find((f) => f.kind !== "withheld") ?? frames[0];
 }
 

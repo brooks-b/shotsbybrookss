@@ -95,7 +95,8 @@
     },
     "DSCF1723.jpg": {
       "alt": "A figure walking through a room of glowing glass lights at teamLab",
-      "stop": "Tokyo"
+      "stop": "Tokyo",
+      "hidden": true
     },
     "DSCF1744.jpg": {
       "alt": "Two people sitting in a stream of projected light at teamLab",

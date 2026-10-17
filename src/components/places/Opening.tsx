@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { Frame, PlaceInfo } from "@/lib/frames";
 import { FrameImage } from "../FrameImage";
-import { ApertureMosaic, F_STOPS } from "../globe/ApertureMosaic";
+import { ApertureMosaic } from "../globe/ApertureMosaic";
 import { ATMOSPHERES } from "../globe/atmospheres";
 import { useMediaQuery, usePrefersReducedMotion } from "../motion/useReducedMotion";
 import { visitPlace } from "./visit";
@@ -59,7 +59,6 @@ export function Opening({ places, mosaic }: { places: PlaceInfo[]; mosaic: Frame
   const reduced = usePrefersReducedMotion();
   const stacked = useMediaQuery("(max-width: 767px)");
   const root = useRef<HTMLElement>(null);
-  const fstop = useRef<HTMLSpanElement>(null);
   const now = useNow();
   const loaded = useAfterInteraction(reduced);
   const lead = Math.max(
@@ -81,8 +80,6 @@ export function Opening({ places, mosaic }: { places: PlaceInfo[]; mosaic: Frame
       if (open === last) return;
       last = open;
       el.style.setProperty("--open", smooth(open).toFixed(4));
-      if (fstop.current)
-        fstop.current.textContent = F_STOPS[Math.min(Math.floor(open * F_STOPS.length), F_STOPS.length - 1)];
       // Once open, the contact sheet steps aside so the board takes clicks.
       if (aperture) aperture.style.visibility = open >= 0.999 ? "hidden" : "visible";
     };
@@ -137,7 +134,7 @@ export function Opening({ places, mosaic }: { places: PlaceInfo[]; mosaic: Frame
       }
     >
       <div className="sticky top-0 h-[100svh] min-h-[600px] overflow-hidden">
-        {!reduced && mosaic.length > 0 && <ApertureMosaic frames={mosaic} now={now} fstop={fstop} />}
+        {!reduced && mosaic.length > 0 && <ApertureMosaic frames={mosaic} now={now} />}
 
         <div className="gutter flex h-full flex-col pb-[clamp(16px,3vh,32px)] pt-[calc(var(--header-h)+8px)]">
           <div className="mb-4 flex flex-wrap items-end justify-between gap-x-6 gap-y-1">

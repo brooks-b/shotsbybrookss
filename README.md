@@ -5,7 +5,7 @@ Live at **[shotsbybrookss.vercel.app](https://shotsbybrookss.vercel.app)**.
 
 ![Scrolling the home page: the globe walks through every stop in travel order](docs/demo.gif)
 
-The site opens on a contact sheet of photos with a camera focus point in the middle. Scroll, and an aperture opens from that point, the f-number counting down as it widens, onto a board of places: one tall photo panel each. Pick one and it grows to fill the screen with that place's own weather playing over the photo: sakura in Japan, falling leaves in Rwanda, rain on the lens in London, lanterns over Bangkok. Further down, a WebGL globe draws the whole route. Every photo carries its own camera data (shutter, aperture, ISO, focal length, and the Fujifilm film simulation), read straight from the original file.
+The site opens on a contact sheet of photos with a camera focus point in the middle. Scroll, and an aperture opens from that point onto a board of places: one tall photo panel each. Pick one and it grows to fill the screen with that place's own weather playing over the photo: sakura in Japan, falling leaves in Rwanda, rain on the lens in London, lanterns over Bangkok. Further down, a WebGL globe draws the whole route. Every photo carries its own camera data (shutter, aperture, ISO, focal length, and the Fujifilm film simulation), read straight from the original file.
 
 ## Stack
 

@@ -13,13 +13,10 @@ import { FrameImage } from "../FrameImage";
  *
  *  - a hard-edged circular mask opens from the focus point, revealing the globe
  *  - the wall pushes toward the viewer and the columns drift apart
- *  - a thin ring traces the aperture edge, with the f-number riding on it
+ *  - a thin ring traces the aperture edge
  *
  * No React state changes during the scroll; the browser does the work.
  */
-
-/** Full stops from closed down to wide open. */
-export const F_STOPS = ["F16", "F11", "F8", "F5.6", "F4", "F2.8", "F2"];
 
 function Columns({
   frames,
@@ -61,16 +58,7 @@ function Columns({
   );
 }
 
-export function ApertureMosaic({
-  frames,
-  now,
-  fstop,
-}: {
-  frames: Frame[];
-  now: Date | null;
-  /** The f-number label; its text is set on scroll by the parent. */
-  fstop: React.RefObject<HTMLSpanElement | null>;
-}) {
+export function ApertureMosaic({ frames, now }: { frames: Frame[]; now: Date | null }) {
   // The wall paints instantly from each photo's blur placeholder; the photos
   // themselves load once the page has finished loading, so they never compete
   // with the name, the fonts or the globe.
@@ -128,7 +116,7 @@ export function ApertureMosaic({
         </div>
       </div>
 
-      {/* Unmasked: the focus point, the aperture ring and its f-number. */}
+      {/* Unmasked: the focus point and the aperture ring. */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div
           className="hud-frame absolute left-1/2 top-1/2 h-[72px] w-[96px] -translate-x-1/2 -translate-y-1/2 [--b:12px]"
@@ -143,17 +131,6 @@ export function ApertureMosaic({
             opacity: "calc((1 - var(--open, 0)) * 3)",
           }}
         />
-        <span
-          ref={fstop}
-          className="hud absolute text-paper"
-          style={{
-            left: "calc(50% + max(58px, var(--r) * 0.7071 + 10px))",
-            top: "calc(50% - max(36px, var(--r) * 0.7071 + 18px))",
-            opacity: "calc((1 - var(--open, 0)) * 3)",
-          }}
-        >
-          {F_STOPS[0]}
-        </span>
         <span
           className="micro absolute left-1/2 top-[calc(50%+52px)] -translate-x-1/2 text-paper/80"
           style={{ opacity: "calc(1 - var(--open, 0) * 5)" }}

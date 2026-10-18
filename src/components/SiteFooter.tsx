@@ -68,13 +68,13 @@ export function SiteFooter() {
           <Col label="follow">
             <li>
               <a href={site.instagram} className={linkCls} target="_blank" rel="noreferrer">
-                Instagram
+                Instagram @{site.handle}
               </a>
             </li>
             {site.email && (
               <li>
-                <a href={`mailto:${site.email}`} className={linkCls}>
-                  Email
+                <a href={`mailto:${site.email}`} className={`${linkCls} break-all`}>
+                  {site.email}
                 </a>
               </li>
             )}

@@ -66,6 +66,16 @@ export function SiteHeader({ chapters, frames }: Props) {
                 </Link>
               </li>
             ))}
+            <li>
+              <a
+                href={site.instagram}
+                target="_blank"
+                rel="noreferrer"
+                className="text-paper-dim transition-colors hover:text-paper"
+              >
+                Instagram ↗
+              </a>
+            </li>
           </ul>
         </nav>
 
@@ -94,6 +104,17 @@ export function SiteHeader({ chapters, frames }: Props) {
               </Link>
             </li>
           ))}
+          <li className="border-b border-line">
+            <a
+              href={site.instagram}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-baseline justify-between py-3"
+            >
+              <span className="display text-[11vw]">Instagram</span>
+              <span className="hud text-paper-dim">@{site.handle} ↗</span>
+            </a>
+          </li>
         </ul>
         <div className="hud flex justify-between text-paper-dim">
           {site.clocks.map((c) => (

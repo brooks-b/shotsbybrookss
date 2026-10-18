@@ -9,7 +9,13 @@ import { useMediaQuery, usePrefersReducedMotion } from "../motion/useReducedMoti
 import { visitPlace } from "./visit";
 
 /** Scroll spent opening the aperture from the contact sheet onto the board. */
-const OPEN_VH = 1.1;
+const OPEN_VH = 0.9;
+/**
+ * The aperture's full size, as a multiple of the screen's half-diagonal. A
+ * touch over 1, so it clears the corners just before the end, which is the
+ * moment the board becomes clickable: no scrolling past "looks open".
+ */
+const OVERSHOOT = 1.04;
 /** A short hold on the open board before the page scrolls on. */
 const HOLD_VH = 0.3;
 
@@ -75,17 +81,22 @@ export function Opening({ places, mosaic }: { places: PlaceInfo[]; mosaic: Frame
     if (reduced) return;
     const el = root.current!;
     const aperture = el.querySelector<HTMLElement>("[data-aperture]");
+    const frame = el.firstElementChild as HTMLElement;
     let last = -1;
     const setOpen = (open: number) => {
       if (open === last) return;
       last = open;
-      el.style.setProperty("--open", smooth(open).toFixed(4));
-      // Once open, the contact sheet steps aside so the board takes clicks.
-      if (aperture) aperture.style.visibility = open >= 0.999 ? "hidden" : "visible";
+      const eased = smooth(open);
+      el.style.setProperty("--open", eased.toFixed(4));
+      // As soon as the aperture clears the corners, the contact sheet steps
+      // aside so the board takes clicks.
+      if (aperture) aperture.style.visibility = eased * OVERSHOOT >= 1 ? "hidden" : "visible";
     };
     let raf = 0;
     const update = () => {
       raf = 0;
+      // The aperture grows to the corners of this screen, whatever its shape.
+      el.style.setProperty("--diag", `${(Math.hypot(frame.clientWidth, frame.clientHeight) / 2).toFixed(1)}px`);
       const scrolled = -el.getBoundingClientRect().top;
       setOpen(Math.min(Math.max(scrolled / (OPEN_VH * window.innerHeight), 0), 1));
     };
@@ -127,7 +138,7 @@ export function Opening({ places, mosaic }: { places: PlaceInfo[]; mosaic: Frame
       style={
         {
           "--open": reduced ? 1 : 0,
-          "--r": "calc(var(--open) * 78vmax)",
+          "--r": `calc(var(--open) * var(--diag, 64vmax) * ${OVERSHOOT})`,
           // Extra height is the scroll distance the aperture takes to open, plus a short hold.
           height: reduced ? "100svh" : `calc(100svh + ${(OPEN_VH + HOLD_VH) * 100}vh)`,
         } as React.CSSProperties

@@ -9,10 +9,7 @@ export const site = {
   description: "Photography by Brooks Barrett. Shot on a Fujifilm X-T50.",
 
   /** Draft. Brooks to edit. */
-  bio: [
-    "Vanderbilt, class of 2029. Minors in National Security, Business, and Generative AI.",
-    "Based between Nashville and the New York area.",
-  ],
+  bio: ["Vanderbilt, class of 2029.", "Based between Nashville and the New York area."],
 
   camera: "Fujifilm X-T50",
   /** From the EXIF of the photos so far. */

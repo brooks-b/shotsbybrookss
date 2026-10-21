@@ -20,10 +20,24 @@ export default function AboutPage() {
   return (
     <div className="gutter grid gap-16 pb-12 pt-[calc(var(--header-h)+48px)] md:grid-cols-12">
       <div className="md:col-span-5">
-        {/* Portrait slot: Brooks to supply. */}
-        <div role="img" aria-label="Portrait coming soon" className="flex aspect-[4/5] w-full items-end bg-ink-2 p-3">
-          <span className="micro text-paper-faint">Portrait</span>
-        </div>
+        <picture className="block aspect-[4/5] w-full overflow-hidden bg-ink-2">
+          {(["avif", "webp"] as const).map((type) => (
+            <source
+              key={type}
+              type={`image/${type}`}
+              srcSet={[480, 800, 1200].map((w) => `/about/portrait-${w}.${type} ${w}w`).join(", ")}
+              sizes="(min-width: 768px) 40vw, 100vw"
+            />
+          ))}
+          <img
+            src="/about/portrait-800.webp"
+            alt="Brooks Barrett"
+            width={800}
+            height={1200}
+            fetchPriority="high"
+            className="h-full w-full object-cover object-top"
+          />
+        </picture>
       </div>
 
       <div className="md:col-span-6 md:col-start-7">
